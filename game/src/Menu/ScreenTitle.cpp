@@ -14,6 +14,7 @@ void ScreenTitleState::InitScreen(void)
 	framesCounter = 0;
 	finishScreen = 0;
 	TraceLog(LOG_INFO, "ScreenTitleState::InitScreen");
+	LogoTitle= LoadTexture( "resources/Menu/Title.png");
 
 	// Use this to access to the Game instance
 	GameManager& GameInst = GameManager::GetGameManager();
@@ -50,12 +51,15 @@ void ScreenTitleState::DrawScreen(void)
 	DrawText("Press Enter for Playing", (GetScreenWidth() / 2) - (MeasureText("Press Enter for Playing", 25) / 2), 500, 25, WHITE);
 	DrawText("Press 'O' for Instructions", (GetScreenWidth() / 2) - (MeasureText("Press 'O' for Instructions", 25) / 2), 560, 25, WHITE);
 
+	DrawTexture(LogoTitle, GetScreenHeight()/2, GetScreenWidth() / 2, WHITE);
+
 
 }
 
 void ScreenTitleState::UnloadScreen(void)
 {
 	GameManager& GameInst = GameManager::GetGameManager();
+	UnloadTexture(LogoTitle);
 }
 
 int ScreenTitleState::FinishScreen(void)

@@ -37,7 +37,7 @@ void GameManager::InitGame()
     font = LoadFont("resources/Font/PacManFont.ttf");
 
     // Setup and init first screen
-    ScreenState = &ScreenLogoState::getInstance();
+    ScreenState = &ScreenTitleState::getInstance();
     ScreenState->InitScreen();
      
 }
