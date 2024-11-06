@@ -51,7 +51,7 @@ void ScreenTitleState::DrawScreen(void)
 	DrawText("Press Enter for Playing", (GetScreenWidth() / 2) - (MeasureText("Press Enter for Playing", 25) / 2), 500, 25, WHITE);
 	DrawText("Press 'O' for Instructions", (GetScreenWidth() / 2) - (MeasureText("Press 'O' for Instructions", 25) / 2), 560, 25, WHITE);
 
-	DrawTexture(LogoTitle, GetScreenHeight()/2, GetScreenWidth() / 2, WHITE);
+	DrawTexture(LogoTitle, ((GetScreenWidth()/2) - (LogoTitle.width/2)), ((GetScreenHeight()/2) - (LogoTitle.height/2))-200 , WHITE);
 
 
 }
