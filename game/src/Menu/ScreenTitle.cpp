@@ -24,6 +24,7 @@ void ScreenTitleState::InitScreen(void)
 
 void ScreenTitleState::UpdateScreen(float deltaTime)
 {
+	framesCounter++;
 	GameManager& GameInst = GameManager::GetGameManager();
 
 
@@ -48,10 +49,11 @@ void ScreenTitleState::DrawScreen(void)
 
 	DrawTextEx(GameInst.GetFont(), " by Raquel L.", Vector2{ posx, 450.f }, 20, 4, WHITE);
 
-	DrawText("Press Enter for Playing", (GetScreenWidth() / 2) - (MeasureText("Press Enter for Playing", 25) / 2), 500, 25, WHITE);
-	DrawText("Press 'O' for Instructions", (GetScreenWidth() / 2) - (MeasureText("Press 'O' for Instructions", 25) / 2), 560, 25, WHITE);
+	DrawText("Press Enter for Playing", (GetScreenWidth() / 2) - (MeasureText("Press Enter for Playing", 25) / 2), 800, 25, WHITE);
+	DrawText("Press 'O' for Instructions", (GetScreenWidth() / 2) - (MeasureText("Press 'O' for Instructions", 25) / 2), 860, 25, WHITE);
 
-	DrawTexture(LogoTitle, ((GetScreenWidth()/2) - (LogoTitle.width/2)), ((GetScreenHeight()/2) - (LogoTitle.height/2))-200 , WHITE);
+	if(framesCounter<50){}
+	DrawTexture(LogoTitle, ((GetScreenWidth()/2) - (LogoTitle.width/2)), ((GetScreenHeight()/2) - (LogoTitle.height/2))-100 , WHITE);
 
 
 }
