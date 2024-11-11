@@ -32,5 +32,9 @@ private:
 	int finishScreen = 0;
 
 	Texture2D LogoTitle;
+	bool animationStarted = false;
+	bool animationComplete = false; 
+	float rotationAngle = 0.0f;
+	float scale = 1.0f;
 
 };
