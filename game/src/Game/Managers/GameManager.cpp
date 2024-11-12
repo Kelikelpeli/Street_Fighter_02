@@ -8,6 +8,7 @@
 #include "Menu/ScreenGameplay.h"
 #include "Menu/ScreenOptions.h"
 #include "Menu/ScreenEnding.h"
+#include "Menu/ScreenIntro.h"
 
 #include <stdio.h>              // Standard input-output C library
 #include <stdlib.h>             // Memory management functions: malloc(), free()
@@ -37,7 +38,7 @@ void GameManager::InitGame()
     font = LoadFont("resources/Font/PacManFont.ttf");
 
     // Setup and init first screen
-    ScreenState = &ScreenGameplayState::getInstance();
+    ScreenState = &ScreenTitleState::getInstance();
     ScreenState->InitScreen();
      
 }
@@ -61,8 +62,7 @@ void GameManager::UpdateFrame(float deltaTime)
                     ScreenState = &ScreenTitleState::getInstance();
                 }
                 } break;
-            case (int) ScreenState::TITLE:
-                {
+            case (int)ScreenState::TITLE:
                 if (int InputKey = ScreenState->FinishScreen())
                 {
                     if (InputKey == 1)
@@ -72,12 +72,18 @@ void GameManager::UpdateFrame(float deltaTime)
                     }
                     else if (InputKey == 2)
                     {
-                        TransitionToScreen((int)ScreenState::GAMEPLAY);
-                        ScreenState = &ScreenGameplayState::getInstance();
+                        TransitionToScreen((int)ScreenState::INTRO);
+                        ScreenState = &ScreenIntroState::getInstance();  // Cambio a ScreenIntro
                     }
                 }
-
-                } break;
+                break;
+            case (int)ScreenState::INTRO:
+                if (ScreenState->FinishScreen())
+                {
+                    TransitionToScreen((int)ScreenState::GAMEPLAY);
+                    ScreenState = &ScreenGameplayState::getInstance();  // Cambio a Gameplay después de Intro
+                }
+                break;
             case (int) ScreenState::OPTIONS:
                 {
                 if (int InputKey = ScreenState->FinishScreen())
@@ -89,6 +95,7 @@ void GameManager::UpdateFrame(float deltaTime)
                     }
                 }
                 } break;
+            
             case (int)ScreenState::GAMEPLAY:
             {
                 if (int InputKey = ScreenState->FinishScreen())

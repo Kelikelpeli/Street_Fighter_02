@@ -6,7 +6,7 @@
 enum class TextureType
 {
 	Logo = 0,
-	Map1,
+	BonusKen,
 	SpriteKenWalkRight,
 	SpriteKenWalkLeft,
 	SpriteKenClimb,
@@ -58,10 +58,10 @@ public:
 	void DrawTextureExCustom(Texture2D texture, Vector2 position, float rotation, float scale, Color tint);
 	void DrawTextureExCustomFromBottom(Texture2D texture, Vector2 position, float rotation, float scale, Color tint);
 	void DrawTextureRecCustom(Texture2D texture, Rectangle Rectangle, Vector2 position, Color tint);
-
+	static TextureManager& getInstance(); // Singleton function
 private:
 	Texture2D textLogo;
-	Texture2D textMap1;
+	Texture2D bonusKen;
 	Texture2D textSpriteKenWalkRight;
 	Texture2D textSpriteKenWalkLeft;
 	Texture2D textSpriteKenClimb;

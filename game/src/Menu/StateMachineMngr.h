@@ -7,7 +7,8 @@ enum class ScreenState
 	TITLE,
 	OPTIONS,
 	GAMEPLAY,
-	ENDING
+	ENDING,
+	INTRO
 };
 
 class Screen;

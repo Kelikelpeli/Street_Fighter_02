@@ -7,14 +7,20 @@ TextureManager::TextureManager()
 
 }
 
+TextureManager& TextureManager::getInstance()
+{
+    static TextureManager instance;
+    return instance;
+}
+
 
 void TextureManager::InitTexturesFiles()
 {
     // Menu
-    textLogo = LoadTexture("resources/Menu/DonkeyKongMainLogo.png");
+    textLogo = LoadTexture("resources/Menu/Title.png");
 
-    //Maps Images
-    textMap1 = LoadTexture("resources/Maps/Custom_L2.png");
+    //Bonus Images
+    bonusKen = LoadTexture("resources/Menu/KenBonusCar.png");
 
 
     //Gameplay
@@ -105,8 +111,8 @@ Texture2D& TextureManager::GetTexture(TextureType texturetype)
         return textLogo;
         break;
 
-    case TextureType::Map1:
-        return textMap1;
+    case TextureType::BonusKen:
+        return bonusKen;
         break;
 
     case TextureType::SpriteKenWalkRight:
@@ -243,7 +249,7 @@ void TextureManager::DrawTextureRecCustom(Texture2D texture, Rectangle Rectangle
 void TextureManager::UnloadTexturesFiles()
 {
     UnloadTexture(textLogo);
-    UnloadTexture(textMap1);
+    UnloadTexture(bonusKen);
     //UnloadTexture(textPacman);
     //UnloadTexture(textSpritePacman);
     //UnloadTexture(textSpritePacmanDead);

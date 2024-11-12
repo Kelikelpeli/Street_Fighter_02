@@ -1,6 +1,7 @@
 #include "ScreenTitle.h"
 #include "raylib.h"
 #include "Game/Managers/GameManager.h"
+#include "Game/Managers/TexturesManager.h"
 
 ScreenTitleState& ScreenTitleState::getInstance()
 {
@@ -16,7 +17,7 @@ void ScreenTitleState::InitScreen(void)
 	TraceLog(LOG_INFO, "ScreenTitleState::InitScreen");
 
 	//Logo y animación
-	LogoTitle = LoadTexture("resources/Menu/Title.png");
+	//LogoTitle = LoadTexture("resources/Menu/Title.png");
 	animationStarted = false; // Variable para controlar el inicio de la animación
 	animationComplete = false; // Controla si la animación ha finalizado
 	rotationAngle = 0.0f;
@@ -78,29 +79,18 @@ void ScreenTitleState::DrawScreen(void)
 	DrawText("Press 'O' for Instructions", (GetScreenWidth() / 2) - (MeasureText("Press 'O' for Instructions", 25) / 2), 860, 25, WHITE);
 
 
-	// Define la posición del logo en el centro de la pantalla
+	TextureManager& textureManager = TextureManager::getInstance();
+	textureManager.InitTexturesFiles();
+	Texture2D logoTexture = textureManager.GetTexture(TextureType::Logo);
+
 	Vector2 screenCenter = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f - 100 };
 
-	// Establece el punto de origen en el centro del logo
-	Vector2 origin = { LogoTitle.width / 2.0f, LogoTitle.height / 2.0f };
-
-	// Usa DrawTexturePro para rotar desde el centro de la pantalla y escalar
-	DrawTexturePro(
-		LogoTitle,                                      // Textura
-		Rectangle{ 0, 0, (float)LogoTitle.width, (float)LogoTitle.height },  // Rectángulo de origen
-		Rectangle{ screenCenter.x, screenCenter.y, LogoTitle.width * scale, LogoTitle.height * scale }, // Rectángulo de destino
-		Vector2{ LogoTitle.width * scale / 2, LogoTitle.height * scale / 2 }, // Centro de rotación
-		rotationAngle,                                  // Ángulo de rotación
-		WHITE                                           // Color de dibujo
-	);
-	//DrawTexture(LogoTitle, ((GetScreenWidth() / 2) - (LogoTitle.width / 2)), ((GetScreenHeight() / 2) - (LogoTitle.height / 2)) - 100, WHITE);
-
+	textureManager.DrawTextureExCustom(logoTexture, screenCenter, rotationAngle, scale, WHITE);
 }
 
 void ScreenTitleState::UnloadScreen(void)
 {
 	GameManager& GameInst = GameManager::GetGameManager();
-	UnloadTexture(LogoTitle);
 }
 
 int ScreenTitleState::FinishScreen(void)
