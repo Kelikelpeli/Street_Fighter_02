@@ -50,8 +50,7 @@ void ScreenIntroState::UpdateScreen(float deltaTime)
 
 void ScreenIntroState::DrawScreen(void)
 {
-    TextureManager& textureManager = TextureManager::getInstance();
-    textureManager.InitTexturesFiles();
+    TextureManager& textureManager = TextureManager::GetTextureManager();
 
 
     // Dibuja un rectángulo oscuro en toda la pantalla

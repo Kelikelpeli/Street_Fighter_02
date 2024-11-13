@@ -2,15 +2,19 @@
 
 #include "Game/Characters/Ken.h"
 
+TextureManager* TextureManager::TextureMngr = nullptr;
+
 TextureManager::TextureManager()
 {
-
+    InitTexturesFiles();
 }
 
-TextureManager& TextureManager::getInstance()
+TextureManager& TextureManager::GetTextureManager()
 {
-    static TextureManager instance;
-    return instance;
+    if (!TextureMngr)
+        TextureMngr = new TextureManager();
+
+    return *TextureMngr;
 }
 
 
@@ -24,37 +28,37 @@ void TextureManager::InitTexturesFiles()
 
 
     //Gameplay
-    // Sprite Mario
+    // Sprite Ken
     Image spriteKenRight = LoadImage("resources/Characters/Mario_walk_right.png");
     textSpriteKenWalkRight = LoadTextureFromImage(spriteKenRight);
     UnloadImage(spriteKenRight);
 
-    // Sprite Mario
+    // Sprite Ken
     Image spriteKenLeft = LoadImage("resources/Characters/Mario_walk_left.png");
     textSpriteKenWalkLeft = LoadTextureFromImage(spriteKenLeft);
     UnloadImage(spriteKenLeft);
    
-    // Sprite Mario Climb
+    // Sprite Ken Climb
     Image spriteKenClimb = LoadImage("resources/Characters/Mario_Climb.png");
     textSpriteKenClimb = LoadTextureFromImage(spriteKenClimb);
     UnloadImage(spriteKenClimb);
 
-    // Sprite Mario Climb idle
+    // Sprite Ken Climb idle
     Image spriteKenClimbIdle = LoadImage("resources/Characters/Mario_Idle_Climb.png");
     textSpriteKenClimbIdle = LoadTextureFromImage(spriteKenClimbIdle);
     UnloadImage(spriteKenClimbIdle);
 
-    // Sprite Mario Dead
+    // Sprite Ken Dead
     Image spriteKenDead = LoadImage("resources/Characters/Mario_Death.png");
     textSpriteKenDead = LoadTextureFromImage(spriteKenDead);
     UnloadImage(spriteKenDead);
 
-    // Sprite Mario Dead idle
+    // Sprite Ken Dead idle
     Image spriteKenDeadIdle = LoadImage("resources/Characters/Mario_Death_Idle.png");
     textSpriteKenDeadIdle = LoadTextureFromImage(spriteKenDeadIdle);
     UnloadImage(spriteKenDeadIdle);
 
-    //Enemies
+    //Car
     Image EnemyCakeImg = LoadImage("resources/Enemies/Cake.png");
     textCake = LoadTextureFromImage(EnemyCakeImg);
     UnloadImage(EnemyCakeImg);
@@ -63,10 +67,10 @@ void TextureManager::InitTexturesFiles()
     textBarrel = LoadTextureFromImage(EnemyBarrelImg);
     UnloadImage(EnemyBarrelImg);
 
-    //Bonus
-    Image Bonus1Img = LoadImage("resources/Bonus/Bonus1.png");
-    textBonus1 = LoadTextureFromImage(Bonus1Img);
-    UnloadImage(Bonus1Img);
+    //Landscape
+    Image landscape = LoadImage("resources/Game/Stages/Ken_Landscape_High.png");
+    textLandscape = LoadTextureFromImage(landscape);
+    UnloadImage(landscape);
 
     Image Bonus2Img = LoadImage("resources/Bonus/Bonus2.png");
     textBonus2 = LoadTextureFromImage(Bonus2Img);
@@ -143,12 +147,12 @@ Texture2D& TextureManager::GetTexture(TextureType texturetype)
         return textCake;
         break;
 
-    case TextureType::ImgBarrel:
+    case TextureType::EnemyBarrelImg:
         return textBarrel;
         break;
 
-    case TextureType::ImgBonus1:
-        return textBonus1;
+    case TextureType::Landscape:
+        return textLandscape;
         break;
 
     case TextureType::ImgBonus2:

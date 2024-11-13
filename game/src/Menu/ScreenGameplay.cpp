@@ -5,6 +5,8 @@
 #include "raylib.h"
 #include "Game/Managers/GameManager.h"
 #include "Game/GlobalGameDefines.h"
+#include "Game/Managers/TexturesManager.h"
+#include "Game/Managers/AudioManager.h"
 
 #include <string>
 
@@ -24,12 +26,18 @@ void ScreenGameplayState::InitScreen(void)
 {
 	framesCounter = 0;
 	finishScreen = 0;
-
+	countdown = 2400;
+	win = false;
 }
 
 void ScreenGameplayState::UpdateScreen(float deltaTime)
 {
 	EvaluateInput();
+	framesCounter++;
+	countdown--;
+	if (countdown <= 0) {
+		finishScreen = 2;
+	}
 
 	
 }
@@ -48,6 +56,11 @@ void ScreenGameplayState::DrawScreen(void)
 	DrawText("SCORE:", 300.f, 100.f, 25, WHITE);
 	DrawText(to_string(GameInst.GetScore()).c_str(), 440.f, 100.f, 25, WHITE);
 
+	TextureManager& textureManager = TextureManager::GetTextureManager();
+	Texture2D landscape = textureManager.GetTexture(TextureType::Landscape);
+	Vector2 centerScreen = { GetScreenWidth(), (landscape.height - GetScreenHeight()) / 2.0f};
+
+	textureManager.DrawTextureExCustom(landscape, centerScreen, 0, 1, WHITE);
 
 }
 
@@ -79,4 +92,10 @@ void ScreenGameplayState::DrawDebug()
 {
 	GameManager& GameInst = GameManager::GetGameManager();
 
+}
+bool ScreenGameplayState::HasWin() {
+	return win;
+}
+void ScreenGameplayState::SetWin(bool win) {
+	this->win = win;
 }

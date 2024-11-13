@@ -15,9 +15,9 @@ enum class TextureType
 	SpriteKenDeadIdle,
 
 	ImgCake,
-	ImgBarrel,
+	EnemyBarrelImg,
 
-	ImgBonus1,
+	Landscape,
 	ImgBonus2,
 	ImgBonus3,
 
@@ -58,8 +58,13 @@ public:
 	void DrawTextureExCustom(Texture2D texture, Vector2 position, float rotation, float scale, Color tint);
 	void DrawTextureExCustomFromBottom(Texture2D texture, Vector2 position, float rotation, float scale, Color tint);
 	void DrawTextureRecCustom(Texture2D texture, Rectangle Rectangle, Vector2 position, Color tint);
-	static TextureManager& getInstance(); // Singleton function
+	static TextureManager& GetTextureManager();
+
 private:
+
+	static TextureManager* TextureMngr;
+
+
 	Texture2D textLogo;
 	Texture2D bonusKen;
 	Texture2D textSpriteKenWalkRight;
@@ -72,7 +77,7 @@ private:
 	Texture2D textCake;
 	Texture2D textBarrel;
 
-	Texture2D textBonus1;
+	Texture2D textLandscape;
 	Texture2D textBonus2;
 	Texture2D textBonus3;
 

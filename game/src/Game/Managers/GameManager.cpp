@@ -10,6 +10,8 @@
 #include "Menu/ScreenEnding.h"
 #include "Menu/ScreenIntro.h"
 
+#include"TexturesManager.h"
+
 #include <stdio.h>              // Standard input-output C library
 #include <stdlib.h>             // Memory management functions: malloc(), free()
 #include <string.h>             // String manipulation functions: strrchr(), strcmp()
@@ -33,14 +35,14 @@ GameManager::GameManager()
 
 void GameManager::InitGame()
 {
-
     // Load global data (assets that must be available in all screens, i.e. font)
     font = LoadFont("resources/Font/PacManFont.ttf");
+   // TextureManager& textureManager = TextureManager::GetTextureManager();
+    //textureManager.InitTexturesFiles();
 
     // Setup and init first screen
-    ScreenState = &ScreenTitleState::getInstance();
-    ScreenState->InitScreen();
-     
+    ScreenState = &ScreenGameplayState::getInstance();
+    ScreenState->InitScreen();     
 }
 //-------------------------------------------------------
 void GameManager::UpdateFrame(float deltaTime)

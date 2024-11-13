@@ -79,8 +79,7 @@ void ScreenTitleState::DrawScreen(void)
 	DrawText("Press 'O' for Instructions", (GetScreenWidth() / 2) - (MeasureText("Press 'O' for Instructions", 25) / 2), 860, 25, WHITE);
 
 
-	TextureManager& textureManager = TextureManager::getInstance();
-	textureManager.InitTexturesFiles();
+	TextureManager& textureManager = TextureManager::GetTextureManager();
 	Texture2D logoTexture = textureManager.GetTexture(TextureType::Logo);
 
 	Vector2 screenCenter = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f - 100 };
