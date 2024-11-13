@@ -27,4 +27,6 @@ private:
 
     int framesCounter = 0;
     int finishScreen = 0;
+    float alpha = 0.0f;
+    int fadeDirection = 0;
 };
