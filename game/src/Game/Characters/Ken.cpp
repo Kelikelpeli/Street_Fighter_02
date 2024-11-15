@@ -4,7 +4,14 @@
 #include "Game/Characters/Ken.h"
 #include "Game/GlobalGameDefines.h"
 #include "Game/Managers/GameManager.h"
+#include "Game/Managers/TexturesManager.h"
+
 #include "Game/States/IdleState.h"
+#include "Game/States/CrouchState.h"
+#include "Game/States/WalkForwardState.h"
+#include "Game/States/WalkBackwardState.h"
+#include "Game/States/JumpUpState.h"
+
 
 #include <string>             // String manipulation functions: strrchr(), strcmp()
 
@@ -12,7 +19,7 @@
 
 
 
-void Ken::InitGameCharacter()
+void Ken::InitCharacter()
 {
 
 	//Let's fill the vector KenSprtes Data
@@ -78,7 +85,7 @@ void Ken::InitGameCharacter()
 
 }
 
-void Ken::UpdateGameCharacter(float deltaTime)
+void Ken::UpdateCharacter(float deltaTime)
 {
 
 	//Update State Machine
@@ -87,11 +94,27 @@ void Ken::UpdateGameCharacter(float deltaTime)
     // add here the updateframe logic to be able to see all the sprites from one state
 }
 
-void Ken::DrawGameCharacter()
+void Ken::DrawCharacter()
 {
+	TextureManager& textureManager = TextureManager::GetTextureManager();
+
+	setPosition(Vector2 { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f });
+	Texture2D Kentext2DSprites = LoadTexture("resources/UI/MarioLifesIcon.png");// textureManager.GetTexture(TextureType::BasicSpriteKen);
+	//DrawTexture(Kentext2DSprites, GetScreenHeight() / 2.0f, GetScreenHeight() / 2.0f, WHITE);
+	////DrawTextureRec(Kentext2DSprites, CharSprites_Idle[0].frameRec, Vector2{ GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f }, WHITE);
+
+	currentFrame = 0; // Inicializa a 0 para asegurarte de que apunta al primer frame
+
+	if(Kentext2DSprites.id > 0) {
+		DrawTextureRec(Kentext2DSprites, CharSprites_Idle[currentFrame].frameRec, getPosition(), WHITE);
+	}
+	else {
+		DrawText("Error: Ken texture not loaded", 10, 10, 20, RED);
+		}
+//	DrawRectangle(GetScreenWidth() / 2, GetScreenHeight() / 2, 20, 20, RED);
 }
 
-void Ken::UnloadGameCharacter()
+void Ken::UnloadCharacter()
 {
 
 }

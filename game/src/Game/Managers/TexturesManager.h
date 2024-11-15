@@ -7,7 +7,7 @@ enum class TextureType
 {
 	Logo = 0,
 	BonusKen,
-	SpriteKenWalkRight,
+	BasicSpriteKen,
 	SpriteKenWalkLeft,
 	SpriteKenClimb,
 	SpriteKenClimbIdle,
@@ -67,7 +67,7 @@ private:
 
 	Texture2D textLogo;
 	Texture2D bonusKen;
-	Texture2D textSpriteKenWalkRight;
+	Texture2D textBasicSpriteKen;
 	Texture2D textSpriteKenWalkLeft;
 	Texture2D textSpriteKenClimb;
 	Texture2D textSpriteKenClimbIdle;

@@ -2,7 +2,8 @@
 
 #include "Game/Characters/Character.h"
 
-class GameCharacter;
+
+class Character;
 
 //////////////////////////////////////
 // State Machine
@@ -13,8 +14,10 @@ public:
 	
 	virtual ~CharacterState() {}
 
-	virtual void enter(GameCharacter* light) = 0;
-	virtual void updateState(GameCharacter* light) = 0;
-	virtual void exit(GameCharacter* light) = 0;
+	virtual void enter(Character* light) = 0;
+	virtual void updateState(Character* light) = 0;
+	virtual void exit(Character* light) = 0;
+
+	virtual int getStateID() const = 0; // Nueva función agregada para identificar el estado actual
 };
 

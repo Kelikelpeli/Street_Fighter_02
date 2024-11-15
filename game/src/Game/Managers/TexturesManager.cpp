@@ -28,10 +28,10 @@ void TextureManager::InitTexturesFiles()
 
 
     //Gameplay
-    // Sprite Ken
-    Image spriteKenRight = LoadImage("resources/Characters/Mario_walk_right.png");
-    textSpriteKenWalkRight = LoadTextureFromImage(spriteKenRight);
-    UnloadImage(spriteKenRight);
+    // Basic Sprite Ken
+    Image basicSpriteKen = LoadImage("resources/Game/Sprites/Ken/KenBasicMovementsSprites.png");
+    textBasicSpriteKen = LoadTextureFromImage(basicSpriteKen);
+    UnloadImage(basicSpriteKen);
 
     // Sprite Ken
     Image spriteKenLeft = LoadImage("resources/Characters/Mario_walk_left.png");
@@ -119,8 +119,8 @@ Texture2D& TextureManager::GetTexture(TextureType texturetype)
         return bonusKen;
         break;
 
-    case TextureType::SpriteKenWalkRight:
-        return textSpriteKenWalkRight;
+    case TextureType::BasicSpriteKen:
+        return textBasicSpriteKen;
         break;
 
     case TextureType::SpriteKenWalkLeft:
@@ -193,14 +193,14 @@ Texture2D& TextureManager::GetTextureByCurrentState(KenSpriteDirection KenSprite
     switch (KenSpriteState)
     {
     case KenSpriteDirection::KenSpriteIdleRight:
-        return textSpriteKenWalkRight;
+        return textBasicSpriteKen;
         break;
     case KenSpriteDirection::KenSpriteIdleLeft:
         return textSpriteKenWalkLeft;
         break;
-    case KenSpriteDirection::KenSpriteRight:
+    /*case KenSpriteDirection::KenSpriteRight:
         return textSpriteKenWalkRight;
-        break;
+        break;*/
     case KenSpriteDirection::KenSpriteLeft:
         return textSpriteKenWalkLeft;
         break;

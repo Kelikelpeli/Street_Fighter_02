@@ -28,6 +28,7 @@ void ScreenGameplayState::InitScreen(void)
 	finishScreen = 0;
 	countdown = 2400;
 	win = false;
+	ken.InitCharacter();
 }
 
 void ScreenGameplayState::UpdateScreen(float deltaTime)
@@ -38,7 +39,6 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 	if (countdown <= 0) {
 		finishScreen = 2;
 	}
-
 	
 }
 
@@ -61,6 +61,7 @@ void ScreenGameplayState::DrawScreen(void)
 	Vector2 centerScreen = { GetScreenWidth()/2.0f, (GetScreenHeight()) / 2.0f};
 
 	textureManager.DrawTextureExCustom(landscape, centerScreen, 0, 1, WHITE);
+	ken.DrawCharacter();  // Dibujar a Ken
 
 }
 

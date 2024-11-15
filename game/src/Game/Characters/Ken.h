@@ -9,14 +9,14 @@
 #include "Game/Characters/Character.h"
 
 
-class Ken : public GameCharacter
+class Ken : public Character
 {
 public:
 
-	virtual void InitGameCharacter() override;
-	virtual void UpdateGameCharacter(float deltaTime) override;
-	virtual void DrawGameCharacter() override;
-	virtual void UnloadGameCharacter() override;
+	virtual void InitCharacter() override;
+	virtual void UpdateCharacter(float deltaTime) override;
+	void DrawCharacter() override;
+	virtual void UnloadCharacter() override;
 
 	//State Machine
 	virtual void updateState();
@@ -44,6 +44,7 @@ private:
 
 	float m_Speed = {0.f};
 	bool m_bcanJump = false;
+
 
 };
 
