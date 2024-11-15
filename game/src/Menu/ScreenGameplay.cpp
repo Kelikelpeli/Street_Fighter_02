@@ -58,7 +58,7 @@ void ScreenGameplayState::DrawScreen(void)
 
 	TextureManager& textureManager = TextureManager::GetTextureManager();
 	Texture2D landscape = textureManager.GetTexture(TextureType::Landscape);
-	Vector2 centerScreen = { GetScreenWidth(), (landscape.height - GetScreenHeight()) / 2.0f};
+	Vector2 centerScreen = { GetScreenWidth()/2.0f, (GetScreenHeight()) / 2.0f};
 
 	textureManager.DrawTextureExCustom(landscape, centerScreen, 0, 1, WHITE);
 
