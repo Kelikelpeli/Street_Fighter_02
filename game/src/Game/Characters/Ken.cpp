@@ -61,6 +61,7 @@ void Ken::UpdateCharacter(float deltaTime)
 {
 	// Update character logic
 	Character::UpdateCharacter(deltaTime);
+    Character::updateState();
 
 	// Specific logic for Ken can be added here if needed
 }

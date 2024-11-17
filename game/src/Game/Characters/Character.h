@@ -5,6 +5,8 @@
 #include <map>
 #include <vector>
 #include <string>
+#include "Game\States\CharacterState.h"
+
 
 enum class CharState
 {
@@ -21,7 +23,7 @@ struct AnimationFrame
 };
 
 
-class CharacterState;
+//class CharacterState;
 #pragma once
 
 enum class CharSpriteDirection
@@ -65,8 +67,9 @@ public :
 
 
 	// State management
-	void SetState(CharState state);
+	void setState(CharacterState& newState);
 	CharState GetState() const;
+	void updateState();
 
 	// Collision management
 	virtual Rectangle GetCollisionBox() const;

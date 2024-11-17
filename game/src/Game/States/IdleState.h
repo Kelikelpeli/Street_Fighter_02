@@ -2,7 +2,7 @@
 
 #include "BaseCharacterState.h"
 
-class IdleState : public BaseCharacterState
+class IdleState : public CharacterState
 {
 public:
     void enter(Character* character) override;
