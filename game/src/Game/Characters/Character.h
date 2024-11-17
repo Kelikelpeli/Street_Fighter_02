@@ -3,6 +3,23 @@
 
 #include "raylib.h"
 #include <map>
+#include <vector>
+#include <string>
+
+enum class CharState
+{
+	Idle = 0,
+	WalkForward,
+	WalkBackward,
+	JumpUp,
+	Crouch
+};
+struct AnimationFrame
+{
+	Rectangle frameRec;    // Texture region
+	Vector2 origin;        // Origin point for drawing
+};
+
 
 class CharacterState;
 #pragma once
@@ -31,73 +48,71 @@ class Character
 public :
 	Character();
 
-	//virtual ~Character(); //
+	virtual ~Character(); //
 
 
-	virtual void InitCharacter();
+	virtual void InitCharacter(const std::string& textureId); // Initialize texture and animations
+
 	virtual void UpdateCharacter(float deltaTime);
 	virtual void DrawCharacter();
-	virtual void UnloadCharacter();
+	//virtual void UnloadCharacter();
 
 	//
-	// Position management
-	void setPosition(Vector2 newPosition) { position = newPosition; }
-	Vector2 getPosition() const { return position; }
+	void SetPosition(Vector2 position);
+	Vector2 GetPosition() const;
+	void SetSpeed(float speed);
+	float GetSpeed() const;
 
-	// Movement management
-	void setSpeed(Vector2 newSpeed) { speed = newSpeed; }
-	Vector2 getSpeed() const { return speed; }
-	void applyMovementLimits(Rectangle bounds);
-	bool isWithinBounds(Rectangle bounds) const;
+
+	// State management
+	void SetState(CharState state);
+	CharState GetState() const;
 
 	// Collision management
-	Rectangle getCollisionBox() const { return collisionBox; }
+	virtual Rectangle GetCollisionBox() const;
+
+	/*Rectangle getCollisionBox() const { return collisionBox; }
 	void setCollisionBoxSize(Vector2 size) { collisionBox.width = size.x; collisionBox.height = size.y; }
-	bool checkCollision(const Rectangle& other) const;
+	bool checkCollision(const Rectangle& other) const;*/
 
 
 	
 	// Animation management
-	void setFrameSpeed(int newSpeed) { framesSpeed = newSpeed; }
-	int getFrameSpeed() const { return framesSpeed; }
-	void setCurrentFrame(int frame) { currentFrame = frame; }
-	int getCurrentFrame() const { return currentFrame; }
-
-	void incrementFrameCounter() { framesCounter++; }
-	void resetFrameCounter() { framesCounter = 0; }
-	int getFrameCounter() const { return framesCounter; }
-
-
-	inline CharacterState* getCurrentState() const { return currentState; }
-	void updateState();
-	void setState(CharacterState& newState);
-	//
+	void LoadAnimationFrames(CharState state, const std::vector<AnimationFrame>& frames);
+	void UpdateAnimation(float deltaTime);
+	
 
 
 protected:
 
-	CharacterState* currentState;//
+	//CharacterState* currentState;//
 
-	std::map<CharSpriteDirection, int> CharSprites_Counter;
-	
-	std::map<int, FrameRecPos> CharSprites_Idle;
-	std::map<int, FrameRecPos> CharSprites_WalkForward;
-	std::map<int, FrameRecPos> CharSprites_WalkBackward;
-	std::map<int, FrameRecPos> CharSprites_Crouch;
-	std::map<int, FrameRecPos> CharSprites_JumpUp;
-	std::map<int, FrameRecPos> CharSprites_LightPunch;
-	std::map<int, FrameRecPos> CharSprites_MediumPunch;
-
+	//std::map<CharSpriteDirection, int> CharSprites_Counter;
 	//
-	int framesCounter = 0;
-	int framesSpeed = 10;
-	int currentFrame = 0;
+	//std::map<int, FrameRecPos> CharSprites_Idle;
+	//std::map<int, FrameRecPos> CharSprites_WalkForward;
+	//std::map<int, FrameRecPos> CharSprites_WalkBackward;
+	//std::map<int, FrameRecPos> CharSprites_Crouch;
+	//std::map<int, FrameRecPos> CharSprites_JumpUp;
+	//std::map<int, FrameRecPos> CharSprites_LightPunch;
+	//std::map<int, FrameRecPos> CharSprites_MediumPunch;
 
-	Vector2 position = { 0.0f, 0.0f };
-	Vector2 speed = { 0.0f, 0.0f };
+	
+	// Attributes
+	Vector2 position;
+	float speed;
+	CharState currentState;
 
+	// Animation data
+	std::map<CharState, std::vector<AnimationFrame>> animations;
+	size_t currentFrame;
+	float frameCounter;
+	float frameSpeed;
+	std::string textureId; // ID for TexturesManager
+	TextureManager& textureManager = TextureManager::GetTextureManager();
+	Texture2D characterText;
 	// Collision box
-	Rectangle collisionBox = { 0.0f, 0.0f, 50.0f, 50.0f }; // Default collision box size (to be updated as needed)
+	//Rectangle collisionBox = { 0.0f, 0.0f, 50.0f, 50.0f }; // Default collision box size (to be updated as needed)
 
 	
 
