@@ -63,6 +63,8 @@ void ScreenGameplayState::DrawScreen(void)
 	textureManager.DrawTextureExCustom(landscape, centerScreen, 0, 1, WHITE);
 	ken.DrawCharacter();  // Dibujar a Ken
 
+
+
 }
 
 void ScreenGameplayState::UnloadScreen(void)

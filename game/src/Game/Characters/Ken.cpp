@@ -98,20 +98,10 @@ void Ken::DrawCharacter()
 {
 	TextureManager& textureManager = TextureManager::GetTextureManager();
 
+	Texture2D Kentext2DSprites = textureManager.GetTexture(TextureType::BasicSpriteKen);
 	setPosition(Vector2 { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f });
-	Texture2D Kentext2DSprites = LoadTexture("resources/UI/MarioLifesIcon.png");// textureManager.GetTexture(TextureType::BasicSpriteKen);
-	//DrawTexture(Kentext2DSprites, GetScreenHeight() / 2.0f, GetScreenHeight() / 2.0f, WHITE);
-	////DrawTextureRec(Kentext2DSprites, CharSprites_Idle[0].frameRec, Vector2{ GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f }, WHITE);
-
-	currentFrame = 0; // Inicializa a 0 para asegurarte de que apunta al primer frame
-
-	if(Kentext2DSprites.id > 0) {
-		DrawTextureRec(Kentext2DSprites, CharSprites_Idle[currentFrame].frameRec, getPosition(), WHITE);
-	}
-	else {
-		DrawText("Error: Ken texture not loaded", 10, 10, 20, RED);
-		}
-//	DrawRectangle(GetScreenWidth() / 2, GetScreenHeight() / 2, 20, 20, RED);
+	textureManager.DrawTextureRecCustom(Kentext2DSprites, CharSprites_Idle[currentFrame].frameRec, getPosition(), WHITE);
+	//DrawTextureRec(Kentext2DSprites, CharSprites_Idle[currentFrame].frameRec, getPosition(), WHITE);
 }
 
 void Ken::UnloadCharacter()

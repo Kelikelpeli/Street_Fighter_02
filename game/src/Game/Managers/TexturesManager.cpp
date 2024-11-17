@@ -100,8 +100,8 @@ void TextureManager::InitTexturesFiles()
     textDonkeyKong = LoadTextureFromImage(DonkeyKongImg);
     UnloadImage(DonkeyKongImg);
 
-    //UI Mario Lifes
-    Image KenLifesIconImg = LoadImage("resources/UI/MarioLifesIcon.png");
+    //UI Mario Lifes 
+    Image KenLifesIconImg = LoadImage("resources/UI/UI_MiscBig.png");
     textIconLifes = LoadTextureFromImage(KenLifesIconImg);
     UnloadImage(KenLifesIconImg);
 
