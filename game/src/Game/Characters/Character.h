@@ -51,7 +51,7 @@ public :
 	virtual ~Character(); //
 
 
-	virtual void InitCharacter(const std::string& textureId); // Initialize texture and animations
+	virtual void InitCharacter(); // Initialize texture and animations
 
 	virtual void UpdateCharacter(float deltaTime);
 	virtual void DrawCharacter();

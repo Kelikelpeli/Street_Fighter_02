@@ -14,9 +14,9 @@ Character::Character(): position{ 0, 0 }, speed(0), currentState(CharState::Idle
 Character::~Character() {}
 
 
-void Character::InitCharacter (const std::string& textureId)
+void Character::InitCharacter ()
 {
-    characterText = textureManager.GetTexture(textureId);
+   
     //TexturesManager::GetInstance().LoadTexture(textureId);
 }
 
