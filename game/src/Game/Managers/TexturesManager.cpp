@@ -249,6 +249,15 @@ void TextureManager::DrawTextureRecCustom(Texture2D texture, Rectangle Rectangle
     Vector2 origin = { position.x - (Rectangle.width/2.f) , position.y - (Rectangle.height / 2.f) };
     DrawTextureRec(texture, Rectangle, origin, tint);
 }
+void TextureManager::DrawTextureOriginRec(Texture2D texture, Rectangle source, Vector2 position, Color tint, Vector2 newOrigin = Vector2{ 0.f,0.f })
+{
+    Rectangle dest = { position.x, position.y, fabsf(source.width), fabsf(source.height) };
+
+    Vector2 origin = newOrigin;
+
+
+    DrawTexturePro(texture, source, dest, origin, 0.0f, tint);
+}
 
 void TextureManager::UnloadTexturesFiles()
 {

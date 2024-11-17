@@ -23,22 +23,22 @@ void Ken::InitCharacter()
 {
 
 	//Let's fill the vector KenSprtes Data
-	
+	framesSpeed = 6;
 	//IDLE
 	CharSprites_Counter[CharSpriteDirection::State_Idle] = 4;
 
 	CharSprites_Idle[0] = FrameRecPos{ {4,4,260,386}, {0.f, 0.f} };
-	CharSprites_Idle[1] = FrameRecPos{ {264,4,260,386}, {0.f, 0.f}};
-	CharSprites_Idle[2] = FrameRecPos{ {524,4,260,386}, {0.f, 0.f}};
-	CharSprites_Idle[3] = FrameRecPos{ {784,4,260,386}, {0.f, 0.f}};
-	
+	CharSprites_Idle[1] = FrameRecPos{ {264,4,260,386}, {0.f, 0.f} };
+	CharSprites_Idle[2] = FrameRecPos{ {524,4,260,386}, {0.f, 0.f} };
+	CharSprites_Idle[3] = FrameRecPos{ {784,4,260,386}, {0.f, 0.f} };
+
 	//WALK FORWARD
 	CharSprites_Counter[CharSpriteDirection::State_WalkForward] = 5;
 
 	CharSprites_WalkForward[0] = FrameRecPos{ {4,1493,260,386}, {0.f, 0.f} };
-	CharSprites_WalkForward[1] = FrameRecPos{ {322,1493,260,386}, {0.f, 0.f}};
-	CharSprites_WalkForward[2] = FrameRecPos{ {612,1493,260,386}, {0.f, 0.f}};
-	CharSprites_WalkForward[3] = FrameRecPos{ {964,1493,260,386}, {0.f, 0.f}};
+	CharSprites_WalkForward[1] = FrameRecPos{ {322,1493,260,386}, {0.f, 0.f} };
+	CharSprites_WalkForward[2] = FrameRecPos{ {612,1493,260,386}, {0.f, 0.f} };
+	CharSprites_WalkForward[3] = FrameRecPos{ {964,1493,260,386}, {0.f, 0.f} };
 	CharSprites_WalkForward[4] = FrameRecPos{ {1237,1493,260,386}, {0.f, 0.f} };
 
 	//WALK BACKWARDS
@@ -82,26 +82,44 @@ void Ken::InitCharacter()
 
 	//init State
 	currentState = &IdleState::getInstance();
-
 }
 
 void Ken::UpdateCharacter(float deltaTime)
 {
-
 	//Update State Machine
+
 	updateState();
 
-    // add here the updateframe logic to be able to see all the sprites from one state
+	framesCounter++;
+
+	if (framesCounter >= (60 / framesSpeed))
+
+	{
+		framesCounter = 0;
+
+		currentFrame++;
+
+		//TODO make it generic for every state, this is only valid for Idle
+
+		int totalNumFrames = 4;
+
+		if (currentFrame > totalNumFrames - 1)
+
+		{
+			currentFrame = 0;
+		}
+	}
 }
 
 void Ken::DrawCharacter()
 {
 	TextureManager& textureManager = TextureManager::GetTextureManager();
 
-	Texture2D Kentext2DSprites = textureManager.GetTexture(TextureType::BasicSpriteKen);
-	setPosition(Vector2 { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f });
-	textureManager.DrawTextureRecCustom(Kentext2DSprites, CharSprites_Idle[currentFrame].frameRec, getPosition(), WHITE);
-	//DrawTextureRec(Kentext2DSprites, CharSprites_Idle[currentFrame].frameRec, getPosition(), WHITE);
+	Texture2D KenText = textureManager.GetTexture(TextureType::BasicSpriteKen);
+	setPosition(Vector2{ GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f });
+	//textureManager.DrawTextureRecCustom(Kentext2DSprites, CharSprites_Idle[frCurrent].frameRec, getPosition(), WHITE);
+	//DrawTextureRec(Kentext2DSprites, CharSprites_Idle[frCurrent].frameRec, getPosition(), WHITE);
+	textureManager.DrawTextureOriginRec(KenText, CharSprites_Idle[currentFrame].frameRec, Vector2{ GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f }, WHITE, Vector2{ (float)CharSprites_Crouch[2].frameRec.width / 2, (float)CharSprites_Crouch[2].frameRec.height / 2 });
 }
 
 void Ken::UnloadCharacter()
@@ -112,9 +130,13 @@ void Ken::UnloadCharacter()
 // State Machines
 void Ken::setState(CharacterState& newState)
 {
+	if (currentState) {
+		currentState->exit(this);  // Salir del estado actual antes de hacer la transición
+	}
 	currentState->exit(this);  // do something before we change state
 	currentState = &newState;  // change state
 	currentState->enter(this); // do something after we change state
+	resetFrameCounter();
 }
 
 void Ken::updateState()

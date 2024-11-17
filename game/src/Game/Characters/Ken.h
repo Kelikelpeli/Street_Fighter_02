@@ -25,12 +25,7 @@ public:
 
 
 
-	float GetKenJumpSpeed() { return m_KenJump_Speed; }
-	float GetKenHorzontalSpeed() { return m_Ken_Horizontal_Speed; }
-	float GetKenVerticalSpeed() { return m_Ken_Vertical_Speed; }
 
-	float GetKenCurrentSpeed() { return m_Speed; }
-	void  SetKenCurrentSpeed(float newSpeed) { m_Speed = newSpeed; }
 
 	bool GetKenCanJump() { return m_bcanJump; }
 	void SetKenCanJump(bool newCanJump) { m_bcanJump = newCanJump; }
@@ -38,13 +33,7 @@ public:
 
 private:
 
-	const float m_KenJump_Speed = 250.f;
-	const float m_Ken_Horizontal_Speed = 100.f;
-	const float m_Ken_Vertical_Speed = 100.f;
-
-	float m_Speed = {0.f};
-	bool m_bcanJump = false;
-
+	bool  m_bcanJump;
 
 };
 

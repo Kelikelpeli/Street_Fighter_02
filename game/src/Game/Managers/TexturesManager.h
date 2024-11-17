@@ -58,6 +58,7 @@ public:
 	void DrawTextureExCustom(Texture2D texture, Vector2 position, float rotation, float scale, Color tint);
 	void DrawTextureExCustomFromBottom(Texture2D texture, Vector2 position, float rotation, float scale, Color tint);
 	void DrawTextureRecCustom(Texture2D texture, Rectangle Rectangle, Vector2 position, Color tint);
+	void DrawTextureOriginRec(Texture2D texture, Rectangle source, Vector2 position, Color tint, Vector2 origin);
 	static TextureManager& GetTextureManager();
 
 private:

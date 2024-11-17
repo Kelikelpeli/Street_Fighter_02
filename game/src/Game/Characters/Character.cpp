@@ -5,7 +5,7 @@
 
 #include "raylib.h"
 
-Character::Character() : currentState(nullptr), position({ 0.0f, 0.0f }), speed({ 0.0f, 0.0f }), collisionBox({ 0.0f, 0.0f, 50.0f, 50.0f }), health(100), maxHealth(100) {}
+Character::Character() : currentState(nullptr), position({ 0.0f, 0.0f }), speed({ 0.0f, 0.0f }), collisionBox({ 0.0f, 0.0f, 50.0f, 50.0f }) {}
 
 
 
@@ -16,7 +16,6 @@ void Character::InitCharacter ()
 	framesCounter = 0;
 	framesSpeed = 8;
 
-    health = 100;
     position = { 0.0f, 0.0f };
     speed = { 0.0f, 0.0f };
 
@@ -66,14 +65,7 @@ bool Character::checkCollision(const Rectangle& other) const
     return CheckCollisionRecs(collisionBox, other);
 }
 
-void Character::takeDamage(int damageAmount)
-{
-    health -= damageAmount;
-    if (health < 0)
-    {
-        health = 0;
-    }
-}
+
 void Character::applyMovementLimits(Rectangle bounds)
 {
     if (position.x < bounds.x) position.x = bounds.x;

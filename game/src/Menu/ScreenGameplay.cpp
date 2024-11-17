@@ -39,7 +39,7 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 	if (countdown <= 0) {
 		finishScreen = 2;
 	}
-	
+	ken.UpdateCharacter(deltaTime);
 }
 
 void ScreenGameplayState::DrawScreen(void)

@@ -56,13 +56,7 @@ public :
 	bool checkCollision(const Rectangle& other) const;
 
 
-	// Damage handling
-	virtual void takeDamage(int damageAmount);
-	void heal(int amount);
-	int getHealth() const { return health; }
-	void setHealth(int newHealth) { health = (newHealth > maxHealth) ? maxHealth : newHealth; }
-	bool isAlive() const { return health > 0; }
-
+	
 	// Animation management
 	void setFrameSpeed(int newSpeed) { framesSpeed = newSpeed; }
 	int getFrameSpeed() const { return framesSpeed; }
@@ -105,9 +99,7 @@ protected:
 	// Collision box
 	Rectangle collisionBox = { 0.0f, 0.0f, 50.0f, 50.0f }; // Default collision box size (to be updated as needed)
 
-	// Health
-	int health = 100;
-	int maxHealth = 100;
+	
 
 
 	/*int CarSprites_Counter = 10;
