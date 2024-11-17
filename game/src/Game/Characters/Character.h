@@ -59,9 +59,9 @@ public :
 
 	//
 	void SetPosition(Vector2 position);
-	Vector2 GetPosition() const;
-	void SetSpeed(float speed);
-	float GetSpeed() const;
+    Vector2 GetPosition() const;
+    void SetSpeed(float speed);
+    float GetSpeed() const;
 
 
 	// State management
@@ -85,15 +85,15 @@ public :
 
 protected:
 
-	//CharacterState* currentState;//
+	CharacterState* currentState;//
 
-	//std::map<CharSpriteDirection, int> CharSprites_Counter;
-	//
-	//std::map<int, FrameRecPos> CharSprites_Idle;
-	//std::map<int, FrameRecPos> CharSprites_WalkForward;
-	//std::map<int, FrameRecPos> CharSprites_WalkBackward;
-	//std::map<int, FrameRecPos> CharSprites_Crouch;
-	//std::map<int, FrameRecPos> CharSprites_JumpUp;
+	std::map<CharSpriteDirection, int> CharSprites_Counter;
+	
+	std::map<int, FrameRecPos> CharSprites_Idle;
+	std::map<int, FrameRecPos> CharSprites_WalkForward;
+	std::map<int, FrameRecPos> CharSprites_WalkBackward;
+	std::map<int, FrameRecPos> CharSprites_Crouch;
+	std::map<int, FrameRecPos> CharSprites_JumpUp;
 	//std::map<int, FrameRecPos> CharSprites_LightPunch;
 	//std::map<int, FrameRecPos> CharSprites_MediumPunch;
 

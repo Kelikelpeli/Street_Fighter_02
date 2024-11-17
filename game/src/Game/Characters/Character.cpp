@@ -7,7 +7,7 @@
 
 #include "raylib.h"
 
-Character::Character(): position{ 0, 0 }, speed(0), currentState(CharState::Idle), currentFrame(0), frameCounter(0), frameSpeed(8.0f)
+Character::Character(): position{ 0, 0 }, speed(0), currentState(CharState::Idle), currentFrame(0), frameCounter(0), frameSpeed(6.0f)
 {
 }
 
@@ -45,13 +45,13 @@ void Character::UpdateCharacter(float deltaTime)
 }
 
 void Character::DrawCharacter()
-{
-    const auto& currentAnimation = animations[currentState];
-    if (currentAnimation.empty()) return;
+    {
+        const auto & currentAnimation = animations[currentState];
+        if (currentAnimation.empty()) return;
 
-    const auto& frame = currentAnimation[currentFrame];
-    characterText = textureManager.GetTexture(textureId);
-   DrawTexturePro(texture, frame.frameRec, { position.x, position.y, frame.frameRec.width, frame.frameRec.height }, frame.origin, 0.0f, WHITE);
+        const auto& frame = currentAnimation[currentFrame];
+        textureManager.DrawTextureOriginRec(characterText, CharSprites_Idle[currentFrame].frameRec, GetPosition(), WHITE, Vector2{(float)CharSprites_Crouch[2].frameRec.width / 2, (float)CharSprites_Crouch[2].frameRec.height / 2});
+
 }
 
 void Character::SetPosition(Vector2 pos)
