@@ -1,6 +1,8 @@
+#ifndef IDLESTATE_H
+#define IDLESTATE_H
 #pragma once
 
-#include "BaseCharacterState.h"
+#include "CharacterState.h"
 
 class IdleState : public CharacterState
 {
@@ -9,13 +11,11 @@ public:
     void updateState(Character* character) override;
     void exit(Character* character) override {}
     static CharacterState& getInstance();
-    int getStateID() const override;
 
 private:
     IdleState() {}
-    IdleState(const IdleState& other);
-    IdleState& operator=(const IdleState& other);
 };
+#endif
 
 
 //#pragma once

@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 #include "Game\States\CharacterState.h"
-
+#include "Game\Managers\TexturesManager.h"
 
 enum class CharState
 {
@@ -65,11 +65,11 @@ public :
     void SetSpeed(float speed);
     float GetSpeed() const;
 
-
-	// State management
-	void setState(CharacterState& newState);
-	CharState GetState() const;
+	inline CharacterState* getCurrentState() const { return currentState; }
+	//CharacterState* getCurrentState() const { return currentState; }
 	void updateState();
+	void setState(CharacterState& newState);
+
 
 	// Collision management
 	virtual Rectangle GetCollisionBox() const;

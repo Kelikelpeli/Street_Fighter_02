@@ -1,6 +1,7 @@
 #include "Character.h"
 #include <stdexcept>
 #include "Game\Managers\TexturesManager.h"
+#include "Game\States\IdleState.h"
 
 //#include "Game/Managers/GameManager.h"
 //#include "Game/States/CharacterState.h"
@@ -77,29 +78,21 @@ float Character::GetSpeed() const
 // State Machines
 void Character::setState(CharacterState& newState)
 {
-
-    currentState->exit(this);  // do something before we change state
-
-    currentState = &newState;  // change state
-
-    currentState->enter(this); // do something after we change state
-
-    framesCounter = 0;
-
-
+    if (currentState)
+    {
+        currentState->exit(this); // Exit the current state
+    }
+    currentState = &newState; // Assign the new state
+    currentState->enter(this); // Enter the new state
+    framesCounter = 0; // Reset frame counter after state transition
 }
-CharState Character::GetState() const
-{
-    return currentState;
-}
+
 void Character::updateState()
-
 {
-
-    // Delegate the task of determining the next state to the current state!
-
-    currentState->updateState(this);
-
+    if (currentState)
+    {
+        currentState->updateState(this); // Correct operator usage for pointer
+    }
 }
 
 Rectangle Character::GetCollisionBox() const

@@ -1,22 +1,38 @@
 #include "IdleState.h"
+#include "WalkForwardState.h"
+#include "WalkBackwardState.h"
+#include "JumpUpState.h"
 #include "raylib.h"
+#include "CharacterState.h"
 
+
+//class IdleState : public CharacterState
+//
+//{
+//    characterState->setCurrentFrame(0);
+//    character->setFrameSpeed(8);
+//}
 void IdleState::enter(Character* character)
 {
-    character->setCurrentFrame(0);
-    character->setFrameSpeed(8);
+    // Set the character's state to Idle (e.g., animation or log)
+    character->setState(CharSpriteDirection::State_Idle);
 }
 
 void IdleState::updateState(Character* character)
 {
+    // Handle state transitions
     if (IsKeyPressed(KEY_RIGHT))
     {
-        // Transición al estado de caminar hacia adelante
-        //character->setState(WalkForwardState::getInstance());
+        character->setState(WalkForwardState::getInstance());
     }
-
-    // Actualización de la animación usando la función común
-    updateAnimationFrame(character, 4); // Suponiendo 4 frames para el estado Idle
+    else if (IsKeyPressed(KEY_LEFT))
+    {
+        character->setState(WalkBackwardState::getInstance());
+    }
+    else if (IsKeyPressed(KEY_SPACE))
+    {
+        character->setState(JumpState::getInstance());
+    }
 }
 
 CharacterState& IdleState::getInstance()
@@ -25,10 +41,10 @@ CharacterState& IdleState::getInstance()
     return singleton;
 }
 
-int IdleState::getStateID() const
-{
-    return static_cast<int>(CharSpriteDirection::State_Idle);
-}
+//int IdleState::getStateID() const
+//{
+//    return static_cast<int>(CharSpriteDirection::State_Idle);
+//}
 
 
 //#include "IdleState.h"
