@@ -77,22 +77,28 @@ float Character::GetSpeed() const
 
 // State Machines
 void Character::setState(CharacterState& newState)
+
 {
-    if (currentState)
-    {
-        currentState->exit(this); // Exit the current state
-    }
-    currentState = &newState; // Assign the new state
-    currentState->enter(this); // Enter the new state
-    framesCounter = 0; // Reset frame counter after state transition
+
+    currentState->exit(this);  // do something before we change state
+
+    currentState = &newState;  // change state
+
+    currentState->enter(this); // do something after we change state
+
+    framesCounter = 0;
+
+
 }
 
 void Character::updateState()
+
 {
-    if (currentState)
-    {
-        currentState->updateState(this); // Correct operator usage for pointer
-    }
+
+    // Delegate the task of determining the next state to the current state!
+
+    currentState->updateState(this);
+
 }
 
 Rectangle Character::GetCollisionBox() const

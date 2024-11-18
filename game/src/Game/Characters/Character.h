@@ -65,10 +65,9 @@ public :
     void SetSpeed(float speed);
     float GetSpeed() const;
 
-	inline CharacterState* getCurrentState() const { return currentState; }
-	//CharacterState* getCurrentState() const { return currentState; }
-	void updateState();
-	void setState(CharacterState& newState);
+	void Character::setState(CharacterState& newState);
+	void Character::updateState();
+
 
 
 	// Collision management
@@ -137,7 +136,6 @@ protected:
 //	void setState(CharacterState& newState);
 //
 //protected:
-//		
 //	CharacterState* currentState;
 
 
