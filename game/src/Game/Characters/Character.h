@@ -82,7 +82,7 @@ protected:
 	size_t currentFrame;
 	float frameCounter;
 	float frameSpeed;
-	TextureManager& textureManager = TextureManager::GetTextureManager();
+	TextureManager& textureManager;
 	Texture2D characterText;
 	// Collision box
 	//Rectangle collisionBox = { 0.0f, 0.0f, 50.0f, 50.0f }; // Default collision box size (to be updated as needed)

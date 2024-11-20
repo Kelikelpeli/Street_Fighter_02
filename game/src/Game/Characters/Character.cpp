@@ -1,6 +1,6 @@
 #include "Character.h"
 //#include <stdexcept>
-#include "Game\Managers\TexturesManager.h"
+//#include "Game\Managers\TexturesManager.h"
 #include "Game\States\IdleState.h"
 
 //#include "Game/Managers/GameManager.h"
@@ -35,15 +35,13 @@ void Character::UpdateCharacter(float deltaTime)
     
 }
 
-void Character::DrawCharacter()
-    {
+void Character::DrawCharacter(){
+    if (!currentState) return;
+
       /*  const auto & currentAnimation = animations[currentState];
         if (currentAnimation.empty()) return;
 
-        const auto& frame = currentAnimation[currentFrame];
-        textureManager.DrawTextureOriginRec(characterText, CharSprites_Idle[currentFrame].frameRec, GetPosition(), WHITE, Vector2{(float)CharSprites_Crouch[2].frameRec.width / 2, (float)CharSprites_Crouch[2].frameRec.height / 2});*/
-
-    if (!currentState) return;
+        const auto& frame = currentAnimation[currentFrame];*/
 
     StateType state = currentState->getStateType();
     const auto& currentAnimation = animations[state];
@@ -51,6 +49,9 @@ void Character::DrawCharacter()
 
     const auto& frame = currentAnimation[currentFrame];
     DrawTextureRec(characterText, frame.frameRec, position, WHITE);
+    textureManager.DrawTextureOriginRec(characterText, frame.frameRec, GetPosition(), WHITE,
+        frame.frameOrigin);
+
 }
 
 void Character::SetPosition(Vector2 pos)

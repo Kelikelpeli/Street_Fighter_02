@@ -1,13 +1,9 @@
 #pragma once
 #include "Ken.h"
 #include "Game\Managers\TexturesManager.h"
-Ken::Ken()
-{
-}
+Ken::Ken() : Character() {}
 
-Ken::~Ken()
-{
-}
+Ken::~Ken(){}
 
 void Ken::InitCharacter()
 {
