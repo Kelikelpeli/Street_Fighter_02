@@ -23,22 +23,10 @@ struct AnimationFrame
 };
 
 
-//class CharacterState;
 #pragma once
 
-enum class CharSpriteDirection
-{
-	State_Idle = 0,
-	State_WalkForward,
-	State_WalkBackward,
-	State_Crouch,
-	State_JumpUp,
-	State_LightPunch,
-	State_MediumPunch
 
-};
-
-struct FrameRecPos
+struct AnimationFrame
 {
 	Rectangle frameRec;
 	Vector2   frameOrigin;
@@ -73,7 +61,7 @@ public :
 		
 	// Animation management
 	void LoadAnimationFrames(StateType state, const std::vector<AnimationFrame>& frames);
-	void UpdateAnimation(float deltaTime);
+	//void UpdateAnimation(float deltaTime);
 	
 protected:
 
@@ -81,26 +69,14 @@ protected:
 
 	std::map<StateType, std::vector<AnimationFrame>> animations;
 	
-	std::map<int, FrameRecPos> CharSprites_Idle;
-	std::map<int, FrameRecPos> CharSprites_WalkForward;
-	std::map<int, FrameRecPos> CharSprites_WalkBackward;
-	std::map<int, FrameRecPos> CharSprites_Crouch;
-	std::map<int, FrameRecPos> CharSprites_JumpUp;
-	//std::map<int, FrameRecPos> CharSprites_LightPunch;
-	//std::map<int, FrameRecPos> CharSprites_MediumPunch;
-
-	
 	// Attributes
 	Vector2 position;
 	float speed;
-	//CharState currentState;
 
 	// Animation data
-	std::map<CharState, std::vector<AnimationFrame>> animations;
 	size_t currentFrame;
 	float frameCounter;
 	float frameSpeed;
-	std::string textureId; // ID for TexturesManager
 	TextureManager& textureManager = TextureManager::GetTextureManager();
 	Texture2D characterText;
 	// Collision box

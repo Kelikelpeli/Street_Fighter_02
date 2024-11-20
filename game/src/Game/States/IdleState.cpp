@@ -8,7 +8,10 @@
 #include "JumpUpState.h"
 #include "CrouchState.h"
 
-
+IdleState& IdleState::getInstance() {
+	static IdleState instance;
+	return instance;
+}
 void IdleState::enter(Character* character)
 
 {
@@ -38,13 +41,13 @@ void IdleState::updateState(Character* character)
 
 	}
 
-	else if (IsKeyPressed(KEY_SPACE))
+	/*else if (IsKeyPressed(KEY_SPACE))
 
 	{
 
 		character->setState(JumpUpState::getInstance());
 
-	}
+	}*/
 
 
 		// Add more states
@@ -52,12 +55,3 @@ void IdleState::updateState(Character* character)
 }
 
 
-CharacterState& IdleState::getInstance()
-
-{
-
-	static IdleState singleton;
-
-	return singleton;
-
-}

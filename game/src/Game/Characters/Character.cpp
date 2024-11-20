@@ -1,5 +1,5 @@
 #include "Character.h"
-#include <stdexcept>
+//#include <stdexcept>
 #include "Game\Managers\TexturesManager.h"
 #include "Game\States\IdleState.h"
 
@@ -8,22 +8,18 @@
 
 #include "raylib.h"
 
-Character::Character(): position{ 0, 0 }, speed(0), currentFrame(0), frameCounter(0), frameSpeed(6.0f)
-{
-}
-
+Character::Character(): position{ 0, 0 }, speed(0), currentState(nullptr), currentFrame(0), frameCounter(0), frameSpeed(6.0f) {}
 Character::~Character() {}
 
 
 void Character::InitCharacter ()
 {
    
-    //TexturesManager::GetInstance().LoadTexture(textureId);
 }
 
 void Character::UpdateCharacter(float deltaTime)
 {
-    UpdateAnimation(deltaTime);
+  //  UpdateAnimation(deltaTime);
 
     if (!currentState) return;
 
@@ -41,12 +37,20 @@ void Character::UpdateCharacter(float deltaTime)
 
 void Character::DrawCharacter()
     {
-        const auto & currentAnimation = animations[currentState];
+      /*  const auto & currentAnimation = animations[currentState];
         if (currentAnimation.empty()) return;
 
         const auto& frame = currentAnimation[currentFrame];
-        textureManager.DrawTextureOriginRec(characterText, CharSprites_Idle[currentFrame].frameRec, GetPosition(), WHITE, Vector2{(float)CharSprites_Crouch[2].frameRec.width / 2, (float)CharSprites_Crouch[2].frameRec.height / 2});
+        textureManager.DrawTextureOriginRec(characterText, CharSprites_Idle[currentFrame].frameRec, GetPosition(), WHITE, Vector2{(float)CharSprites_Crouch[2].frameRec.width / 2, (float)CharSprites_Crouch[2].frameRec.height / 2});*/
 
+    if (!currentState) return;
+
+    StateType state = currentState->getStateType();
+    const auto& currentAnimation = animations[state];
+    if (currentAnimation.empty()) return;
+
+    const auto& frame = currentAnimation[currentFrame];
+    DrawTextureRec(characterText, frame.frameRec, position, WHITE);
 }
 
 void Character::SetPosition(Vector2 pos)
@@ -95,18 +99,18 @@ void Character::LoadAnimationFrames(StateType state, const std::vector<Animation
     animations[state] = frames;
 }
 
-void Character::UpdateAnimation(float deltaTime)
-{
-    const auto& currentAnimation = animations[currentState];
-    if (currentAnimation.empty()) return;
-
-    frameCounter += deltaTime * frameSpeed;
-    if (frameCounter >= 1.0f)
-    {
-        frameCounter = 0;
-        currentFrame = (currentFrame + 1) % currentAnimation.size();
-    }
-}
+//void Character::UpdateAnimation(float deltaTime)
+//{
+//    const auto& currentAnimation = animations[StateType];
+//    if (currentAnimation.empty()) return;
+//
+//    frameCounter += deltaTime * frameSpeed;
+//    if (frameCounter >= 1.0f)
+//    {
+//        frameCounter = 0;
+//        currentFrame = (currentFrame + 1) % currentAnimation.size();
+//    }
+//}
 
 //void Character::updateState()
 //{

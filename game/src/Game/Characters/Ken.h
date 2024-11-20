@@ -7,13 +7,14 @@ class Ken : public Character
 {
 public:
     Ken();
-    virtual ~Ken();
+    ~Ken();
 
     void InitCharacter() override;
     void UpdateCharacter(float deltaTime) override;
 
-    void Ken::UpdateCharacter(float deltaTime);
-
+   // void Ken::UpdateCharacter(float deltaTime);
+private:
+    void LoadKenAnimations();
 
 };
 

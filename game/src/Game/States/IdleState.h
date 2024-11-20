@@ -7,25 +7,23 @@
 class Character;
 
 
-class IdleState : public CharacterState
-
-{
-
+class IdleState : public CharacterState{
 public:
 
-	void enter(GameCharacter* character) override;
-	void updateState(GameCharacter* character) override;
-	void exit(GameCharacter* character) override {}
+	void enter(Character* character) override;
+	void updateState(Character* character) override;
+	void exit(Character* character) override {}
+	StateType getStateType() const override { return StateType::Idle; }
 
-	static CharacterState& getInstance();
+	static IdleState& getInstance();
 
 
 private:
 
 	IdleState() {}
 
-	IdleState(const IdleState& other);
+	//IdleState(const IdleState& other);
 
-	IdleState& operator=(const IdleState& other);
+	//IdleState& operator=(const IdleState& other);
 
-};;
+};
