@@ -32,11 +32,14 @@ void IdleState::updateState(Character* character){
 
 	}
 
-	/*else if (IsKeyPressed(KEY_SPACE)){
+	else if (IsKeyPressed(KEY_UP)){
 
 		character->setState(JumpUpState::getInstance());
 
-	}*/
+	}
+	else if (IsKeyPressed(KEY_DOWN)) {
+		character->setState(CrouchState::getInstance());
+	}
 
 
 	// Add more states

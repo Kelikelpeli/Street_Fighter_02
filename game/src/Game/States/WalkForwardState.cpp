@@ -1,28 +1,22 @@
 #include "WalkForwardState.h"
+#include "Game\Characters\Character.h"
+#include "CrouchState.h"
 #include "IdleState.h"
 
-void WalkForwardState::enter(Character* character)
-{
-    character->SetCharSpriteState(CharSpriteDirection::State_WalkForward);
+WalkForwardState& WalkForwardState::getInstance() {
+    static WalkForwardState instance;
+    return instance;
 }
 
-void WalkForwardState::updateState(Character* character)
-{
-    if (!IsKeyDown(KEY_RIGHT))
-    {
+void WalkForwardState::enter(Character* character) {
+    character->setStateAnimation(StateType::WalkForward);
+}
+
+void WalkForwardState::updateState(Character* character) {
+    if (IsKeyPressed(KEY_DOWN)) {
+        character->setState(CrouchState::getInstance());
+    }
+    else if (!IsKeyDown(KEY_RIGHT)) {
         character->setState(IdleState::getInstance());
     }
-    else
-    {
-        // Move character forward
-        Vector2 position = character->GetPosition();
-        position.x += character->GetSpeed();
-        character->SetPosition(position);
-    }
-}
-
-CharacterState& WalkForwardState::getInstance()
-{
-    static WalkForwardState singleton;
-    return singleton;
 }

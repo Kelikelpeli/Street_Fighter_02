@@ -8,6 +8,8 @@
 #include "Game\States\CharacterState.h"
 #include "Game\Managers\TexturesManager.h"
 
+class CharacterState;
+
 enum class StateType
 {
 	Idle = 0,
