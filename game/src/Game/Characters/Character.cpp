@@ -8,8 +8,17 @@
 
 #include "raylib.h"
 
-Character::Character(): position{ 0, 0 }, speed(0), currentState(nullptr), currentFrame(0), frameCounter(0), frameSpeed(6.0f) {}
-Character::~Character() {}
+Character::Character()
+    : position({ 0, 0 }),
+    speed(0.0f),
+    currentState(nullptr),  // Inicialización del puntero a nullptr
+    currentFrame(0),
+    frameCounter(0.0f),
+    frameSpeed(6.0f),
+    characterText({ 0 }), // Inicialización de la textura a una estructura vacía
+   textureManager(TextureManager::GetTextureManager()) // Inicialización de la referencia a TextureManager
+{
+}
 
 
 void Character::InitCharacter ()
@@ -48,7 +57,7 @@ void Character::DrawCharacter(){
     if (currentAnimation.empty()) return;
 
     const auto& frame = currentAnimation[currentFrame];
-    DrawTextureRec(characterText, frame.frameRec, position, WHITE);
+   // DrawTextureRec(characterText, frame.frameRec, position, WHITE);
     textureManager.DrawTextureOriginRec(characterText, frame.frameRec, GetPosition(), WHITE,
         frame.frameOrigin);
 

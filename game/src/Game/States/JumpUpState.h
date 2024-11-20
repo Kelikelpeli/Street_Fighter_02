@@ -1,7 +1,7 @@
 #pragma once
 #include "CharacterState.h"
 
-class JumpState : public CharacterState {
+class JumpUpState : public CharacterState {
 public:
     void enter(Character* character) override;
     void updateState(Character* character) override;
@@ -9,8 +9,8 @@ public:
 
     StateType getStateType() const override { return StateType::JumpUp; }
 
-    static JumpState& getInstance();
+    static JumpUpState& getInstance();
 
 private:
-    JumpState() {}
+    JumpUpState() {}
 };

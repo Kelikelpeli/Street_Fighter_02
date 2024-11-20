@@ -71,6 +71,18 @@ void Ken::UpdateCharacter(float deltaTime)
 	// Specific logic for Ken can be added here if needed
 }
 
+void Ken :: DrawCharacter() {
+    StateType state = currentState->getStateType();
+    const auto& currentAnimation = animations[state];
+    if (currentAnimation.empty()) return;
+
+    const auto& frame = currentAnimation[currentFrame];
+    //DrawTextureRec(characterText, frame.frameRec, position, WHITE);
+    //const auto& frame = animations[StateType::Idle][currentFrame];
+   // textureManager.DrawTextureOriginRec(characterText, animations[StateType::Idle][0].frameRec, position, WHITE, frame.frameOrigin);
+    DrawRectangle(0, 0, 20, 20, RED);
+
+}
 //	CharSprites_Counter[CharSpriteDirection::State_Idle] = 4;
 //
 //	CharSprites_Idle[0] = FrameRecPos{ {4,4,260,386}, {0.f, 0.f} };

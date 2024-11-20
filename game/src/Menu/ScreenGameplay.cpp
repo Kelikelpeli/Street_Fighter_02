@@ -44,6 +44,8 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 
 void ScreenGameplayState::DrawScreen(void)
 {
+	DrawRectangle(GetScreenHeight() / 2, GetScreenWidth() / 2, 100, 100, RED);
+
 
 	DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
 
@@ -61,7 +63,8 @@ void ScreenGameplayState::DrawScreen(void)
 	Vector2 centerScreen = { GetScreenWidth()/2.0f, (GetScreenHeight()) / 2.0f};
 
 	textureManager.DrawTextureExCustom(landscape, centerScreen, 0, 1, WHITE);
-	ken.DrawCharacter();  // Dibujar a Ken
+
+	//ken.DrawCharacter();  // Dibujar a Ken
 
 
 

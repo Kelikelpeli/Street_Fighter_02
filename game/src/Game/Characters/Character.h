@@ -7,19 +7,10 @@
 #include <string>
 #include "Game\States\CharacterState.h"
 #include "Game\Managers\TexturesManager.h"
+#include "Game\States\StateType.h"
 
 class CharacterState;
 
-enum class StateType
-{
-	Idle = 0,
-	WalkForward,
-	WalkBackward,
-	JumpUp,
-	Crouch,
-	LightPunch,
-	MediumPunch
-};
 struct AnimationFrame
 {
 	Rectangle frameRec;    // Texture region
@@ -42,7 +33,7 @@ class Character
 public :
 	Character();
 
-	virtual ~Character(); //
+	//virtual ~Character(); //
 
 
 	virtual void InitCharacter(); // Initialize texture and animations

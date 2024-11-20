@@ -11,6 +11,7 @@ public:
 
     void InitCharacter() override;
     void UpdateCharacter(float deltaTime) override;
+    void DrawCharacter() override;
 
    // void Ken::UpdateCharacter(float deltaTime);
 private:

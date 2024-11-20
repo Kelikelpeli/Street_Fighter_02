@@ -1,5 +1,6 @@
 #pragma once
-
+#include "Game/Characters/Character.h"
+#include"StateType.h"
 class Character;
 
 class CharacterState {
