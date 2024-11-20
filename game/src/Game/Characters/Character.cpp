@@ -8,7 +8,7 @@
 
 #include "raylib.h"
 
-Character::Character(): position{ 0, 0 }, speed(0), currentState(CharState::Idle), currentFrame(0), frameCounter(0), frameSpeed(6.0f)
+Character::Character(): position{ 0, 0 }, speed(0), currentFrame(0), frameCounter(0), frameSpeed(6.0f)
 {
 }
 
@@ -25,23 +25,17 @@ void Character::UpdateCharacter(float deltaTime)
 {
     UpdateAnimation(deltaTime);
 
-    //// Update state machine
-    //updateState();
+    if (!currentState) return;
 
-    //// Update frame counter for animations
-    //framesCounter++;
-    //if (framesCounter >= (60 / framesSpeed))
-    //{
-    //    framesCounter = 0;
-    //    currentFrame++;
+    // Update animation frames
+    frameCounter += deltaTime * frameSpeed;
+    if (frameCounter >= 1.0f) {
+        frameCounter = 0;
 
-    //    // TODO: Make this generic for every state, currently only valid for Idle state
-    //    CharSpriteDirection currentStateDirection = static_cast<CharSpriteDirection>(currentState->getStateID());
-    //    int totalNumFrames = CharSprites_Counter[currentStateDirection];
-    //    if (currentFrame > totalNumFrames - 1)
-    //    {
-    //        currentFrame = 0;
-    //    }
+        StateType state = currentState->getStateType();
+        const auto& currentAnimation = animations[state];
+        currentFrame = (currentFrame + 1) % currentAnimation.size();
+    }
     
 }
 
@@ -76,29 +70,19 @@ float Character::GetSpeed() const
 }
 
 // State Machines
-void Character::setState(CharacterState& newState)
-
-{
-
-    currentState->exit(this);  // do something before we change state
-
-    currentState = &newState;  // change state
-
-    currentState->enter(this); // do something after we change state
-
-    framesCounter = 0;
-
-
+void Character::setState(CharacterState& newState) {
+    if (currentState) {
+        currentState->exit(this);  // Use -> because currentState is a pointer
+    }
+    currentState = &newState;      // Assign the address of newState
+    currentState->enter(this);     // Use -> to call enter
+    frameCounter = 0;             // Reset frame counter
 }
 
-void Character::updateState()
-
-{
-
-    // Delegate the task of determining the next state to the current state!
-
-    currentState->updateState(this);
-
+void Character::updateState() {
+    if (currentState) {
+        currentState->updateState(this); // Use -> to delegate the update
+    }
 }
 
 Rectangle Character::GetCollisionBox() const
@@ -106,7 +90,7 @@ Rectangle Character::GetCollisionBox() const
     return { position.x, position.y, 50.0f, 50.0f }; // Example collision box
 }
 
-void Character::LoadAnimationFrames(CharState state, const std::vector<AnimationFrame>& frames)
+void Character::LoadAnimationFrames(StateType state, const std::vector<AnimationFrame>& frames)
 {
     animations[state] = frames;
 }

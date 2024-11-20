@@ -8,7 +8,7 @@
 #include "Game\States\CharacterState.h"
 #include "Game\Managers\TexturesManager.h"
 
-enum class CharState
+enum class StateType
 {
 	Idle = 0,
 	WalkForward,
@@ -57,7 +57,6 @@ public :
 
 	virtual void UpdateCharacter(float deltaTime);
 	virtual void DrawCharacter();
-	//virtual void UnloadCharacter();
 
 	//
 	void SetPosition(Vector2 position);
@@ -65,31 +64,22 @@ public :
     void SetSpeed(float speed);
     float GetSpeed() const;
 
-	void Character::setState(CharacterState& newState);
-	void Character::updateState();
-
-
+	inline CharacterState* getCurrentState() const { return currentState; }
+	void updateState();
+	void setState(CharacterState& newState);
 
 	// Collision management
 	virtual Rectangle GetCollisionBox() const;
-
-	/*Rectangle getCollisionBox() const { return collisionBox; }
-	void setCollisionBoxSize(Vector2 size) { collisionBox.width = size.x; collisionBox.height = size.y; }
-	bool checkCollision(const Rectangle& other) const;*/
-
-
-	
+		
 	// Animation management
-	void LoadAnimationFrames(CharState state, const std::vector<AnimationFrame>& frames);
+	void LoadAnimationFrames(StateType state, const std::vector<AnimationFrame>& frames);
 	void UpdateAnimation(float deltaTime);
 	
-
-
 protected:
 
 	CharacterState* currentState;//
 
-	std::map<CharSpriteDirection, int> CharSprites_Counter;
+	std::map<StateType, std::vector<AnimationFrame>> animations;
 	
 	std::map<int, FrameRecPos> CharSprites_Idle;
 	std::map<int, FrameRecPos> CharSprites_WalkForward;
@@ -103,7 +93,7 @@ protected:
 	// Attributes
 	Vector2 position;
 	float speed;
-	CharState currentState;
+	//CharState currentState;
 
 	// Animation data
 	std::map<CharState, std::vector<AnimationFrame>> animations;

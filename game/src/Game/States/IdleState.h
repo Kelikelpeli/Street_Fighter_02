@@ -4,7 +4,7 @@
 #include "CharacterState.h"
 
 
-class GameCharacter;
+class Character;
 
 
 class IdleState : public CharacterState
@@ -13,11 +13,9 @@ class IdleState : public CharacterState
 
 public:
 
-	void enter(GameCharacter* character);
-
-	void updateState(GameCharacter* character);
-
-	void exit(GameCharacter* character) {}
+	void enter(GameCharacter* character) override;
+	void updateState(GameCharacter* character) override;
+	void exit(GameCharacter* character) override {}
 
 	static CharacterState& getInstance();
 

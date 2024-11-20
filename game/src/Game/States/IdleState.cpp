@@ -1,12 +1,15 @@
 
 #include "IdleState.h"
+#include "Game\Characters\Character.h"
 
 #include "WalkForwardState.h"
 
 #include "WalkBackwardState.h"
+#include "JumpUpState.h"
+#include "CrouchState.h"
 
 
-void IdleState::enter(GameCharacter* character)
+void IdleState::enter(Character* character)
 
 {
 
@@ -15,7 +18,7 @@ void IdleState::enter(GameCharacter* character)
 }
 
 
-void IdleState::updateState(GameCharacter* character)
+void IdleState::updateState(Character* character)
 
 {
 
@@ -39,7 +42,7 @@ void IdleState::updateState(GameCharacter* character)
 
 	{
 
-		character->setState(JumpState::getInstance());
+		character->setState(JumpUpState::getInstance());
 
 	}
 

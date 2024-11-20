@@ -1,44 +1,17 @@
 #pragma once
 
-#include "Game\Characters\Character.h"
-
 class Character;
 
-//////////////////////////////////////
-// State Machine
-
-class CharacterState
-{
+class CharacterState {
 public:
+    virtual ~CharacterState() {}
 
+    // State machine functions
 
-	// State Mahines functions
-
-	inline CharacterState* getCurrentState() const { return currentState; }
-
-	// In here, we'll delegate the state transition to the currentState
-
-	void updateState();
-
-	// This will get called by the current state
-
-	void setState(CharacterState& newState);
-
+    virtual void enter(Character* character) = 0;
+    virtual void updateState(Character* character) = 0;
+    virtual void exit(Character* character) = 0;
 
 protected:
-
-
-
-
-
-	CharacterState* currentState;
-//public:
-//
-//
-//	virtual ~CharacterState() {}
-//
-//	virtual void enter(GameCharacter* light) = 0;
-//	virtual void updateState(GameCharacter* light) = 0;
-//	virtual void exit(GameCharacter* light) = 0;
+    CharacterState* currentState; // Pointer to the current state
 };
-
