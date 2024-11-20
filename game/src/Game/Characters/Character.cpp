@@ -19,7 +19,7 @@ void Character::InitCharacter ()
 
 void Character::UpdateCharacter(float deltaTime)
 {
-  //  UpdateAnimation(deltaTime);
+    updateState();
 
     if (!currentState) return;
 
@@ -86,6 +86,12 @@ void Character::setState(CharacterState& newState) {
 void Character::updateState() {
     if (currentState) {
         currentState->updateState(this); // Use -> to delegate the update
+    }
+}
+void Character::setStateAnimation(StateType state) {
+    const auto& currentAnimation = animations[state];
+    if (!currentAnimation.empty()) {
+        currentFrame = 0; // Reset animation to the first frame
     }
 }
 

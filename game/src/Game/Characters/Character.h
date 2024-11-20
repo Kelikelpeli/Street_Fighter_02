@@ -14,7 +14,9 @@ enum class StateType
 	WalkForward,
 	WalkBackward,
 	JumpUp,
-	Crouch
+	Crouch,
+	LightPunch,
+	MediumPunch
 };
 struct AnimationFrame
 {
@@ -42,7 +44,6 @@ public :
 
 
 	virtual void InitCharacter(); // Initialize texture and animations
-
 	virtual void UpdateCharacter(float deltaTime);
 	virtual void DrawCharacter();
 
@@ -61,6 +62,8 @@ public :
 		
 	// Animation management
 	void LoadAnimationFrames(StateType state, const std::vector<AnimationFrame>& frames);
+	void setStateAnimation(StateType state);
+
 	//void UpdateAnimation(float deltaTime);
 	
 protected:
