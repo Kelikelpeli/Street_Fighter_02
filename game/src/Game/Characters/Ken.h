@@ -1,13 +1,12 @@
 #ifndef Ken_H
 #define Ken_H
-#pragma once
-#include "Character.h"
+#include "Game/Characters/Character.h"
 
 class Ken : public Character
 {
 public:
     Ken();
-    ~Ken();
+    virtual ~Ken();
 
     void InitCharacter() override;
     void UpdateCharacter(float deltaTime) override;

@@ -18,7 +18,6 @@ struct AnimationFrame
 };
 
 
-#pragma once
 
 
 struct AnimationFrame

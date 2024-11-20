@@ -1,6 +1,7 @@
 #pragma once
 #include "StateMachineMngr.h"
 #include "Game/Characters/Ken.h"
+#include "Game/Characters/Character.h"
 
 
 class ScreenGameplayState : public StateMachineMngr
