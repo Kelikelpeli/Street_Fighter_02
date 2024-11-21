@@ -1,5 +1,6 @@
 #pragma once
-
+#ifndef STATETYPES_H
+#define STATETYPES_H
 enum class StateType {
     Idle = 0,
     WalkForward,
@@ -9,3 +10,4 @@ enum class StateType {
     LightPunch,
     MediumPunch
 };
+#endif

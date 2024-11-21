@@ -1,20 +1,49 @@
-#ifndef Ken_H
-#define Ken_H
+#ifndef Ken_CHAR_H
+#define Ken_CHAR_H
+
+#pragma once
+
+#include <map>
+#include <string>
+
 #include "Game/Characters/Character.h"
 
-class Ken : public Character
+
+class Ken : public GameCharacter
 {
 public:
-    Ken();
-    virtual ~Ken();
 
-    void InitCharacter() override;
-    void UpdateCharacter(float deltaTime) override;
-    void DrawCharacter() override;
+	virtual void InitGameCharacter() override;
+	virtual void UpdateGameCharacter(float deltaTime) override;
+	virtual void DrawGameCharacter() override;
+	virtual void UnloadGameCharacter() override;
 
-   // void Ken::UpdateCharacter(float deltaTime);
+	//State Machine
+	virtual void updateState();
+	// This will get called by the current state
+	virtual void setState(CharacterState& newState);
+
+
+
+	float GetKenJumpSpeed() { return m_KenJump_Speed; }
+	float GetKenHorzontalSpeed() { return m_Ken_Horizontal_Speed; }
+	float GetKenVerticalSpeed() { return m_Ken_Vertical_Speed; }
+
+	float GetKenCurrentSpeed() { return m_Speed; }
+	void  SetKenCurrentSpeed(float newSpeed) { m_Speed = newSpeed; }
+
+	bool GetKenCanJump() { return m_bcanJump; }
+	void SetKenCanJump(bool newCanJump) { m_bcanJump = newCanJump; }
+
+
 private:
-    void LoadKenAnimations();
+
+	const float m_KenJump_Speed = 250.f;
+	const float m_Ken_Horizontal_Speed = 100.f;
+	const float m_Ken_Vertical_Speed = 100.f;
+
+	float m_Speed = { 0.f };
+	bool m_bcanJump = false;
 
 };
 

@@ -1,8 +1,5 @@
 #pragma once
 #include "StateMachineMngr.h"
-#include "Game/Characters/Ken.h"
-#include "Game/Characters/Character.h"
-
 
 class ScreenGameplayState : public StateMachineMngr
 {
@@ -21,8 +18,6 @@ public:
 	int getScreenId() { return (int)ScreenState::GAMEPLAY; }
 
 	static ScreenGameplayState& getInstance();
-	bool HasWin();
-
 
 private:
 	ScreenGameplayState();
@@ -30,22 +25,15 @@ private:
 	ScreenGameplayState& operator= (const ScreenGameplayState& other);
 
 	void EvaluateInput();
-	
+
 	void DebugOptions();
 	void DrawDebug();
 
-	void SetWin(bool win);
-
 	int framesCounter = 0;
 	int finishScreen = 0;
-	int countdown = 2400;
 	bool mb_ReplayLevel = false;
-	bool win = false;
-
 
 	bool debug_floor = false;
 	bool debug_stairs = false;
-
-	Ken ken;
 
 };

@@ -1,139 +1,55 @@
 #include "Character.h"
-//#include <stdexcept>
-//#include "Game\Managers\TexturesManager.h"
-#include "Game\States\IdleState.h"
 
-//#include "Game/Managers/GameManager.h"
-//#include "Game/States/CharacterState.h"
+#include "Game/Managers/GameManager.h"
+#include "Game/States/CharacterState.h"
 
 #include "raylib.h"
 
-Character::Character()
-    : position({ 0, 0 }),
-    speed(0.0f),
-    currentState(nullptr),  // Inicialización del puntero a nullptr
-    currentFrame(0),
-    frameCounter(0.0f),
-    frameSpeed(6.0f),
-    characterText({ 0 }), // Inicialización de la textura a una estructura vacía
-   textureManager(TextureManager::GetTextureManager()) // Inicialización de la referencia a TextureManager
+GameCharacter::GameCharacter()
 {
 }
 
-
-void Character::InitCharacter ()
+void GameCharacter::InitGameCharacter()
 {
-   
+	currentFrame = 0;
+
+	framesCounter = 0;
+	framesSpeed = 8;
 }
 
-void Character::UpdateCharacter(float deltaTime)
+void GameCharacter::UpdateGameCharacter(float deltaTime)
 {
-    updateState();
-
-    if (!currentState) return;
-
-    // Update animation frames
-    frameCounter += deltaTime * frameSpeed;
-    if (frameCounter >= 1.0f) {
-        frameCounter = 0;
-
-        StateType state = currentState->getStateType();
-        const auto& currentAnimation = animations[state];
-        currentFrame = (currentFrame + 1) % currentAnimation.size();
-    }
-    
-}
-
-void Character::DrawCharacter(){
-    if (!currentState) return;
-
-      /*  const auto & currentAnimation = animations[currentState];
-        if (currentAnimation.empty()) return;
-
-        const auto& frame = currentAnimation[currentFrame];*/
-
-    StateType state = currentState->getStateType();
-    const auto& currentAnimation = animations[state];
-    if (currentAnimation.empty()) return;
-
-    const auto& frame = currentAnimation[currentFrame];
-   // DrawTextureRec(characterText, frame.frameRec, position, WHITE);
-    textureManager.DrawTextureOriginRec(characterText, frame.frameRec, GetPosition(), WHITE,
-        frame.frameOrigin);
 
 }
 
-void Character::SetPosition(Vector2 pos)
+void GameCharacter::DrawGameCharacter()
 {
-    position = pos;
 }
 
-Vector2 Character::GetPosition() const
+void GameCharacter::UnloadGameCharacter()
 {
-    return position;
+
 }
 
-void Character::SetSpeed(float spd)
-{
-    speed = spd;
-}
-
-float Character::GetSpeed() const
-{
-    return speed;
-}
 
 // State Machines
-void Character::setState(CharacterState& newState) {
-    if (currentState) {
-        currentState->exit(this);  // Use -> because currentState is a pointer
-    }
-    currentState = &newState;      // Assign the address of newState
-    currentState->enter(this);     // Use -> to call enter
-    frameCounter = 0;             // Reset frame counter
-}
-
-void Character::updateState() {
-    if (currentState) {
-        currentState->updateState(this); // Use -> to delegate the update
-    }
-}
-void Character::setStateAnimation(StateType state) {
-    const auto& currentAnimation = animations[state];
-    if (!currentAnimation.empty()) {
-        currentFrame = 0; // Reset animation to the first frame
-    }
-}
-
-Rectangle Character::GetCollisionBox() const
+void GameCharacter::setState(CharacterState& newState)
 {
-    return { position.x, position.y, 50.0f, 50.0f }; // Example collision box
+	currentState->exit(this);  // do something before we change state
+	currentState = &newState;  // change state
+	currentState->enter(this); // do something after we change state
+	framesCounter = 0;
+
 }
 
-void Character::LoadAnimationFrames(StateType state, const std::vector<AnimationFrame>& frames)
+void GameCharacter::updateState()
 {
-    animations[state] = frames;
+	// Delegate the task of determining the next state to the current state!
+	currentState->updateState(this);
 }
-
-//void Character::UpdateAnimation(float deltaTime)
-//{
-//    const auto& currentAnimation = animations[StateType];
-//    if (currentAnimation.empty()) return;
-//
-//    frameCounter += deltaTime * frameSpeed;
-//    if (frameCounter >= 1.0f)
-//    {
-//        frameCounter = 0;
-//        currentFrame = (currentFrame + 1) % currentAnimation.size();
-//    }
-//}
-
-//void Character::updateState()
-//{
-//    if (currentState)
-//    {
-//        currentState->updateState(this);
-//    }
-//	// Delegate the task of determining the next state to the current state!
-//	//currentState->updateState(this);
-//}
+void GameCharacter::setPosition(float x, float y) {
+	position = Vector2{ x, y };
+}
+Vector2 GameCharacter::getPosition() {
+	return position;
+}
