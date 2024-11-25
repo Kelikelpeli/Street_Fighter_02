@@ -4,6 +4,7 @@
 
 #include "raylib.h"
 #include <map>
+//#include "Game/Characters/Ken.h"
 
 class CharacterState;
 #pragma once
@@ -76,7 +77,7 @@ protected:
 	CharacterState* currentState;
 
 	Vector2 position;
-
+	//Ken ken;
 
 };
 

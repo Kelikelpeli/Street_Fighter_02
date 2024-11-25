@@ -11,6 +11,7 @@ GameCharacter::GameCharacter()
 
 void GameCharacter::InitGameCharacter()
 {
+	//ken.InitGameCharacter();
 	currentFrame = 0;
 
 	framesCounter = 0;

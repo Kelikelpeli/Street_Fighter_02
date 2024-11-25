@@ -22,8 +22,10 @@ ScreenGameplayState& ScreenGameplayState::getInstance()
 
 void ScreenGameplayState::InitScreen(void)
 {
+	ken = new Ken();
 	framesCounter = 0;
 	finishScreen = 0;
+	ken->InitGameCharacter();
 
 }
 
@@ -47,7 +49,7 @@ void ScreenGameplayState::DrawScreen(void)
 
 	DrawText("SCORE:", 300.f, 100.f, 25, WHITE);
 	DrawText(to_string(GameInst.GetScore()).c_str(), 440.f, 100.f, 25, WHITE);
-
+	ken->DrawGameCharacter();
 
 }
 

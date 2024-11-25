@@ -1,6 +1,6 @@
 #include "TexturesManager.h"
 
-#include "Game/Characters/Ken.h"
+//#include "Game/Characters/Ken.h"
 
 TextureManager* TextureManager::TextureMngr = nullptr;
 

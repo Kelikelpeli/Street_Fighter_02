@@ -14,7 +14,6 @@
 
 void Ken::InitGameCharacter()
 {
-
 	//Let's fill the vector KenSprtes Data
 
 	//IDLE
@@ -89,8 +88,10 @@ void Ken::UpdateGameCharacter(float deltaTime)
 
 void Ken::DrawGameCharacter()
 {
-	TextureManager& textureManager = TextureManager::GetTextureManager();
-	Texture2D kenSprites = textureManager.GetTexture(TextureType::BasicSpriteKen);
+	//TextureManager& textureManager = TextureManager::GetTextureManager();
+//	Texture2D kenSprites = textureManager.GetTexture(TextureType::BasicSpriteKen);
+	Texture2D kenSprites = LoadTexture("resources/Game/Sprites/Ken/KenBasicMovementsSprites.png");
+
 	DrawTextureRec(kenSprites, CharSprites_Idle[0].frameRec, position, WHITE);
 
 

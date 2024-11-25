@@ -1,5 +1,6 @@
 #pragma once
 #include "StateMachineMngr.h"
+#include "Game/Characters/Ken.h"
 
 class ScreenGameplayState : public StateMachineMngr
 {
@@ -35,5 +36,6 @@ private:
 
 	bool debug_floor = false;
 	bool debug_stairs = false;
+	Ken* ken;
 
 };
