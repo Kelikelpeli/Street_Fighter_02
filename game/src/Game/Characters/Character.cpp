@@ -45,10 +45,10 @@ void GameCharacter::setState(CharacterState& newState)
 
 }
 
-//void GameCharacter::SetCharSpriteState(CharSpriteDirection& newCharState)const
-//{
-//
-//}
+void GameCharacter::SetCharSpriteState(CharSpriteDirection newCharState)
+{
+	currentSpriteState = newCharState;
+}
 
 void GameCharacter::updateState()
 {
@@ -60,4 +60,9 @@ void GameCharacter::setPosition(float x, float y) {
 }
 Vector2 GameCharacter::getPosition() {
 	return position;
+}void GameCharacter::setSpeed(float x, float y) {
+	speed = Vector2{ x, y };
+}
+Vector2 GameCharacter::getSpeed() {
+	return speed;
 }

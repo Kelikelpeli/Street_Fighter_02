@@ -39,12 +39,11 @@ void IdleState::updateState(GameCharacter* character)
 
 	{
 
-		character->setState(JumpState::getInstance());
+	//	character->setState(JumpState::getInstance());
 
 	}
 
-	…..
-
+	
 		// Add more states
 
 }

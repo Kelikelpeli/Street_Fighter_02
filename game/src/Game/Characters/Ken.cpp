@@ -72,6 +72,14 @@ void Ken::InitGameCharacter()
 	CharSprites_MediumPunch[1] = FrameRecPos{ {328,390,317,382}, {0.f, 0.f} };
 	CharSprites_MediumPunch[2] = FrameRecPos{ {652,390,508,382}, {170.f, 0.f} };
 
+	CharSprites[CharSpriteDirection::State_Idle] = CharSprites_Idle;
+	CharSprites[CharSpriteDirection::State_WalkForward] = CharSprites_WalkForward;
+	CharSprites[CharSpriteDirection::State_WalkBackward] = CharSprites_WalkBackward;
+	CharSprites[CharSpriteDirection::State_Crouch] = CharSprites_Crouch;
+	CharSprites[CharSpriteDirection::State_JumpUp] = CharSprites_JumpUp;
+	CharSprites[CharSpriteDirection::State_LightPunch] = CharSprites_LightPunch;
+	CharSprites[CharSpriteDirection::State_MediumPunch] = CharSprites_MediumPunch;
+
 	//init State
 	currentState = &IdleState::getInstance();
 
@@ -82,32 +90,32 @@ void Ken::UpdateGameCharacter(float deltaTime)
 
 	//Update State Machine
 	updateState();
+	
+framesCounter++;
 
-	framesCounter++;
+if (framesCounter >= (60 / framesSpeed))
 
-	if (framesCounter >= (60 / framesSpeed))
+{
 
-	{
+framesCounter = 0;
 
-		framesCounter = 0;
-
-		currentFrame++;
-
-
-		//TODO make it generic for every state, this is only valid for Idle
-
-		int totalNumFrames = 4;
+currentFrame++;
 
 
-		if (currentFrame > totalNumFrames - 1)
+//TODO make it generic for every state, this is only valid for Idle
 
-		{
+int totalNumFrames = 4; 
 
-			currentFrame = 0;
 
-		}
+if (currentFrame > totalNumFrames - 1)
 
-	}
+{
+
+      currentFrame = 0;
+
+}
+
+}
 
 	// add here the updateframe logic to be able to see all the sprites from one state
 }
@@ -118,7 +126,10 @@ void Ken::DrawGameCharacter()
 	Texture2D kenSprites = textureManager.GetTexture(TextureType::BasicSpriteKen);
 	//Texture2D kenSprites = LoadTexture("resources/Game/Sprites/Ken/KenBasicMovementsSprites.png");
 
-	//DrawTextureRec(kenSprites, currentState..frameRec, position, WHITE);
+	//DrawTextureRec(kenSprites, CharSprites_Idle[currentFrame].frameRec, position, WHITE);
+	DrawTextureRec(kenSprites, CharSprites[currentSpriteState][currentFrame].frameRec, position, WHITE);
+
+
 
 
 }

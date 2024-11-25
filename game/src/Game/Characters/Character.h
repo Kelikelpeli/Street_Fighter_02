@@ -4,6 +4,7 @@
 
 #include "raylib.h"
 #include <map>
+#include <vector>
 
 class CharacterState;
 
@@ -40,6 +41,7 @@ public:
 
 
 protected:
+	std::map<CharSpriteDirection, std::map<int, FrameRecPos>> CharSprites;
 
 	std::map<CharSpriteDirection, int> CharSprites_Counter;
 
@@ -50,7 +52,6 @@ protected:
 	std::map<int, FrameRecPos> CharSprites_JumpUp;
 	std::map<int, FrameRecPos> CharSprites_LightPunch;
 	std::map<int, FrameRecPos> CharSprites_MediumPunch;
-
 
 	int CarSprites_Counter = 10;
 	std::map<int, FrameRecPos> CarSprites;
@@ -67,16 +68,19 @@ public:
 	void updateState();
 	// This will get called by the current state
 	void setState(CharacterState& newState);
-	//void SetCharSpriteState(CharSpriteDirection& newCharState)const;
+	void SetCharSpriteState(CharSpriteDirection newCharState);
 
 	void setPosition(float x, float y);
 	Vector2 getPosition();
+	void setSpeed(float x, float y);
+	Vector2 getSpeed();
 
 protected:
-
+	CharSpriteDirection currentSpriteState;
 	CharacterState* currentState;
 
 	Vector2 position;
+	Vector2 speed;
 	Texture2D characterText;
 
 };

@@ -18,22 +18,21 @@ void WalkForwardState::enter(GameCharacter* character)
 void WalkForwardState::updateState(GameCharacter* character)
 
 {
+	if (IsKeyPressed(KEY_RIGHT)){
 
-	//if (IsKeyPressed(KEY_LEFT))
+		character->setState(WalkBackwardState::getInstance());
+		character->setPosition(character->getPosition().x * character->getSpeed().x*1, character->getPosition().y);
 
-	//{
+	} else if (IsKeyPressed(KEY_LEFT))
+	{
+		character->setPosition(character->getPosition().x * character->getSpeed().x*-1,character->getPosition().y);
 
-	//	character->setState(WalkForwardState::getInstance());
+	}
+	else {
+		character->setState(IdleState::getInstance());
+	}
 
-	//}
-
-	//else if (IsKeyPressed(KEY_RIGHT))
-
-	//{
-
-	//	character->setState(WalkBackwardsState::getInstance());
-
-	//}
+	//else
 
 	//else if (IsKeyPressed(KEY_SPACE))
 
