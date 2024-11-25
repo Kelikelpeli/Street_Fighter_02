@@ -5,6 +5,7 @@
 #include "raylib.h"
 #include "Game/Managers/GameManager.h"
 #include "Game/GlobalGameDefines.h"
+#include "Game/Managers/TexturesManager.h"
 
 #include <string>
 
@@ -33,7 +34,7 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 {
 	EvaluateInput();
 
-
+	ken->UpdateGameCharacter(deltaTime);
 }
 
 void ScreenGameplayState::DrawScreen(void)
@@ -49,7 +50,13 @@ void ScreenGameplayState::DrawScreen(void)
 
 	DrawText("SCORE:", 300.f, 100.f, 25, WHITE);
 	DrawText(to_string(GameInst.GetScore()).c_str(), 440.f, 100.f, 25, WHITE);
+	Vector2 centerScreen = Vector2{(float) GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+	TextureManager& textureManager = TextureManager::GetTextureManager();
+	landscape = textureManager.GetTexture(TextureType::Landscape);
+	DrawTexture(landscape, 0, 0, WHITE);
+
 	ken->DrawGameCharacter();
+
 
 }
 

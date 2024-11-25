@@ -83,16 +83,42 @@ void Ken::UpdateGameCharacter(float deltaTime)
 	//Update State Machine
 	updateState();
 
+	framesCounter++;
+
+	if (framesCounter >= (60 / framesSpeed))
+
+	{
+
+		framesCounter = 0;
+
+		currentFrame++;
+
+
+		//TODO make it generic for every state, this is only valid for Idle
+
+		int totalNumFrames = 4;
+
+
+		if (currentFrame > totalNumFrames - 1)
+
+		{
+
+			currentFrame = 0;
+
+		}
+
+	}
+
 	// add here the updateframe logic to be able to see all the sprites from one state
 }
 
 void Ken::DrawGameCharacter()
 {
-	//TextureManager& textureManager = TextureManager::GetTextureManager();
-//	Texture2D kenSprites = textureManager.GetTexture(TextureType::BasicSpriteKen);
-	Texture2D kenSprites = LoadTexture("resources/Game/Sprites/Ken/KenBasicMovementsSprites.png");
+	TextureManager& textureManager = TextureManager::GetTextureManager();
+	Texture2D kenSprites = textureManager.GetTexture(TextureType::BasicSpriteKen);
+	//Texture2D kenSprites = LoadTexture("resources/Game/Sprites/Ken/KenBasicMovementsSprites.png");
 
-	DrawTextureRec(kenSprites, CharSprites_Idle[0].frameRec, position, WHITE);
+	DrawTextureRec(kenSprites, CharSprites_Idle[currentFrame].frameRec, position, WHITE);
 
 
 }

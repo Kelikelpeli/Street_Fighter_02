@@ -7,6 +7,7 @@
 
 GameCharacter::GameCharacter()
 {
+	
 }
 
 void GameCharacter::InitGameCharacter()
@@ -20,6 +21,7 @@ void GameCharacter::InitGameCharacter()
 
 void GameCharacter::UpdateGameCharacter(float deltaTime)
 {
+
 
 }
 

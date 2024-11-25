@@ -1,13 +1,11 @@
+#pragma once
 #ifndef CHARACTER_H
 #define CHARACTER_H
-#endif 
 
 #include "raylib.h"
 #include <map>
-//#include "Game/Characters/Ken.h"
 
 class CharacterState;
-#pragma once
 
 enum class CharSpriteDirection
 {
@@ -77,8 +75,7 @@ protected:
 	CharacterState* currentState;
 
 	Vector2 position;
-	//Ken ken;
+	Texture2D characterText;
 
 };
-
-
+#endif 
