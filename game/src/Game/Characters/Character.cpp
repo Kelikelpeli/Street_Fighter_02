@@ -45,6 +45,11 @@ void GameCharacter::setState(CharacterState& newState)
 
 }
 
+//void GameCharacter::SetCharSpriteState(CharSpriteDirection& newCharState)const
+//{
+//
+//}
+
 void GameCharacter::updateState()
 {
 	// Delegate the task of determining the next state to the current state!

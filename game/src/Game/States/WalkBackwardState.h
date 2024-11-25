@@ -1,16 +1,19 @@
-//#pragma once
-//#include "CharacterState.h"
-//
-//class WalkBackwardState : public CharacterState {
-//public:
-//    void enter(Character* character) override;
-//    void updateState(Character* character) override;
-//    void exit(Character* character) override {}
-//
-//    StateType getStateType() const override { return StateType::WalkBackward; }
-//
-//    static WalkBackwardState& getInstance();
-//
-//private:
-//    WalkBackwardState() {}
-//};
+#pragma once
+
+#include "CharacterState.h"
+
+class GameCharacter;
+
+class WalkBackwardState : public CharacterState
+{
+public:
+	void enter(GameCharacter* character);
+	void updateState(GameCharacter* character);
+	void exit(GameCharacter* character) {}
+	static CharacterState& getInstance();
+
+private:
+	WalkBackwardState() {};
+	WalkBackwardState(const WalkBackwardState& other);
+	WalkBackwardState& operator=(const WalkBackwardState& other);
+};

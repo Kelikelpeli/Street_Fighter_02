@@ -118,7 +118,7 @@ void Ken::DrawGameCharacter()
 	Texture2D kenSprites = textureManager.GetTexture(TextureType::BasicSpriteKen);
 	//Texture2D kenSprites = LoadTexture("resources/Game/Sprites/Ken/KenBasicMovementsSprites.png");
 
-	DrawTextureRec(kenSprites, CharSprites_Idle[currentFrame].frameRec, position, WHITE);
+	//DrawTextureRec(kenSprites, currentState..frameRec, position, WHITE);
 
 
 }

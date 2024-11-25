@@ -13,7 +13,7 @@ public:
 	static CharacterState& getInstance();
 
 private:
-	IdleState() {}
+	IdleState() {};
 	IdleState(const IdleState& other);
 	IdleState& operator=(const IdleState& other);
 };

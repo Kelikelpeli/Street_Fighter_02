@@ -67,6 +67,8 @@ public:
 	void updateState();
 	// This will get called by the current state
 	void setState(CharacterState& newState);
+	//void SetCharSpriteState(CharSpriteDirection& newCharState)const;
+
 	void setPosition(float x, float y);
 	Vector2 getPosition();
 
