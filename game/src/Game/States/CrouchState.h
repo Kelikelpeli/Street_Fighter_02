@@ -1,16 +1,19 @@
-//#pragma once
-//#include "CharacterState.h"
-//
-//class CrouchState : public CharacterState {
-//public:
-//    void enter(Character* character) override;
-//    void updateState(Character* character) override;
-//    void exit(Character* character) override {}
-//
-//    StateType getStateType() const override { return StateType::Crouch; }
-//
-//    static CrouchState& getInstance();
-//
-//private:
-//    CrouchState() {}
-//};
+#pragma once
+
+#include "CharacterState.h"
+
+class GameCharacter;
+
+class CrouchState : public CharacterState
+{
+public:
+	void enter(GameCharacter* character);
+	void updateState(GameCharacter* character);
+	void exit(GameCharacter* character) {}
+	static CharacterState& getInstance();
+
+private:
+	CrouchState() {};
+	CrouchState(const CrouchState& other);
+	CrouchState& operator=(const CrouchState& other);
+};

@@ -4,59 +4,36 @@
 #include "WalkForwardState.h"
 
 #include "WalkBackwardState.h"
+#include "CrouchState.h"
+#include "JumpUpState.h"
 
 
-void WalkBackwardState::enter(GameCharacter* character)
-
-{
+void WalkBackwardState::enter(GameCharacter* character){
 
 	character->SetCharSpriteState(CharSpriteDirection::State_WalkBackward);
 
 }
 
 
-void WalkBackwardState::updateState(GameCharacter* character)
+void WalkBackwardState::updateState(GameCharacter* character){
+	if (!IsKeyDown(KEY_RIGHT)) {
 
-{
-	if (IsKeyPressed(KEY_RIGHT)) {
-
-		//character->setState(WalkBackwardState::getInstance());
-		character->setPosition(character->getPosition().x * character->getSpeed().x * 1, character->getPosition().y);
-
-	}
-	else if (IsKeyPressed(KEY_LEFT))
-	{
-		character->setState(WalkForwardState::getInstance());
-		character->setPosition(character->getPosition().x * character->getSpeed().x * -1, character->getPosition().y);
-
-	}
-	else {
 		character->setState(IdleState::getInstance());
+
+	}else if (IsKeyDown(KEY_LEFT)) {
+
+		character->setState(WalkForwardState::getInstance());
 	}
+	else if (IsKeyPressed(KEY_SPACE) && character->getJump() == false) {
 
-	//if (IsKeyPressed(KEY_LEFT))
+		character->setState(JumpUpState::getInstance());
+		character->isJump(true);
 
-	//{
+	}else if (IsKeyPressed(KEY_DOWN)) {
 
-	//	character->setState(WalkForwardState::getInstance());
+		character->setState(CrouchState::getInstance());
 
-	//}
-
-	//else if (IsKeyPressed(KEY_RIGHT))
-
-	//{
-
-	//	character->setState(WalkBackwardsState::getInstance());
-
-	//}
-
-	//else if (IsKeyPressed(KEY_SPACE))
-
-	//{
-
-	//	character->setState(JumpState::getInstance());
-
-	//}
+	}
 
 	//…..
 
@@ -65,9 +42,7 @@ void WalkBackwardState::updateState(GameCharacter* character)
 }
 
 
-CharacterState& WalkBackwardState::getInstance()
-
-{
+CharacterState& WalkBackwardState::getInstance(){
 
 	static WalkBackwardState singleton;
 

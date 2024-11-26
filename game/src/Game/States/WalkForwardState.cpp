@@ -4,6 +4,8 @@
 #include "WalkForwardState.h"
 
 #include "WalkBackwardState.h"
+#include "CrouchState.h"
+#include "JumpUpState.h"
 
 
 void WalkForwardState::enter(GameCharacter* character)
@@ -18,32 +20,25 @@ void WalkForwardState::enter(GameCharacter* character)
 void WalkForwardState::updateState(GameCharacter* character)
 
 {
-	if (IsKeyPressed(KEY_RIGHT)){
+	//	//character->setPosition(character->getPosition().x * character->getSpeed().x*1, character->getPosition().y);
+
+	if (!IsKeyDown(KEY_LEFT)) {
+
+		character->setState(IdleState::getInstance());
+
+	}else if (IsKeyDown(KEY_RIGHT)) {
 
 		character->setState(WalkBackwardState::getInstance());
-		character->setPosition(character->getPosition().x * character->getSpeed().x*1, character->getPosition().y);
-
-	} else if (IsKeyPressed(KEY_LEFT))
-	{
-		character->setPosition(character->getPosition().x * character->getSpeed().x*-1,character->getPosition().y);
-
 	}
-	else {
-		character->setState(IdleState::getInstance());
+	else if (IsKeyPressed(KEY_SPACE) && character->getJump() == false) {
+
+		character->setState(JumpUpState::getInstance());
+		character->isJump(true);
+
+	}else if (IsKeyPressed(KEY_DOWN)){
+
+	    character->setState(CrouchState::getInstance());
 	}
-
-	//else
-
-	//else if (IsKeyPressed(KEY_SPACE))
-
-	//{
-
-	//	character->setState(JumpState::getInstance());
-
-	//}
-
-	//…..
-
 		// Add more states
 
 }

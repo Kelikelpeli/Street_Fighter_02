@@ -60,7 +60,25 @@ void GameCharacter::setPosition(float x, float y) {
 }
 Vector2 GameCharacter::getPosition() {
 	return position;
-}void GameCharacter::setSpeed(float x, float y) {
+}
+
+void GameCharacter::isJump(bool jump) {
+	this->jump = jump;
+}
+bool GameCharacter::getJump() {
+	return jump;
+}
+
+void GameCharacter::isCrouch(bool crouch) {
+	this->crouch = crouch;
+}
+
+bool GameCharacter::getCrouch()
+{
+	return crouch;
+}
+
+void GameCharacter::setSpeed(float x, float y) {
 	speed = Vector2{ x, y };
 }
 Vector2 GameCharacter::getSpeed() {

@@ -15,7 +15,7 @@
 void Ken::InitGameCharacter()
 {
 	//Let's fill the vector KenSprtes Data
-
+	setPosition(GetScreenWidth()/2.0f,GetScreenHeight()/2.0f);
 	//IDLE
 	CharSprites_Counter[CharSpriteDirection::State_Idle] = 4;
 
@@ -90,32 +90,32 @@ void Ken::UpdateGameCharacter(float deltaTime)
 
 	//Update State Machine
 	updateState();
-	
-framesCounter++;
 
-if (framesCounter >= (60 / framesSpeed))
+	framesCounter++;
 
-{
+	if (framesCounter >= (60 / framesSpeed))
 
-framesCounter = 0;
+	{
 
-currentFrame++;
+		framesCounter = 0;
 
-
-//TODO make it generic for every state, this is only valid for Idle
-
-int totalNumFrames = 4; 
+		currentFrame++;
 
 
-if (currentFrame > totalNumFrames - 1)
+		//TODO make it generic for every state, this is only valid for Idle
 
-{
+		int totalNumFrames = 4;
 
-      currentFrame = 0;
 
-}
+		if (currentFrame > totalNumFrames - 1)
 
-}
+		{
+
+			currentFrame = 0;
+
+		}
+
+	}
 
 	// add here the updateframe logic to be able to see all the sprites from one state
 }
@@ -127,8 +127,17 @@ void Ken::DrawGameCharacter()
 	//Texture2D kenSprites = LoadTexture("resources/Game/Sprites/Ken/KenBasicMovementsSprites.png");
 
 	//DrawTextureRec(kenSprites, CharSprites_Idle[currentFrame].frameRec, position, WHITE);
-	DrawTextureRec(kenSprites, CharSprites[currentSpriteState][currentFrame].frameRec, position, WHITE);
+	if (!getJump()) {
 
+		DrawTextureRec(kenSprites, CharSprites[currentSpriteState][currentFrame].frameRec, getPosition(), WHITE);
+	}
+	else {
+		for (int i = 0; i < CharSprites_Counter[currentSpriteState]; i++) {
+			DrawTextureRec(kenSprites, CharSprites[currentSpriteState][currentFrame].frameRec, position, WHITE);
+		}
+		DrawTextureRec(kenSprites, CharSprites[currentSpriteState][CharSprites_Counter[currentSpriteState]].frameRec, getPosition(), WHITE);
+		//currentFrame = CharSprites_Counter[currentSpriteState];
+	}
 
 
 

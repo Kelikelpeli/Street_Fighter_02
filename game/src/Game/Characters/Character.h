@@ -74,6 +74,10 @@ public:
 	Vector2 getPosition();
 	void setSpeed(float x, float y);
 	Vector2 getSpeed();
+	void isJump(bool jump);
+	bool getJump();
+	void isCrouch(bool crouch);
+	bool getCrouch();
 
 protected:
 	CharSpriteDirection currentSpriteState;
@@ -81,7 +85,9 @@ protected:
 
 	Vector2 position;
 	Vector2 speed;
-	Texture2D characterText;
+	Texture2D characterText = { 0 };
+	bool jump=false;
+	bool crouch;
 
 };
 #endif 
