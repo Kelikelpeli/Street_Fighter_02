@@ -8,12 +8,9 @@
 #include "JumpUpState.h"
 
 
-void WalkForwardState::enter(GameCharacter* character)
-
-{
+void WalkForwardState::enter(GameCharacter* character){
 
 	character->SetCharSpriteState(CharSpriteDirection::State_WalkForward);
-	character->setSpeed(0.1f, character->getSpeed().y);
 }
 
 
@@ -39,7 +36,9 @@ void WalkForwardState::updateState(GameCharacter* character)
 
 	    character->setState(CrouchState::getInstance());
 		character->isCrouch(true);
-
+	}
+	else {
+		character->setPosition(character->getPosition().x - character->getSpeed().x, character->getPosition().y);
 	}
 		// Add more states
 

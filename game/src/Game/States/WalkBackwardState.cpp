@@ -11,7 +11,6 @@
 void WalkBackwardState::enter(GameCharacter* character){
 
 	character->SetCharSpriteState(CharSpriteDirection::State_WalkBackward);
-	character->setSpeed(-0.1f, character->getSpeed().y);
 
 }
 
@@ -36,9 +35,9 @@ void WalkBackwardState::updateState(GameCharacter* character){
 		character->isCrouch(true);
 
 	}
-
-	//…..
-
+	else {
+		character->setPosition(character->getPosition().x + character->getSpeed().x, character->getPosition().y);
+	}
 		// Add more states
 
 }

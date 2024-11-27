@@ -17,6 +17,10 @@ void GameCharacter::InitGameCharacter()
 
 	framesCounter = 0;
 	framesSpeed = 8;
+	l = KEY_LEFT;
+	r = KEY_RIGHT;
+	u = KEY_UP;
+	d = KEY_DOWN;
 }
 
 void GameCharacter::UpdateGameCharacter(float deltaTime)
@@ -41,19 +45,11 @@ void GameCharacter::setState(CharacterState& newState)
 	currentState = &newState;  // change state
 	currentState->enter(this); // do something after we change state
 	framesCounter = 0;
-
 }
 
 void GameCharacter::SetCharSpriteState(CharSpriteDirection newCharState)
 {
 	currentSpriteState = newCharState;
-}
-
-
-
-void GameCharacter::MoveCharacter()
-{
-	setPosition(getPosition().x+0.01f * getSpeed().x, getPosition().y+0.01 * getSpeed().y);
 }
 
 void GameCharacter::updateState()
@@ -83,6 +79,33 @@ void GameCharacter::isCrouch(bool crouch) {
 bool GameCharacter::getCrouch()
 {
 	return crouch;
+}
+
+void GameCharacter::SetControls(KeyboardKey left, KeyboardKey right, KeyboardKey up, KeyboardKey down)
+{
+	this->l=left;
+	this->r = right;
+	this->u = up;
+	this->d = down;
+}
+
+KeyboardKey GameCharacter::GetControl(char control)
+{
+	/*switch (control) {
+	case l:
+			return l;
+			break;	
+	case Controls::right:
+		return r;
+		break;
+	case Controls::down:
+		return d;
+		break;
+	case Controls::up:
+		return u;
+		break;
+	}*/
+	return KeyboardKey();
 }
 
 void GameCharacter::setSpeed(float x, float y) {

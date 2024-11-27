@@ -84,6 +84,8 @@ void Ken::InitGameCharacter()
 	currentState = &IdleState::getInstance();
 	isJump(false);
 	isCrouch(false);
+	SetControls(KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN);
+	setSpeed(3.0f, 3.0f);
 }
 
 void Ken::UpdateGameCharacter(float deltaTime) {
@@ -124,14 +126,11 @@ void Ken::DrawGameCharacter()
 	//Texture2D kenSprites = LoadTexture("resources/Game/Sprites/Ken/KenBasicMovementsSprites.png");
 
 	DrawTextureRec(kenSprites, CharSprites[currentSpriteState][currentFrame].frameRec, getPosition(), WHITE);
-	MoveCharacter();
 
 }
 
 void Ken::UnloadGameCharacter()
-{
-
-}
+{}
 
 // State Machines
 void Ken::setState(CharacterState& newState)

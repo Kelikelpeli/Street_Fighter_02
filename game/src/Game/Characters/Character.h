@@ -36,9 +36,6 @@ public:
 	virtual void UpdateGameCharacter(float deltaTime);
 	virtual void DrawGameCharacter();
 	virtual void UnloadGameCharacter();
-	void MoveCharacter();
-
-
 
 
 protected:
@@ -56,6 +53,8 @@ protected:
 
 	int CarSprites_Counter = 10;
 	std::map<int, FrameRecPos> CarSprites;
+	void SetControls(KeyboardKey left, KeyboardKey right, KeyboardKey up, KeyboardKey down);
+	KeyboardKey GetControl(char control);
 
 public:
 	int framesCounter = 0;
@@ -79,7 +78,13 @@ public:
 	void isCrouch(bool crouch);
 	bool getCrouch();
 
+	KeyboardKey l;
+	KeyboardKey r;
+	KeyboardKey d;
+	KeyboardKey u;
+
 protected:
+
 	CharSpriteDirection currentSpriteState;
 	CharacterState* currentState;
 
@@ -88,6 +93,5 @@ protected:
 	Texture2D characterText = { 0 };
 	bool jump=false;
 	bool crouch;
-
 };
 #endif 

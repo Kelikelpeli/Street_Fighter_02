@@ -10,7 +10,6 @@
 
 void CrouchState::enter(GameCharacter* character) {
 	character->SetCharSpriteState(CharSpriteDirection::State_Crouch);
-	character->setSpeed(1, 1);
 
 }
 
@@ -27,14 +26,14 @@ void CrouchState::updateState(GameCharacter* character) {
 		character->setState(JumpUpState::getInstance());
 		character->isJump(true);
 	}
-	else if (IsKeyPressed(KEY_LEFT)) {
+	/*else if (IsKeyPressed(KEY_LEFT)) {
 
 		character->setState(WalkForwardState::getInstance());
 
 	}else if (IsKeyPressed(KEY_RIGHT)) {
 
 		character->setState(WalkBackwardState::getInstance());
-	}
+	}*/
 
 	// Add more states
 

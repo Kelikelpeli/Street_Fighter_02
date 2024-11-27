@@ -11,7 +11,6 @@
 
 void IdleState::enter(GameCharacter* character) {
 	character->SetCharSpriteState(CharSpriteDirection::State_Idle);
-	character->setSpeed(1, 1);
 }
 
 void IdleState::updateState(GameCharacter* character) {

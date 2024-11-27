@@ -8,7 +8,6 @@
 
 void JumpUpState::enter(GameCharacter* character){
 	character->SetCharSpriteState(CharSpriteDirection::State_JumpUp);
-	character->setSpeed(character->getSpeed().x, 0.1f);
 
 }
 
@@ -24,8 +23,12 @@ void JumpUpState::updateState(GameCharacter* character) {
 		character->setState(WalkBackwardState::getInstance());
 
 	}*/
-	if (!character->getJump()){          //character->getPosition().y==GetScreenHeight()/2.0f) {
-		character->setState(IdleState::getInstance());
+	if (character->getPosition().y <= 100) { // Altura máxima
+		character->setSpeed(character->getSpeed().x, -character->getSpeed().y); // Cambia dirección a caer
+	}
+	else if (character->getPosition().y >= 400) { // Regresa al suelo
+		character->setPosition(character->getPosition().x, 400); // Ajusta posición al suelo
+		character->setState(IdleState::getInstance()); // Cambia a Idle
 	}
 
 	// Add more states
