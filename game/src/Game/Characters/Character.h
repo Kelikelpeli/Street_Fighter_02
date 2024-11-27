@@ -36,6 +36,7 @@ public:
 	virtual void UpdateGameCharacter(float deltaTime);
 	virtual void DrawGameCharacter();
 	virtual void UnloadGameCharacter();
+	void MoveCharacter();
 
 
 
@@ -55,7 +56,6 @@ protected:
 
 	int CarSprites_Counter = 10;
 	std::map<int, FrameRecPos> CarSprites;
-
 
 public:
 	int framesCounter = 0;

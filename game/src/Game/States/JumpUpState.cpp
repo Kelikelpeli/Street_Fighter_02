@@ -8,10 +8,12 @@
 
 void JumpUpState::enter(GameCharacter* character){
 	character->SetCharSpriteState(CharSpriteDirection::State_JumpUp);
+	character->setSpeed(character->getSpeed().x, 0.1f);
+
 }
 
 
-void JumpUpState::updateState(GameCharacter* character){
+void JumpUpState::updateState(GameCharacter* character) {
 
 	/*if (IsKeyPressed(KEY_LEFT)){
 
@@ -22,9 +24,8 @@ void JumpUpState::updateState(GameCharacter* character){
 		character->setState(WalkBackwardState::getInstance());
 
 	}*/
-	if (character->getPosition().y==GetScreenHeight()/2.0f) {
+	if (!character->getJump()){          //character->getPosition().y==GetScreenHeight()/2.0f) {
 		character->setState(IdleState::getInstance());
-		character->isJump(false);
 	}
 
 	// Add more states

@@ -15,7 +15,7 @@
 void Ken::InitGameCharacter()
 {
 	//Let's fill the vector KenSprtes Data
-	setPosition(GetScreenWidth()/2.0f,GetScreenHeight()/2.0f);
+	setPosition(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f);
 	//IDLE
 	CharSprites_Counter[CharSpriteDirection::State_Idle] = 4;
 
@@ -82,38 +82,35 @@ void Ken::InitGameCharacter()
 
 	//init State
 	currentState = &IdleState::getInstance();
-
+	isJump(false);
+	isCrouch(false);
 }
 
-void Ken::UpdateGameCharacter(float deltaTime)
-{
+void Ken::UpdateGameCharacter(float deltaTime) {
 
 	//Update State Machine
 	updateState();
 
 	framesCounter++;
 
-	if (framesCounter >= (60 / framesSpeed))
-
-	{
+	if (framesCounter >= (60 / framesSpeed)) {
 
 		framesCounter = 0;
-
 		currentFrame++;
-
 
 		//TODO make it generic for every state, this is only valid for Idle
 
-		int totalNumFrames = 4;
+		int totalNumFrames = CharSprites_Counter[currentSpriteState];
+			if (currentFrame >= totalNumFrames ) {
+				if (!getJump() && !getCrouch()) {
+					currentFrame = 0;
+				}
+				else {
+					 currentFrame = totalNumFrames - 1;
+				}
 
-
-		if (currentFrame > totalNumFrames - 1)
-
-		{
-
-			currentFrame = 0;
-
-		}
+			}
+		
 
 	}
 
@@ -126,20 +123,8 @@ void Ken::DrawGameCharacter()
 	Texture2D kenSprites = textureManager.GetTexture(TextureType::BasicSpriteKen);
 	//Texture2D kenSprites = LoadTexture("resources/Game/Sprites/Ken/KenBasicMovementsSprites.png");
 
-	//DrawTextureRec(kenSprites, CharSprites_Idle[currentFrame].frameRec, position, WHITE);
-	if (!getJump()) {
-
-		DrawTextureRec(kenSprites, CharSprites[currentSpriteState][currentFrame].frameRec, getPosition(), WHITE);
-	}
-	else {
-		for (int i = 0; i < CharSprites_Counter[currentSpriteState]; i++) {
-			DrawTextureRec(kenSprites, CharSprites[currentSpriteState][currentFrame].frameRec, position, WHITE);
-		}
-		DrawTextureRec(kenSprites, CharSprites[currentSpriteState][CharSprites_Counter[currentSpriteState]].frameRec, getPosition(), WHITE);
-		//currentFrame = CharSprites_Counter[currentSpriteState];
-	}
-
-
+	DrawTextureRec(kenSprites, CharSprites[currentSpriteState][currentFrame].frameRec, getPosition(), WHITE);
+	MoveCharacter();
 
 }
 

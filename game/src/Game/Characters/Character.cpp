@@ -7,7 +7,7 @@
 
 GameCharacter::GameCharacter()
 {
-	
+
 }
 
 void GameCharacter::InitGameCharacter()
@@ -21,7 +21,6 @@ void GameCharacter::InitGameCharacter()
 
 void GameCharacter::UpdateGameCharacter(float deltaTime)
 {
-
 
 }
 
@@ -50,12 +49,20 @@ void GameCharacter::SetCharSpriteState(CharSpriteDirection newCharState)
 	currentSpriteState = newCharState;
 }
 
+
+
+void GameCharacter::MoveCharacter()
+{
+	setPosition(getPosition().x+0.01f * getSpeed().x, getPosition().y+0.01 * getSpeed().y);
+}
+
 void GameCharacter::updateState()
 {
 	// Delegate the task of determining the next state to the current state!
 	currentState->updateState(this);
 }
 void GameCharacter::setPosition(float x, float y) {
+
 	position = Vector2{ x, y };
 }
 Vector2 GameCharacter::getPosition() {
@@ -79,7 +86,12 @@ bool GameCharacter::getCrouch()
 }
 
 void GameCharacter::setSpeed(float x, float y) {
-	speed = Vector2{ x, y };
+	if (y > 0) {
+		speed = Vector2{ x, y };
+	}
+	else {
+		speed = Vector2{ x,getSpeed().y};
+	}
 }
 Vector2 GameCharacter::getSpeed() {
 	return speed;

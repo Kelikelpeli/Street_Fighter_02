@@ -11,6 +11,7 @@
 
 void IdleState::enter(GameCharacter* character) {
 	character->SetCharSpriteState(CharSpriteDirection::State_Idle);
+	character->setSpeed(1, 1);
 }
 
 void IdleState::updateState(GameCharacter* character) {
@@ -31,7 +32,7 @@ void IdleState::updateState(GameCharacter* character) {
 	else if (IsKeyPressed(KEY_DOWN)){
 
 	 character->setState(CrouchState::getInstance());
-
+	 character->isCrouch(true);
 	}
 
 	// Add more states

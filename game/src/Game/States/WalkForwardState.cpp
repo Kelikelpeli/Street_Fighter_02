@@ -13,7 +13,7 @@ void WalkForwardState::enter(GameCharacter* character)
 {
 
 	character->SetCharSpriteState(CharSpriteDirection::State_WalkForward);
-
+	character->setSpeed(0.1f, character->getSpeed().y);
 }
 
 
@@ -38,6 +38,8 @@ void WalkForwardState::updateState(GameCharacter* character)
 	}else if (IsKeyPressed(KEY_DOWN)){
 
 	    character->setState(CrouchState::getInstance());
+		character->isCrouch(true);
+
 	}
 		// Add more states
 
