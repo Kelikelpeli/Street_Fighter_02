@@ -83,6 +83,8 @@ public:
 	KeyboardKey d;
 	KeyboardKey u;
 
+	const float groundLevel = GetScreenHeight()/2;
+
 protected:
 
 	CharSpriteDirection currentSpriteState;
