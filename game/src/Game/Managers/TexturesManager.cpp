@@ -34,9 +34,9 @@ void TextureManager::InitTexturesFiles()
     UnloadImage(basicSpriteKen);
 
     // Sprite Ken
-    Image spriteKenLeft = LoadImage("resources/Characters/Mario_walk_left.png");
-    textSpriteKenWalkLeft = LoadTextureFromImage(spriteKenLeft);
-    UnloadImage(spriteKenLeft);
+    Image punchSpriteKen = LoadImage("resources/Game/Sprites/Ken/KenPunchMovementsSprites.png");
+    textPunchSpriteKen = LoadTextureFromImage(punchSpriteKen);
+    UnloadImage(punchSpriteKen);
    
     // Sprite Ken Climb
     Image spriteKenClimb = LoadImage("resources/Characters/Mario_Climb.png");
@@ -123,8 +123,8 @@ Texture2D& TextureManager::GetTexture(TextureType texturetype)
         return textBasicSpriteKen;
         break;
 
-    case TextureType::SpriteKenWalkLeft:
-        return textSpriteKenWalkLeft;
+    case TextureType::PunchSpriteKen:
+        return textPunchSpriteKen;
         break;
 
     case TextureType::SpriteKenClimb:
@@ -196,14 +196,14 @@ Texture2D& TextureManager::GetTextureByCurrentState(KenSpriteDirection KenSprite
         return textBasicSpriteKen;
         break;
     case KenSpriteDirection::KenSpriteIdleLeft:
-        return textSpriteKenWalkLeft;
+        return textPunchSpriteKen;
         break;
     /*case KenSpriteDirection::KenSpriteRight:
         return textSpriteKenWalkRight;
         break;*/
-    case KenSpriteDirection::KenSpriteLeft:
+    /*case KenSpriteDirection::KenSpriteLeft:
         return textSpriteKenWalkLeft;
-        break;
+        break;*/
     case KenSpriteDirection::KenSpriteClimb:
         return textSpriteKenClimb;
         break;

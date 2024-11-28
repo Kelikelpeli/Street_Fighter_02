@@ -17,10 +17,12 @@ void GameCharacter::InitGameCharacter()
 
 	framesCounter = 0;
 	framesSpeed = 8;
-	l = KEY_LEFT;
-	r = KEY_RIGHT;
-	u = KEY_UP;
-	d = KEY_DOWN;
+	left = KEY_LEFT;
+	right = KEY_RIGHT;
+	up = KEY_UP;
+	down = KEY_DOWN;
+	special1 = KEY_Q;
+	special2 = KEY_T;
 }
 
 void GameCharacter::UpdateGameCharacter(float deltaTime)
@@ -65,28 +67,22 @@ Vector2 GameCharacter::getPosition() {
 	return position;
 }
 
-void GameCharacter::isJump(bool jump) {
-	this->jump = jump;
+void GameCharacter::isStop(bool stop) {
+	this->stop = stop;
 }
-bool GameCharacter::getJump() {
-	return jump;
-}
-
-void GameCharacter::isCrouch(bool crouch) {
-	this->crouch = crouch;
+bool GameCharacter::getStop() {
+	return stop;
 }
 
-bool GameCharacter::getCrouch()
+
+void GameCharacter::SetControls(KeyboardKey left, KeyboardKey right, KeyboardKey up, KeyboardKey down, KeyboardKey special1, KeyboardKey special2)
 {
-	return crouch;
-}
-
-void GameCharacter::SetControls(KeyboardKey left, KeyboardKey right, KeyboardKey up, KeyboardKey down)
-{
-	this->l=left;
-	this->r = right;
-	this->u = up;
-	this->d = down;
+	this->left=left;
+	this->right = right;
+	this->up = up;
+	this->down = down;
+	this->special1 = special1;
+	this->special2 = special2;
 }
 
 KeyboardKey GameCharacter::GetControl(char control)

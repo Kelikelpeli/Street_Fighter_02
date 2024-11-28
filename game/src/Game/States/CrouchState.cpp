@@ -19,12 +19,12 @@ void CrouchState::updateState(GameCharacter* character) {
 	if (!IsKeyDown(KEY_DOWN)) {
 
 		character->setState(IdleState::getInstance());
-		character->isCrouch(false);
+		character->isStop(false);
 
-	}else if (IsKeyPressed(KEY_SPACE) && character->getJump() == false) {
+	}else if (IsKeyPressed(KEY_SPACE) && character->getStop() == false) {
 
 		character->setState(JumpUpState::getInstance());
-		character->isJump(true);
+		character->isStop(true);
 	}
 	/*else if (IsKeyPressed(KEY_LEFT)) {
 

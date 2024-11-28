@@ -15,8 +15,8 @@ enum class CharSpriteDirection
 	State_WalkBackward,
 	State_Crouch,
 	State_JumpUp,
-	State_LightPunch,
-	State_MediumPunch
+	State_Special1,
+	State_Special2
 
 };
 
@@ -48,12 +48,12 @@ protected:
 	std::map<int, FrameRecPos> CharSprites_WalkBackward;
 	std::map<int, FrameRecPos> CharSprites_Crouch;
 	std::map<int, FrameRecPos> CharSprites_JumpUp;
-	std::map<int, FrameRecPos> CharSprites_LightPunch;
-	std::map<int, FrameRecPos> CharSprites_MediumPunch;
+	std::map<int, FrameRecPos> CharSprites_Special1;
+	std::map<int, FrameRecPos> CharSprites_Special2;
 
 	int CarSprites_Counter = 10;
 	std::map<int, FrameRecPos> CarSprites;
-	void SetControls(KeyboardKey left, KeyboardKey right, KeyboardKey up, KeyboardKey down);
+	void SetControls(KeyboardKey left, KeyboardKey right, KeyboardKey up, KeyboardKey down, KeyboardKey special1, KeyboardKey special2);
 	KeyboardKey GetControl(char control);
 
 public:
@@ -73,15 +73,15 @@ public:
 	Vector2 getPosition();
 	void setSpeed(float x, float y);
 	Vector2 getSpeed();
-	void isJump(bool jump);
-	bool getJump();
-	void isCrouch(bool crouch);
-	bool getCrouch();
+	void isStop(bool stop);
+	bool getStop();
 
-	KeyboardKey l;
-	KeyboardKey r;
-	KeyboardKey d;
-	KeyboardKey u;
+	KeyboardKey left;
+	KeyboardKey right;
+	KeyboardKey down;
+	KeyboardKey up;
+	KeyboardKey special1;
+	KeyboardKey special2;
 
 	const float groundLevel = GetScreenHeight()/2;
 
@@ -93,7 +93,6 @@ protected:
 	Vector2 position;
 	Vector2 speed;
 	Texture2D characterText = { 0 };
-	bool jump=false;
-	bool crouch;
+	bool stop=false;
 };
 #endif 

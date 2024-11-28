@@ -44,6 +44,7 @@ private:
 
 	float m_Speed = { 0.f };
 	bool m_bcanJump = false;
+	Texture2D punchText;
 
 };
 

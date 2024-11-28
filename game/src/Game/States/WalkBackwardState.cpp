@@ -6,6 +6,8 @@
 #include "WalkBackwardState.h"
 #include "CrouchState.h"
 #include "JumpUpState.h"
+#include "Special1State.h"
+#include "Special2State.h"
 
 
 void WalkBackwardState::enter(GameCharacter* character){
@@ -24,16 +26,26 @@ void WalkBackwardState::updateState(GameCharacter* character){
 
 		character->setState(WalkForwardState::getInstance());
 	}
-	else if (IsKeyPressed(KEY_SPACE) && character->getJump() == false) {
+	else if (IsKeyPressed(KEY_SPACE) && character->getStop() == false) {
 
 		character->setState(JumpUpState::getInstance());
-		character->isJump(true);
+		character->isStop(true);
 
 	}else if (IsKeyPressed(KEY_DOWN)) {
 
 		character->setState(CrouchState::getInstance());
-		character->isCrouch(true);
+		character->isStop(true);
 
+	}
+	else if (IsKeyPressed(KEY_Q)) {
+
+		character->setState(Special1State::getInstance());
+		character->isStop(true);
+	}
+	else if (IsKeyPressed(KEY_T)) {
+
+		character->setState(Special2State::getInstance());
+		character->isStop(true);
 	}
 	else {
 		character->setPosition(character->getPosition().x + character->getSpeed().x, character->getPosition().y);

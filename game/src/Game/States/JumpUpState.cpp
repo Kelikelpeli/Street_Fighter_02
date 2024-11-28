@@ -4,11 +4,13 @@
 #include "WalkBackwardState.h"
 #include "CrouchState.h"
 #include "JumpUpState.h"
+#include "Special1State.h"
+#include "Special2State.h"
 
 
 void JumpUpState::enter(GameCharacter* character){
 	character->SetCharSpriteState(CharSpriteDirection::State_JumpUp);
-	character->isJump(true); // Marca el personaje como saltando
+	character->isStop(true); // Marca el personaje como saltando
 	startTime = GetTime();   // Registra el tiempo de inicio del salto
 }
 
@@ -29,7 +31,7 @@ void JumpUpState::updateState(GameCharacter* character) {
 	else {
 		// Finaliza el salto y regresa a Idle
 		character->setPosition(character->getPosition().x, character->groundLevel); // Ajusta la posición al suelo
-		character->isJump(false); // Marca que el personaje ya no está saltando
+		character->isStop(false); // Marca que el personaje ya no está saltando
 		character->setState(IdleState::getInstance());
 	}
 	/*if (IsKeyPressed(KEY_LEFT)){

@@ -8,6 +8,9 @@
 #include "CrouchState.h"
 #include "JumpUpState.h"
 
+#include "Special1State.h"
+#include "Special2State.h"
+
 
 void IdleState::enter(GameCharacter* character) {
 	character->SetCharSpriteState(CharSpriteDirection::State_Idle);
@@ -23,15 +26,25 @@ void IdleState::updateState(GameCharacter* character) {
 
 		character->setState(WalkBackwardState::getInstance());
 
-	}else if (IsKeyPressed(KEY_SPACE) && character->getJump() == false) {
+	}else if (IsKeyPressed(KEY_SPACE) && character->getStop() == false) {
 
 		character->setState(JumpUpState::getInstance());
-		character->isJump(true);
+		character->isStop(true);
 	}
 	else if (IsKeyPressed(KEY_DOWN)){
 
 	 character->setState(CrouchState::getInstance());
-	 character->isCrouch(true);
+	 character->isStop(true);
+	}
+	else if (IsKeyPressed(KEY_Q)) {
+
+		character->setState(Special1State::getInstance());
+		character->isStop(true);
+	}
+	else if (IsKeyPressed(KEY_T)) {
+
+		character->setState(Special2State::getInstance());
+		character->isStop(true);
 	}
 
 	// Add more states

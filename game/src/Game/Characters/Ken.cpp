@@ -61,30 +61,29 @@ void Ken::InitGameCharacter()
 	CharSprites_Crouch[2] = FrameRecPos{ {586,842,320,386}, {0.f, 0.f} };
 
 	// LIGHT PUNCH
-	CharSprites_Counter[CharSpriteDirection::State_LightPunch] = 2;
-	CharSprites_LightPunch[0] = FrameRecPos{ {4,4,260,386}, {0.f, 0.f} };
-	CharSprites_LightPunch[1] = FrameRecPos{ {374,4,450,386}, {125.f, 0.f } };
+	CharSprites_Counter[CharSpriteDirection::State_Special1] = 2;
+	CharSprites_Special1[0] = FrameRecPos{ {4,4,260,386}, {0.f, 0.f} };
+	CharSprites_Special1[1] = FrameRecPos{ {374,4,450,386}, {125.f, 0.f } };
 
 	// MEDIUM PUNCH
-	CharSprites_Counter[CharSpriteDirection::State_MediumPunch] = 3;
+	CharSprites_Counter[CharSpriteDirection::State_Special2] = 3;
 
-	CharSprites_MediumPunch[0] = FrameRecPos{ {4,390,322,382}, {0.f, 0.f} };
-	CharSprites_MediumPunch[1] = FrameRecPos{ {328,390,317,382}, {0.f, 0.f} };
-	CharSprites_MediumPunch[2] = FrameRecPos{ {652,390,508,382}, {170.f, 0.f} };
+	CharSprites_Special2[0] = FrameRecPos{ {4,390,322,382}, {0.f, 0.f} };
+	CharSprites_Special2[1] = FrameRecPos{ {328,390,317,382}, {0.f, 0.f} };
+	CharSprites_Special2[2] = FrameRecPos{ {652,390,508,382}, {170.f, 0.f} };
 
 	CharSprites[CharSpriteDirection::State_Idle] = CharSprites_Idle;
 	CharSprites[CharSpriteDirection::State_WalkForward] = CharSprites_WalkForward;
 	CharSprites[CharSpriteDirection::State_WalkBackward] = CharSprites_WalkBackward;
 	CharSprites[CharSpriteDirection::State_Crouch] = CharSprites_Crouch;
 	CharSprites[CharSpriteDirection::State_JumpUp] = CharSprites_JumpUp;
-	CharSprites[CharSpriteDirection::State_LightPunch] = CharSprites_LightPunch;
-	CharSprites[CharSpriteDirection::State_MediumPunch] = CharSprites_MediumPunch;
+	CharSprites[CharSpriteDirection::State_Special1] = CharSprites_Special1;
+	CharSprites[CharSpriteDirection::State_Special2] = CharSprites_Special2;
 
 	//init State
 	currentState = &IdleState::getInstance();
-	isJump(false);
-	isCrouch(false);
-	SetControls(KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN);
+	isStop(false);
+	SetControls(KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_Q, KEY_Z);
 	setSpeed(3.0f, 3.0f);
 }
 
@@ -104,7 +103,7 @@ void Ken::UpdateGameCharacter(float deltaTime) {
 
 		int totalNumFrames = CharSprites_Counter[currentSpriteState];
 			if (currentFrame >= totalNumFrames ) {
-				if (!getJump() && !getCrouch()) {
+				if (!isStop) {
 					currentFrame = 0;
 				}
 				else {
@@ -123,9 +122,17 @@ void Ken::DrawGameCharacter()
 {
 	TextureManager& textureManager = TextureManager::GetTextureManager();
 	Texture2D kenSprites = textureManager.GetTexture(TextureType::BasicSpriteKen);
+	Texture2D punchText = textureManager.GetTexture(TextureType::PunchSpriteKen);
 	//Texture2D kenSprites = LoadTexture("resources/Game/Sprites/Ken/KenBasicMovementsSprites.png");
 
-	DrawTextureRec(kenSprites, CharSprites[currentSpriteState][currentFrame].frameRec, getPosition(), WHITE);
+	if (currentSpriteState != CharSpriteDirection::State_Special1 && currentSpriteState != CharSpriteDirection::State_Special2) {
+		DrawTextureRec(kenSprites, CharSprites[currentSpriteState][currentFrame].frameRec, getPosition(), WHITE);
+
+	}
+	else {
+		DrawTextureRec(punchText, CharSprites[currentSpriteState][currentFrame].frameRec, getPosition(), WHITE);
+
+	}
 
 }
 
