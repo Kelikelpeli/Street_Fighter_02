@@ -13,13 +13,13 @@
 
 void Special1State::enter(GameCharacter* character) {
 	character->SetCharSpriteState(CharSpriteDirection::State_Special1);
+	framesCounter = 0;
 }
 
 void Special1State::updateState(GameCharacter* character) {
-	float framesCounter=0;
 	framesCounter++;
-	
-	if (framesCounter>240) {
+
+	if (framesCounter > 9) {
 		if (IsKeyPressed(KEY_LEFT)) {
 
 			character->isStop(false);

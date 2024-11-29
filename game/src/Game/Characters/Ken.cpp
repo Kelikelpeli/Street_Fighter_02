@@ -40,8 +40,8 @@ void Ken::InitGameCharacter()
 	CharSprites_WalkBackward[1] = FrameRecPos{ {264,1878,260,386}, {0.f, 0.f} };
 	CharSprites_WalkBackward[2] = FrameRecPos{ {524,1878,260,386}, {0.f, 0.f} };
 	CharSprites_WalkBackward[3] = FrameRecPos{ {783,1878,321,386}, {0.f, 0.f} };
-	CharSprites_WalkBackward[4] = FrameRecPos{ {1107,1878,225,386}, {0.f, 0.f} };
-	CharSprites_WalkBackward[5] = FrameRecPos{ {1367,1878,225,386}, {0.f, 0.f} };
+	CharSprites_WalkBackward[4] = FrameRecPos{ {1107,1878,280,386}, {0.f, 0.f} };
+	CharSprites_WalkBackward[5] = FrameRecPos{ {1367,1878,280,386}, {0.f, 0.f} };
 
 	// JUMP UP
 	CharSprites_Counter[CharSpriteDirection::State_JumpUp] = 6;
@@ -85,6 +85,7 @@ void Ken::InitGameCharacter()
 	isStop(false);
 	SetControls(KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_Q, KEY_Z);
 	setSpeed(3.0f, 3.0f);
+	
 }
 
 void Ken::UpdateGameCharacter(float deltaTime) {
@@ -103,7 +104,7 @@ void Ken::UpdateGameCharacter(float deltaTime) {
 
 		int totalNumFrames = CharSprites_Counter[currentSpriteState];
 			if (currentFrame >= totalNumFrames ) {
-				if (!isStop) {
+				if (!stop) {
 					currentFrame = 0;
 				}
 				else {
@@ -123,17 +124,21 @@ void Ken::DrawGameCharacter()
 	TextureManager& textureManager = TextureManager::GetTextureManager();
 	Texture2D kenSprites = textureManager.GetTexture(TextureType::BasicSpriteKen);
 	Texture2D punchText = textureManager.GetTexture(TextureType::PunchSpriteKen);
-	//Texture2D kenSprites = LoadTexture("resources/Game/Sprites/Ken/KenBasicMovementsSprites.png");
 
 	if (currentSpriteState != CharSpriteDirection::State_Special1 && currentSpriteState != CharSpriteDirection::State_Special2) {
-		DrawTextureRec(kenSprites, CharSprites[currentSpriteState][currentFrame].frameRec, getPosition(), WHITE);
+		DrawTextureRec(kenSprites, CharSprites[currentSpriteState][currentFrame].frameRec,
+			Vector2{ getPosition().x - CharSprites[currentSpriteState][currentFrame].frameOrigin.x,
+			getPosition().y - -CharSprites[currentSpriteState][currentFrame].frameOrigin.y }, WHITE);
 
 	}
 	else {
-		DrawTextureRec(punchText, CharSprites[currentSpriteState][currentFrame].frameRec, getPosition(), WHITE);
-
+		DrawTextureRec(punchText, CharSprites[currentSpriteState][currentFrame].frameRec, 
+			Vector2{ getPosition().x - CharSprites[currentSpriteState][currentFrame].frameOrigin.x,
+			getPosition().y- -CharSprites[currentSpriteState][currentFrame].frameOrigin.y }, WHITE);
+		//Colisiones
+		DrawRectangle(getPosition().x - 125.f, getPosition().y + 80, 80, 30, RED);
 	}
-
+	DrawRectangle(getPosition().x+50, getPosition().y + 20, 170, 350, YELLOW);
 }
 
 void Ken::UnloadGameCharacter()

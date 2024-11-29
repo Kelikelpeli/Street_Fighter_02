@@ -34,6 +34,7 @@ public:
 
 	bool GetKenCanJump() { return m_bcanJump; }
 	void SetKenCanJump(bool newCanJump) { m_bcanJump = newCanJump; }
+	//void ActiveCollisions();
 
 
 private:
@@ -45,7 +46,7 @@ private:
 	float m_Speed = { 0.f };
 	bool m_bcanJump = false;
 	Texture2D punchText;
-
+	Rectangle collider;
 };
 
 #endif

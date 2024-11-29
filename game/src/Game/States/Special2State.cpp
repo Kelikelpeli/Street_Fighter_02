@@ -12,14 +12,15 @@
 
 
 void Special2State::enter(GameCharacter* character) {
-	character->SetCharSpriteState(CharSpriteDirection::State_Special1);
+	character->SetCharSpriteState(CharSpriteDirection::State_Special2);
+	framesCounter = 0;
 }
 
 void Special2State::updateState(GameCharacter* character) {
-	float framesCounter = 0;
-	framesCounter++;
+	framesCounter ++;
 
-	if (framesCounter > 240) {
+	if (framesCounter > 24) {
+		
 		if (IsKeyPressed(KEY_LEFT)) {
 			character->isStop(false);
 

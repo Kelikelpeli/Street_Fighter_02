@@ -16,4 +16,5 @@ private:
 	Special2State() {};
 	Special2State(const Special2State& other);
 	Special2State& operator=(const Special2State& other);
+	float framesCounter = 0;
 };
