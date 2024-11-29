@@ -25,28 +25,27 @@ public:
 
 
 
-	float GetKenJumpSpeed() { return m_KenJump_Speed; }
+	/*float GetKenJumpSpeed() { return m_KenJump_Speed; }
 	float GetKenHorzontalSpeed() { return m_Ken_Horizontal_Speed; }
-	float GetKenVerticalSpeed() { return m_Ken_Vertical_Speed; }
+	float GetKenVerticalSpeed() { return m_Ken_Vertical_Speed; }*/
 
-	float GetKenCurrentSpeed() { return m_Speed; }
-	void  SetKenCurrentSpeed(float newSpeed) { m_Speed = newSpeed; }
+	//float GetKenCurrentSpeed() { return m_Speed; }
+	//void  SetKenCurrentSpeed(float newSpeed) { m_Speed = newSpeed; }
 
-	bool GetKenCanJump() { return m_bcanJump; }
-	void SetKenCanJump(bool newCanJump) { m_bcanJump = newCanJump; }
+	//bool GetKenCanJump() { return m_bcanJump; }
+//	void SetKenCanJump(bool newCanJump) { m_bcanJump = newCanJump; }
 	//void ActiveCollisions();
 
 
 private:
 
 	const float m_KenJump_Speed = 250.f;
-	const float m_Ken_Horizontal_Speed = 100.f;
-	const float m_Ken_Vertical_Speed = 100.f;
+	//const float m_Ken_Horizontal_Speed = 100.f;
+	//const float m_Ken_Vertical_Speed = 100.f;
 
-	float m_Speed = { 0.f };
-	bool m_bcanJump = false;
+	//float m_Speed = { 0.f };
+	//bool m_bcanJump = false;
 	Texture2D punchText;
-	Rectangle collider;
 };
 
 #endif

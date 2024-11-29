@@ -38,72 +38,20 @@ void TextureManager::InitTexturesFiles()
     textPunchSpriteKen = LoadTextureFromImage(punchSpriteKen);
     UnloadImage(punchSpriteKen);
    
-    // Sprite Ken Climb
-    Image spriteKenClimb = LoadImage("resources/Characters/Mario_Climb.png");
-    textSpriteKenClimb = LoadTextureFromImage(spriteKenClimb);
-    UnloadImage(spriteKenClimb);
-
-    // Sprite Ken Climb idle
-    Image spriteKenClimbIdle = LoadImage("resources/Characters/Mario_Idle_Climb.png");
-    textSpriteKenClimbIdle = LoadTextureFromImage(spriteKenClimbIdle);
-    UnloadImage(spriteKenClimbIdle);
-
-    // Sprite Ken Dead
-    Image spriteKenDead = LoadImage("resources/Characters/Mario_Death.png");
-    textSpriteKenDead = LoadTextureFromImage(spriteKenDead);
-    UnloadImage(spriteKenDead);
-
-    // Sprite Ken Dead idle
-    Image spriteKenDeadIdle = LoadImage("resources/Characters/Mario_Death_Idle.png");
-    textSpriteKenDeadIdle = LoadTextureFromImage(spriteKenDeadIdle);
-    UnloadImage(spriteKenDeadIdle);
-
-    //Car
-    Image EnemyCakeImg = LoadImage("resources/Enemies/Cake.png");
-    textCake = LoadTextureFromImage(EnemyCakeImg);
-    UnloadImage(EnemyCakeImg);
-
-    Image EnemyBarrelImg = LoadImage("resources/Enemies/Barrel.png");
-    textBarrel = LoadTextureFromImage(EnemyBarrelImg);
-    UnloadImage(EnemyBarrelImg);
-
     //Landscape
     Image landscape = LoadImage("resources/Game/Stages/Ken_Landscape_High.png");
     textLandscape = LoadTextureFromImage(landscape);
     UnloadImage(landscape);
 
-    Image Bonus2Img = LoadImage("resources/Bonus/Bonus2.png");
-    textBonus2 = LoadTextureFromImage(Bonus2Img);
-    UnloadImage(Bonus2Img);
+    Image spriteCar = LoadImage("resources/Game/Sprites/Car/CarBouns.png");
+    textSpriteCar = LoadTextureFromImage(spriteCar);
+    UnloadImage(spriteCar);
 
     Image Bonus3Img = LoadImage("resources/Bonus/Bonus3.png");
     textBonus3 = LoadTextureFromImage(Bonus3Img);
     UnloadImage(Bonus3Img);
 
-    //Peach
-    Image PeachImg = LoadImage("resources/Characters/Peach.png");
-    textPeach = LoadTextureFromImage(PeachImg);
-    UnloadImage(PeachImg);
-
-    //Burning Barrel
-    Image BurningBarrelImg = LoadImage("resources/Enemies/BurningBarrel.png");
-    textBurningBarrel = LoadTextureFromImage(BurningBarrelImg);
-    UnloadImage(BurningBarrelImg);
-
-    //FireFlame
-    Image FireFlameImg = LoadImage("resources/Enemies/FireFlame.png");
-    textFireFlame = LoadTextureFromImage(FireFlameImg);
-    UnloadImage(FireFlameImg);
-
-    //Donkey Kong
-    Image DonkeyKongImg = LoadImage("resources/Enemies/DonkeyKong.png");
-    textDonkeyKong = LoadTextureFromImage(DonkeyKongImg);
-    UnloadImage(DonkeyKongImg);
-
-    //UI Mario Lifes 
-    Image KenLifesIconImg = LoadImage("resources/UI/UI_MiscBig.png");
-    textIconLifes = LoadTextureFromImage(KenLifesIconImg);
-    UnloadImage(KenLifesIconImg);
+   
 
 }
 
@@ -127,22 +75,6 @@ Texture2D& TextureManager::GetTexture(TextureType texturetype)
         return textPunchSpriteKen;
         break;
 
-    case TextureType::SpriteKenClimb:
-        return textSpriteKenClimb;
-        break;
-
-    case TextureType::SpriteKenClimbIdle:
-        return textSpriteKenClimbIdle;
-        break;
-
-    case TextureType::SpriteKenDead:
-        return textSpriteKenDead;
-        break;
-
-    case TextureType::SpriteKenDeadIdle:
-        return textSpriteKenDeadIdle;
-        break;
-
     case TextureType::ImgCake:
         return textCake;
         break;
@@ -155,72 +87,19 @@ Texture2D& TextureManager::GetTexture(TextureType texturetype)
         return textLandscape;
         break;
 
-    case TextureType::ImgBonus2:
-        return textBonus2;
+    case TextureType::SpriteCar:
+        return textSpriteCar;
         break;
 
     case TextureType::ImgBonus3:
         return textBonus3;
         break;
 
-    case TextureType::ImgPeach:
-        return textPeach;
-        break;
-
-    case TextureType::ImgBurningBarrel:
-        return textBurningBarrel;
-        break;
-
-    case TextureType::ImgFireFlame:
-        return textFireFlame;
-        break;
-
-    case TextureType::ImgDonkeyKong:
-        return textDonkeyKong;
-        break;
-        
-    case TextureType::IconLifes:
-        return textIconLifes;
-        break;
-
     default:
         break;
     }
 }
 
-Texture2D& TextureManager::GetTextureByCurrentState(KenSpriteDirection KenSpriteState)
-{
-    switch (KenSpriteState)
-    {
-    case KenSpriteDirection::KenSpriteIdleRight:
-        return textBasicSpriteKen;
-        break;
-    case KenSpriteDirection::KenSpriteIdleLeft:
-        return textPunchSpriteKen;
-        break;
-    /*case KenSpriteDirection::KenSpriteRight:
-        return textSpriteKenWalkRight;
-        break;*/
-    /*case KenSpriteDirection::KenSpriteLeft:
-        return textSpriteKenWalkLeft;
-        break;*/
-    case KenSpriteDirection::KenSpriteClimb:
-        return textSpriteKenClimb;
-        break;
-    case KenSpriteDirection::KenSpriteClimbIdle:
-        return textSpriteKenClimbIdle;
-        break;
-    case KenSpriteDirection::KenSpriteDead:
-        return textSpriteKenDead;
-        break;
-    case KenSpriteDirection::KenSpriteDeadIdle:
-        return textSpriteKenDeadIdle;
-        break;
-
-    default:
-        break;
-    }
-}
 
 
 

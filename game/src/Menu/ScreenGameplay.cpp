@@ -27,6 +27,7 @@ void ScreenGameplayState::InitScreen(void)
 	framesCounter = 0;
 	finishScreen = 0;
 	ken->InitGameCharacter();
+	car->InitGameCharacter();
 
 }
 
@@ -35,6 +36,7 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 	EvaluateInput();
 
 	ken->UpdateGameCharacter(deltaTime);
+	car->UpdateGameCharacter(deltaTime);
 }
 
 void ScreenGameplayState::DrawScreen(void)
@@ -56,6 +58,7 @@ void ScreenGameplayState::DrawScreen(void)
 	DrawTexture(landscape, 0, 0, WHITE);
 
 	ken->DrawGameCharacter();
+	car->DrawGameCharacter();
 
 
 }

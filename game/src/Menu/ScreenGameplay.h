@@ -1,5 +1,6 @@
 #pragma once
 #include "StateMachineMngr.h"
+#include "Game/Characters/Car.h"
 #include "Game/Characters/Ken.h"
 #include "Game/Characters/Character.h"
 
@@ -48,5 +49,6 @@ private:
 
 	Texture2D landscape;
 	Ken* ken;
+	Car* car;
 
 };

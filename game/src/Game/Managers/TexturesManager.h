@@ -9,38 +9,18 @@ enum class TextureType
 	BonusKen,
 	BasicSpriteKen,
 	PunchSpriteKen,
-	SpriteKenClimb,
-	SpriteKenClimbIdle,
-	SpriteKenDead,
-	SpriteKenDeadIdle,
 
 	ImgCake,
 	EnemyBarrelImg,
 
 	Landscape,
-	ImgBonus2,
+	SpriteCar,
 	ImgBonus3,
 
-	ImgPeach,
-
-	ImgBurningBarrel,
-	ImgFireFlame,
-	ImgDonkeyKong,
-
-	IconLifes,
+	
 };
 
-enum class KenSpriteDirection
-{
-	KenSpriteIdleRight,
-	KenSpriteIdleLeft,
-	KenSpriteRight,
-	KenSpriteLeft,
-	KenSpriteClimb,
-	KenSpriteClimbIdle,
-	KenSpriteDead,
-	KenSpriteDeadIdle
-};
+
 
 class TextureManager
 {
@@ -52,8 +32,6 @@ public:
 
 	//Functons For textures
 	Texture2D& GetTexture(TextureType texture);
-	Texture2D& GetTextureByCurrentState(KenSpriteDirection KenSpriteState);
-
 
 	void DrawTextureExCustom(Texture2D texture, Vector2 position, float rotation, float scale, Color tint);
 	void DrawTextureExCustomFromBottom(Texture2D texture, Vector2 position, float rotation, float scale, Color tint);
@@ -79,7 +57,7 @@ private:
 	Texture2D textBarrel;
 
 	Texture2D textLandscape;
-	Texture2D textBonus2;
+	Texture2D textSpriteCar;
 	Texture2D textBonus3;
 
 	Texture2D textPeach;
