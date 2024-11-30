@@ -28,4 +28,13 @@ private:
 	int framesCounter = 0;
 	int finishScreen = 0;
 
+	//GAME OVER
+	int letterYPositions[9] = { 0 };
+	int currentLetterIndex = 0;
+	int lettersFallSpeed = 0;
+
+	//WIN
+	float winScale = 0.0f;
+	float scaleSpeed = 0.05f;
+	bool scalingUp = true;
 };

@@ -36,7 +36,7 @@ GameManager::GameManager()
 void GameManager::InitGame()
 {
     // Load global data (assets that must be available in all screens, i.e. font)
-    font = LoadFont("resources/Font/PacManFont.ttf");
+    font = LoadFont("resources/UI/GAMEDAY.ttf");
    // TextureManager& textureManager = TextureManager::GetTextureManager();
     //textureManager.InitTexturesFiles();
 

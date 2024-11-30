@@ -56,7 +56,7 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 	car->UpdateGameCharacter(deltaTime);
 	CarDamage();
 	GameInst.SetSeconds(GetTime()-startTime);
-	if (GameInst.GetSeconds() > 40.0f) {
+	if (GameInst.GetSeconds() > 5.0f) {
 		if (car->getDamage() <= 0) {
 			GameInst.SetScore(true); //ganar
 		}

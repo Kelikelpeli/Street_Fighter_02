@@ -71,13 +71,15 @@ void ScreenTitleState::DrawScreen(void)
 
 	GameManager& GameInst = GameManager::GetGameManager();
 
-	float posx = ((GetScreenWidth() / 2.f) - (MeasureText("by Raquel L.", 20) / 2.f));
 
-	DrawTextEx(GameInst.GetFont(), " by Raquel L.", Vector2{ posx, 720.f }, 20, 4, WHITE);
 
-	DrawText("Press Enter for Playing", (GetScreenWidth() / 2) - (MeasureText("Press Enter for Playing", 25) / 2), 800, 25, WHITE);
-	DrawText("Press 'O' for Instructions", (GetScreenWidth() / 2) - (MeasureText("Press 'O' for Instructions", 25) / 2), 860, 25, WHITE);
 
+	const char* line1 = "Press Enter to go to Title screen";
+	const char* line2 = "Press 'O' for Options";
+	const char* line3 = "by Raquel L.";
+	DrawTextEx(GameInst.GetFont(), line1, Vector2{ (GetScreenWidth() - MeasureTextEx(GameInst.GetFont(), line1, 25, 2).x) / 2.f, 800.f }, 25, 2, WHITE);
+	DrawTextEx(GameInst.GetFont(), line2, Vector2{ (GetScreenWidth() - MeasureTextEx(GameInst.GetFont(), line2, 25, 2).x) / 2.f, 850.f }, 25, 2, WHITE);
+	DrawTextEx(GameInst.GetFont(), line3, Vector2{ (GetScreenWidth() - MeasureTextEx(GameInst.GetFont(), line3, 25, 2).x) / 2.f, 720.f }, 25, 2, WHITE);
 
 	TextureManager& textureManager = TextureManager::GetTextureManager();
 	Texture2D logoTexture = textureManager.GetTexture(TextureType::Logo);

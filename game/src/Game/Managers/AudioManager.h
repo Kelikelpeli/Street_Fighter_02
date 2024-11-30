@@ -33,8 +33,12 @@ public:
 	void UpdateGameOverMusic();
 
 	void PlaySoundEffect(SoundType sound);
+	static AudioManager& GetAudioManager();
+
 
 private:
+	static AudioManager* AudioMngr;
+
 	Music IntroMusic;
 	Music GameOverMusic;
 

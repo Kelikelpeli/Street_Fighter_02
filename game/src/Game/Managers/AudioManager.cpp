@@ -1,12 +1,19 @@
 #include "AudioManager.h"
 
 
+AudioManager* AudioManager::AudioMngr = nullptr;
 
 AudioManager::AudioManager()
 {
-
+    InitAudioFiles();
 }
+AudioManager& AudioManager::GetAudioManager()
+{
+    if (!AudioMngr)
+        AudioMngr = new AudioManager();
 
+    return *AudioMngr;
+}
 
 void AudioManager::InitAudioFiles()
 {
