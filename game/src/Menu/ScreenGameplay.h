@@ -23,6 +23,8 @@ public:
 
 	static ScreenGameplayState& getInstance();
 	bool HasWin();
+	void CarDamage();
+
 
 
 private:

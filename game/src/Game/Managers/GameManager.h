@@ -33,8 +33,8 @@ public:
 
 	Font& GetFont() { return font; }
 
-	int GetScore() { return score; }
-	void SetScore(int newValue) { score = newValue; }
+	bool GetScore() { return score; }
+	void SetScore(bool newValue) { score = newValue; }
 
 	int GetSeconds() { return seconds; }
 	void SetSeconds(int newValue) { seconds = newValue; }
@@ -66,7 +66,7 @@ private:
 	int transFromScreen = -1;
 	int transToScreen = -1;
 
-	int score = 0;
+	bool score = false;
 	int seconds = 0;
 
 	Level NumLevel = Level::Title;

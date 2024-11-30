@@ -12,9 +12,10 @@ public:
 	virtual void UpdateGameCharacter(float deltaTime) override;
 	virtual void DrawGameCharacter() override;
 	virtual void UnloadGameCharacter() override;
+	void setDamage(int damage);
+	int getDamage();
 
 private:
-	int collisions;
-	bool Choque();
+	int damage;
 };
 #endif

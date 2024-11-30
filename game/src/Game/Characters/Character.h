@@ -55,6 +55,7 @@ protected:
 	std::map<int, FrameRecPos> CarSprites;
 	void SetControls(KeyboardKey left, KeyboardKey right, KeyboardKey up, KeyboardKey down, KeyboardKey special1, KeyboardKey special2);
 	KeyboardKey GetControl(char control);
+	Rectangle bodyColliderRect ={ getPosition().x + 50, getPosition().y + 20, 170, 350 };
 
 public:
 	int framesCounter = 0;
@@ -75,6 +76,7 @@ public:
 	Vector2 getSpeed();
 	void isStop(bool stop);
 	bool getStop();
+	Rectangle getBodyColliderRect();
 
 	KeyboardKey left;
 	KeyboardKey right;
@@ -83,7 +85,9 @@ public:
 	KeyboardKey special1;
 	KeyboardKey special2;
 
-	const float groundLevel = GetScreenHeight()/2;
+	const float groundLevel = GetScreenHeight() / 2.0f + 100;
+	bool GetAttack();
+	void setAttack(bool attack);
 
 protected:
 
@@ -94,5 +98,7 @@ protected:
 	Vector2 speed;
 	Texture2D characterText = { 0 };
 	bool stop=false;
+	bool attack;
+
 };
 #endif 

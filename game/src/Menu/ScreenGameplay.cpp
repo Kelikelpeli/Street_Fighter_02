@@ -8,6 +8,7 @@
 #include "Game/Managers/TexturesManager.h"
 
 #include <string>
+#include <iostream>
 
 
 ScreenGameplayState::ScreenGameplayState()
@@ -21,9 +22,22 @@ ScreenGameplayState& ScreenGameplayState::getInstance()
 	return singleton;
 }
 
+void ScreenGameplayState::CarDamage()
+{
+
+	//CharSpriteDirection::State_Special1 || ken->getCurrentState() == CharSpriteDirection::State_Special2) {
+	if (ken->GetAttack() && CheckCollisionRecs(ken->getHitColliderRect(), car->getBodyColliderRect())) {
+		car->setDamage(1);//se puede hacer logica por tipo de golpe
+		std::cout << "Debugging: !Al ataque¿ ";
+	}
+	std::cout << "Damage=" << car->getDamage()<< std::endl;
+
+}
+
 void ScreenGameplayState::InitScreen(void)
 {
 	ken = new Ken();
+	car = new Car();
 	framesCounter = 0;
 	finishScreen = 0;
 	ken->InitGameCharacter();
@@ -33,10 +47,21 @@ void ScreenGameplayState::InitScreen(void)
 
 void ScreenGameplayState::UpdateScreen(float deltaTime)
 {
+	GameManager& GameInst = GameManager::GetGameManager();
+
 	EvaluateInput();
 
 	ken->UpdateGameCharacter(deltaTime);
 	car->UpdateGameCharacter(deltaTime);
+	CarDamage();
+	if (GameInst.GetSeconds() > 40) {
+		if (car->getDamage() <= 0) {
+			GameInst.SetScore(true); //ganar
+		}
+		else {
+			GameInst.SetScore(false); //perder
+		}
+	}
 }
 
 void ScreenGameplayState::DrawScreen(void)
@@ -52,7 +77,7 @@ void ScreenGameplayState::DrawScreen(void)
 
 	DrawText("SCORE:", 300.f, 100.f, 25, WHITE);
 	DrawText(to_string(GameInst.GetScore()).c_str(), 440.f, 100.f, 25, WHITE);
-	Vector2 centerScreen = Vector2{(float) GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+	Vector2 centerScreen = Vector2{ (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
 	TextureManager& textureManager = TextureManager::GetTextureManager();
 	landscape = textureManager.GetTexture(TextureType::Landscape);
 	DrawTexture(landscape, 0, 0, WHITE);

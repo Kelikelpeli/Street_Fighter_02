@@ -18,6 +18,7 @@ void Special2State::enter(GameCharacter* character) {
 
 void Special2State::updateState(GameCharacter* character) {
 	framesCounter ++;
+	character->setAttack(false);
 
 	if (framesCounter > 24) {
 		
@@ -47,6 +48,7 @@ void Special2State::updateState(GameCharacter* character) {
 		}
 		else if (IsKeyPressed(KEY_Q)) {
 			character->isStop(false);
+			character->setAttack(true);
 
 			character->setState(Special1State::getInstance());
 			character->isStop(true);

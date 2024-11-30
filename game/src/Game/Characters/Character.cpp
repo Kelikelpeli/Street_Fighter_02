@@ -58,6 +58,7 @@ void GameCharacter::updateState()
 {
 	// Delegate the task of determining the next state to the current state!
 	currentState->updateState(this);
+	
 }
 void GameCharacter::setPosition(float x, float y) {
 
@@ -72,6 +73,14 @@ void GameCharacter::isStop(bool stop) {
 }
 bool GameCharacter::getStop() {
 	return stop;
+}
+
+
+
+
+Rectangle GameCharacter::getBodyColliderRect()
+{
+	return bodyColliderRect;
 }
 
 
@@ -114,4 +123,13 @@ void GameCharacter::setSpeed(float x, float y) {
 }
 Vector2 GameCharacter::getSpeed() {
 	return speed;
+}
+void GameCharacter::setAttack(bool attack)
+{
+	this->attack = attack;
+}
+
+bool GameCharacter::GetAttack()
+{
+	return attack;
 }

@@ -15,7 +15,7 @@
 void Ken::InitGameCharacter()
 {
 	//Let's fill the vector KenSprtes Data
-	setPosition(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f);
+	setPosition(GetScreenWidth() / 2.0f+70, GetScreenHeight() / 2.0f+100); //posicion inicial simiar a las capturas del ej
 	//IDLE
 	CharSprites_Counter[CharSpriteDirection::State_Idle] = 4;
 
@@ -84,16 +84,20 @@ void Ken::InitGameCharacter()
 	currentState = &IdleState::getInstance();
 	isStop(false);
 	SetControls(KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_Q, KEY_Z);
-	setSpeed(3.0f, 3.0f);
-	
+	setSpeed(6.0f, 3.0f);
+	setAttack(false);
+	bodyColliderRect = { getPosition().x + 50, getPosition().y + 20, 170, 350 }; //cuerpo
+	hitColliderRect = { getPosition().x - 125.f, getPosition().y + 80, 80, 30 }; //puños
 }
 
 void Ken::UpdateGameCharacter(float deltaTime) {
 
 	//Update State Machine
 	updateState();
-
+	bodyColliderRect = { getPosition().x + 50, getPosition().y + 20, 170, 350 }; //actualizar el collider
+	hitColliderRect = { getPosition().x - 125.f, getPosition().y + 80, 80, 30 }; //actualizar el collider
 	framesCounter++;
+
 
 	if (framesCounter >= (60 / framesSpeed)) {
 
@@ -136,9 +140,12 @@ void Ken::DrawGameCharacter()
 			Vector2{ getPosition().x - CharSprites[currentSpriteState][currentFrame].frameOrigin.x,
 			getPosition().y- -CharSprites[currentSpriteState][currentFrame].frameOrigin.y }, WHITE);
 		//Colisiones
-		DrawRectangle(getPosition().x - 125.f, getPosition().y + 80, 80, 30, RED);
+		//DrawRectangle(getPosition().x - 125.f, getPosition().y + 80, 80, 30, RED);
+		DrawRectangle(hitColliderRect.x, hitColliderRect.y, hitColliderRect.width, hitColliderRect.height, RED);
 	}
-	DrawRectangle(getPosition().x+50, getPosition().y + 20, 170, 350, YELLOW);
+	//DrawRectangle(getPosition().x+50, getPosition().y + 20, 170, 350, YELLOW);
+	DrawRectangle(bodyColliderRect.x, bodyColliderRect.y, bodyColliderRect.width, bodyColliderRect.height, YELLOW);
+
 }
 
 void Ken::UnloadGameCharacter()
@@ -151,6 +158,13 @@ void Ken::setState(CharacterState& newState)
 	currentState = &newState;  // change state
 	currentState->enter(this); // do something after we change state
 }
+
+Rectangle Ken::getHitColliderRect()
+{
+	return hitColliderRect;
+}
+
+
 
 void Ken::updateState()
 {

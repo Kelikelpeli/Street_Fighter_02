@@ -38,12 +38,13 @@ void WalkBackwardState::updateState(GameCharacter* character){
 
 	}
 	else if (IsKeyPressed(KEY_Q)) {
+		character->setAttack(true);
 
 		character->setState(Special1State::getInstance());
 		character->isStop(true);
 	}
 	else if (IsKeyPressed(KEY_T)) {
-
+		character->setAttack(true);
 		character->setState(Special2State::getInstance());
 		character->isStop(true);
 	}
