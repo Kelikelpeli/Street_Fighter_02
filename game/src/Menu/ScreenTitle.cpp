@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include "Game/Managers/GameManager.h"
 #include "Game/Managers/TexturesManager.h"
+#include "Game/Managers/AudioManager.h"
 
 ScreenTitleState& ScreenTitleState::getInstance()
 {
@@ -12,6 +13,10 @@ ScreenTitleState& ScreenTitleState::getInstance()
 
 void ScreenTitleState::InitScreen(void)
 {
+
+	AudioManager& audioManager = AudioManager::GetAudioManager();
+
+	audioManager.PlayIntroMusic(true);
 	framesCounter = 0;
 	finishScreen = 0;
 	TraceLog(LOG_INFO, "ScreenTitleState::InitScreen");

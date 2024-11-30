@@ -59,8 +59,8 @@ void ScreenGameplayState::InitScreen(void)
 	GameInst.SetSeconds(0);
 	startTime = GetTime();
 	countdown = GetTime();
-	frame = 0;
-	frame2 = 0;
+	frame = 1;
+	frame2 = 4;
 }
 
 void ScreenGameplayState::UpdateScreen(float deltaTime)
@@ -73,7 +73,7 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 	car->UpdateGameCharacter(deltaTime);
 	CarDamage();
 	GameInst.SetSeconds(GetTime() - startTime);
-	if (GameInst.GetSeconds() > 40.0f) {
+	if (GameInst.GetSeconds() > 41.0f) {
 		if (car->getDamage() <= 0) {
 			GameInst.SetScore(true); //ganar
 		}
@@ -129,26 +129,26 @@ void ScreenGameplayState::DrawCounter()
 	float uiPosY = 20.f;
 	float separacion = 60.f;
 	double segundo = GetTime() - countdown;
-	//segundo numero
-	DrawTextureRec(ui, UISpritesMap[frame].frameRec, Vector2{ GetScreenWidth() / 2.f + (separacion / 2),uiPosY }, WHITE);
 	//primer numero
 	DrawTextureRec(ui, UISpritesMap[frame2].frameRec, Vector2{ GetScreenWidth() / 2.f - (separacion / 2),uiPosY }, WHITE);
+	//segundo numero
+	DrawTextureRec(ui, UISpritesMap[frame].frameRec, Vector2{ GetScreenWidth() / 2.f + (separacion / 2),uiPosY }, WHITE);
 
 	if (segundo >= 1.0f) {
-		if (frame2 < 9) {
-			if (frame < 9) {
-				frame++;
+		if (frame2 >= 0 ) {
+			if (frame > 0) {
+				frame--;
 
 			}
 			else {
-				frame = 0;
-				frame2++;
+				frame = 9;
+				frame2--;
 			}
 			countdown = GetTime();
 		}
 		else {
-			frame = 0;
-			frame2 = 0;
+			frame = 9;
+			frame2 = 9;
 		}
 	}
 }

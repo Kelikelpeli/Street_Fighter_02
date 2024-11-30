@@ -20,7 +20,7 @@ void AudioManager::InitAudioFiles()
     InitAudioDevice();
 
     //Music
-    IntroMusic = LoadMusicStream("resources/Audio/Music//IntroTheme.mp3");	// Load Intro theme music
+    IntroMusic = LoadMusicStream("resources/Sound/Title_Theme.mp3");	// Load Intro theme music
     GameOverMusic = LoadMusicStream("resources/Audio/Music/GameOverTheme.mp3");
 
 
@@ -39,10 +39,14 @@ void AudioManager::InitAudioFiles()
 
 void AudioManager::PlayIntroMusic(bool activate)
 {
-    if(activate)
+    if (activate) {
         PlayMusicStream(IntroMusic);
-    else
+        TraceLog(LOG_INFO, "Intro music started playing.");
+    }
+    else {
         StopMusicStream(IntroMusic);
+        TraceLog(LOG_INFO, "Intro music finish playing.");
+    }
 }
 
 void AudioManager::UpdateIntroMusic()

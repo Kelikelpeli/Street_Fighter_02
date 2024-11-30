@@ -41,7 +41,7 @@ void GameManager::InitGame()
     //textureManager.InitTexturesFiles();
 
     // Setup and init first screen
-    ScreenState = &ScreenGameplayState::getInstance();
+    ScreenState = &ScreenLogoState::getInstance();
     ScreenState->InitScreen();     
 }
 //-------------------------------------------------------
