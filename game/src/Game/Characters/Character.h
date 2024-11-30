@@ -99,6 +99,8 @@ protected:
 	Texture2D characterText = { 0 };
 	bool stop=false;
 	bool attack;
+	Vector2 widthLimits = { 0,(float)GetScreenWidth()};
+
 
 };
 #endif 

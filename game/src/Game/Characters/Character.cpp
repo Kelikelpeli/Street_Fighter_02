@@ -2,6 +2,10 @@
 
 #include "Game/Managers/GameManager.h"
 #include "Game/States/CharacterState.h"
+#include "Game/GlobalGameDefines.h"
+
+#include <iostream>
+
 
 #include "raylib.h"
 
@@ -23,6 +27,7 @@ void GameCharacter::InitGameCharacter()
 	down = KEY_DOWN;
 	special1 = KEY_Q;
 	special2 = KEY_T;
+	//widthLimits = { 0,1920};
 }
 
 void GameCharacter::UpdateGameCharacter(float deltaTime)
@@ -61,8 +66,12 @@ void GameCharacter::updateState()
 	
 }
 void GameCharacter::setPosition(float x, float y) {
+	std::cout << "Limites de ancho: " << widthLimits.x << " - " << widthLimits.y << std::endl;
+	if (x >= widthLimits.x && x <= widthLimits.y) {
+		position.x = x;
+	}
+	position.y = y;
 
-	position = Vector2{ x, y };
 }
 Vector2 GameCharacter::getPosition() {
 	return position;

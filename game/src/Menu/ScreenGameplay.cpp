@@ -49,13 +49,13 @@ void ScreenGameplayState::InitScreen(void)
 	UISpritesMap[9] = FrameRecUI{ {633,125,60,60}, {0.f, 0.f} };
 
 
+	car = new Car();
 
 	ken = new Ken();
-	car = new Car();
 	framesCounter = 0;
 	finishScreen = 0;
-	ken->InitGameCharacter();
 	car->InitGameCharacter();
+	ken->InitGameCharacter();
 	GameInst.SetSeconds(0);
 	startTime = GetTime();
 	countdown = GetTime();

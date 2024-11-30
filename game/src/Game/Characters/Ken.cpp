@@ -14,7 +14,9 @@
 
 void Ken::InitGameCharacter()
 {
-	//Let's fill the vector KenSprtes Data
+	
+	widthLimits = { 820,(float)GetScreenWidth()-260 };
+
 	setPosition(GetScreenWidth() / 2.0f+70, GetScreenHeight() / 2.0f+100); //posicion inicial simiar a las capturas del ej
 	//IDLE
 	CharSprites_Counter[CharSpriteDirection::State_Idle] = 4;
@@ -139,12 +141,7 @@ void Ken::DrawGameCharacter()
 		DrawTextureRec(punchText, CharSprites[currentSpriteState][currentFrame].frameRec, 
 			Vector2{ getPosition().x - CharSprites[currentSpriteState][currentFrame].frameOrigin.x,
 			getPosition().y- -CharSprites[currentSpriteState][currentFrame].frameOrigin.y }, WHITE);
-		//Colisiones
-		//DrawRectangle(getPosition().x - 125.f, getPosition().y + 80, 80, 30, RED);
-		DrawRectangle(hitColliderRect.x, hitColliderRect.y, hitColliderRect.width, hitColliderRect.height, RED);
 	}
-	//DrawRectangle(getPosition().x+50, getPosition().y + 20, 170, 350, YELLOW);
-	DrawRectangle(bodyColliderRect.x, bodyColliderRect.y, bodyColliderRect.width, bodyColliderRect.height, YELLOW);
 
 }
 
