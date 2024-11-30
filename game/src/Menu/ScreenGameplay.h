@@ -4,6 +4,26 @@
 #include "Game/Characters/Ken.h"
 #include "Game/Characters/Character.h"
 
+#include "raylib.h"
+#include <map>
+#include <vector>
+
+enum class UISprite {
+	UISprite_0,
+	UISprite_1,
+	UISprite_2,
+	UISprite_3,
+	UISprite_4,
+	UISprite_5,
+	UISprite_6,
+	UISprite_7,
+	UISprite_8,
+	UISprite_9
+};
+struct FrameRecUI {
+	Rectangle frameRec;
+	Vector2 frameOrigin;
+};
 
 class ScreenGameplayState : public StateMachineMngr
 {
@@ -22,8 +42,6 @@ public:
 	int getScreenId() { return (int)ScreenState::GAMEPLAY; }
 
 	static ScreenGameplayState& getInstance();
-	bool HasWin();
-	void CarDamage();
 
 
 
@@ -37,12 +55,19 @@ private:
 	
 	void DebugOptions();
 	void DrawDebug();
+	void CarDamage();
+	void DrawCounter();
 
-	void SetWin(bool win);
+	int UISprites_Counter = 10;
+	//std::map<UISprite, FrameRecUI> UISpritesMap;
+	std::map<int, FrameRecUI> UISpritesMap;
+
 
 	int framesCounter = 0;
 	int finishScreen = 0;
-	int countdown = 2400;
+	double countdown = 2400;
+	int frame;
+	int frame2;
 	bool mb_ReplayLevel = false;
 	bool win = false;
 
@@ -52,6 +77,7 @@ private:
 
 	double startTime;
 	Texture2D landscape;
+	Texture2D ui;
 	Ken* ken;
 	Car* car;
 

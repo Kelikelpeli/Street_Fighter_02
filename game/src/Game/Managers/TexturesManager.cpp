@@ -47,9 +47,9 @@ void TextureManager::InitTexturesFiles()
     textSpriteCar = LoadTextureFromImage(spriteCar);
     UnloadImage(spriteCar);
 
-    Image Bonus3Img = LoadImage("resources/Bonus/Bonus3.png");
-    textBonus3 = LoadTextureFromImage(Bonus3Img);
-    UnloadImage(Bonus3Img);
+    Image UIMiscBigImg = LoadImage("resources/UI/UI_MiscBig.png");
+    textUIMiscBig = LoadTextureFromImage(UIMiscBigImg);
+    UnloadImage(UIMiscBigImg);
 
    
 
@@ -75,14 +75,6 @@ Texture2D& TextureManager::GetTexture(TextureType texturetype)
         return textPunchSpriteKen;
         break;
 
-    case TextureType::ImgCake:
-        return textCake;
-        break;
-
-    case TextureType::EnemyBarrelImg:
-        return textBarrel;
-        break;
-
     case TextureType::Landscape:
         return textLandscape;
         break;
@@ -91,8 +83,8 @@ Texture2D& TextureManager::GetTexture(TextureType texturetype)
         return textSpriteCar;
         break;
 
-    case TextureType::ImgBonus3:
-        return textBonus3;
+    case TextureType::UIMiscBig:
+        return textUIMiscBig;
         break;
 
     default:

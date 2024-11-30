@@ -10,12 +10,9 @@ enum class TextureType
 	BasicSpriteKen,
 	PunchSpriteKen,
 
-	ImgCake,
-	EnemyBarrelImg,
-
 	Landscape,
 	SpriteCar,
-	ImgBonus3,
+	UIMiscBig,
 
 	
 };
@@ -53,21 +50,11 @@ private:
 	Texture2D textSpriteKenDead;
 	Texture2D textSpriteKenDeadIdle;
 
-	Texture2D textCake;
-	Texture2D textBarrel;
 
 	Texture2D textLandscape;
 	Texture2D textSpriteCar;
-	Texture2D textBonus3;
+	Texture2D textUIMiscBig;
 
-	Texture2D textPeach;
-
-	Texture2D textBurningBarrel;
-	Texture2D textFireFlame;
-	Texture2D textDonkeyKong;
-
-	//UI
-	Texture2D textIconLifes;
 
 	
 };
