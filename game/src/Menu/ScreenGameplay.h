@@ -27,6 +27,7 @@ public:
 
 
 
+
 private:
 	ScreenGameplayState();
 	ScreenGameplayState(const ScreenGameplayState& other);
@@ -49,6 +50,7 @@ private:
 	bool debug_floor = false;
 	bool debug_stairs = false;
 
+	double startTime;
 	Texture2D landscape;
 	Ken* ken;
 	Car* car;

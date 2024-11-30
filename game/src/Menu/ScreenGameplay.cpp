@@ -28,21 +28,22 @@ void ScreenGameplayState::CarDamage()
 	//CharSpriteDirection::State_Special1 || ken->getCurrentState() == CharSpriteDirection::State_Special2) {
 	if (ken->GetAttack() && CheckCollisionRecs(ken->getHitColliderRect(), car->getBodyColliderRect())) {
 		car->setDamage(1);//se puede hacer logica por tipo de golpe
-		std::cout << "Debugging: !Al ataque¿ ";
 	}
-	std::cout << "Damage=" << car->getDamage()<< std::endl;
 
 }
 
 void ScreenGameplayState::InitScreen(void)
 {
+	GameManager& GameInst = GameManager::GetGameManager();
+
 	ken = new Ken();
 	car = new Car();
 	framesCounter = 0;
 	finishScreen = 0;
 	ken->InitGameCharacter();
 	car->InitGameCharacter();
-
+	GameInst.SetSeconds(0);
+	startTime = GetTime();
 }
 
 void ScreenGameplayState::UpdateScreen(float deltaTime)
@@ -54,14 +55,19 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 	ken->UpdateGameCharacter(deltaTime);
 	car->UpdateGameCharacter(deltaTime);
 	CarDamage();
-	if (GameInst.GetSeconds() > 40) {
+	GameInst.SetSeconds(GetTime()-startTime);
+	if (GameInst.GetSeconds() > 40.0f) {
 		if (car->getDamage() <= 0) {
 			GameInst.SetScore(true); //ganar
 		}
 		else {
 			GameInst.SetScore(false); //perder
 		}
+		finishScreen = 4;
+
 	}
+
+
 }
 
 void ScreenGameplayState::DrawScreen(void)
