@@ -14,9 +14,6 @@ ScreenTitleState& ScreenTitleState::getInstance()
 void ScreenTitleState::InitScreen(void)
 {
 
-	AudioManager& audioManager = AudioManager::GetAudioManager();
-
-	audioManager.PlayIntroMusic(true);
 	framesCounter = 0;
 	finishScreen = 0;
 	TraceLog(LOG_INFO, "ScreenTitleState::InitScreen");
@@ -30,10 +27,14 @@ void ScreenTitleState::InitScreen(void)
 
 	// Use this to access to the Game instance
 	GameManager& GameInst = GameManager::GetGameManager();
+	AudioManager& audioManager = AudioManager::GetAudioManager();
+
+	audioManager.PlaySoundEffect(SoundType::IntroTheme);
 }
 
 void ScreenTitleState::UpdateScreen(float deltaTime)
 {
+
 	framesCounter++;
 	GameManager& GameInst = GameManager::GetGameManager();
 

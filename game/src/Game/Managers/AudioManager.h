@@ -6,14 +6,8 @@ enum class SoundType
 {
 	IntroTheme = 0,
 	GameOver,
-	Death,
-	EatingCherry,
-	EatingGhost,
-	EatingPowerPill,
-	GameStart,
-	Siren,
+	KenTheme,
 	Victory,
-	WakaWaka
 };
 
 class AudioManager
@@ -24,13 +18,6 @@ public:
 	void InitAudioFiles();
 	void UnloadAudioFiles();
 
-	//Functons For music 
-	void PlayIntroMusic(bool activate);
-	void UpdateIntroMusic();
-
-	//Fuunctions for GPP Music
-	void PlayGameOverMusic(bool activate);
-	void UpdateGameOverMusic();
 
 	void PlaySoundEffect(SoundType sound);
 	static AudioManager& GetAudioManager();
@@ -39,15 +26,8 @@ public:
 private:
 	static AudioManager* AudioMngr;
 
-	Music IntroMusic;
-	Music GameOverMusic;
-
-	Sound DeathSound;
-	Sound EatingCherrySound;
-	Sound EatingGhostSound;
-	Sound EatingPowerPillSound;
-	Sound GameStartSound;
-	Sound SirenSound;
+	Sound IntroSound;
+	Sound GameOverSound;
+	Sound KenThemeSound;
 	Sound VictorySound;
-	Sound WakaWakaSound;
 };

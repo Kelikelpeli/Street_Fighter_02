@@ -37,11 +37,9 @@ void GameManager::InitGame()
 {
     // Load global data (assets that must be available in all screens, i.e. font)
     font = LoadFont("resources/UI/GAMEDAY.ttf");
-   // TextureManager& textureManager = TextureManager::GetTextureManager();
-    //textureManager.InitTexturesFiles();
 
     // Setup and init first screen
-    ScreenState = &ScreenLogoState::getInstance();
+    ScreenState = &ScreenGameplayState::getInstance();
     ScreenState->InitScreen();     
 }
 //-------------------------------------------------------

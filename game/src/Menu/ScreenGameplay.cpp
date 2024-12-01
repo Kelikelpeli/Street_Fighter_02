@@ -6,6 +6,7 @@
 #include "Game/Managers/GameManager.h"
 #include "Game/GlobalGameDefines.h"
 #include "Game/Managers/TexturesManager.h"
+#include "Game/Managers/AudioManager.h"
 
 #include <string>
 #include <iostream>
@@ -26,6 +27,9 @@ ScreenGameplayState& ScreenGameplayState::getInstance()
 
 void ScreenGameplayState::InitScreen(void)
 {
+	AudioManager& audioManager = AudioManager::GetAudioManager();
+
+	audioManager.PlaySoundEffect(SoundType::KenTheme);
 	GameManager& GameInst = GameManager::GetGameManager();
 	UISprites_Counter = 10;
 	UISpritesMap[0] = FrameRecUI{ {58,125,60,60}, {0.f, 0.f} };
@@ -57,6 +61,7 @@ void ScreenGameplayState::InitScreen(void)
 	car->InitGameCharacter();
 	ken->InitGameCharacter();
 	GameInst.SetSeconds(0);
+	GameInst.SetScore(false);
 	startTime = GetTime();
 	countdown = GetTime();
 	frame = 1;
@@ -114,8 +119,10 @@ void ScreenGameplayState::DrawScreen(void)
 void ScreenGameplayState::CarDamage()
 {
 
-	//CharSpriteDirection::State_Special1 || ken->getCurrentState() == CharSpriteDirection::State_Special2) {
 	if (ken->GetAttack() && CheckCollisionRecs(ken->getHitColliderRect(), car->getBodyColliderRect())) {
+		if (IsKeyPressed(KEY_Q)) {
+
+		}
 		car->setDamage(1);//se puede hacer logica por tipo de golpe
 	}
 

@@ -27,7 +27,6 @@ void GameCharacter::InitGameCharacter()
 	down = KEY_DOWN;
 	special1 = KEY_Q;
 	special2 = KEY_T;
-	//widthLimits = { 0,1920};
 }
 
 void GameCharacter::UpdateGameCharacter(float deltaTime)
@@ -66,7 +65,6 @@ void GameCharacter::updateState()
 	
 }
 void GameCharacter::setPosition(float x, float y) {
-	std::cout << "Limites de ancho: " << widthLimits.x << " - " << widthLimits.y << std::endl;
 	if (x >= widthLimits.x && x <= widthLimits.y) {
 		position.x = x;
 	}

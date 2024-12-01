@@ -20,80 +20,47 @@ void AudioManager::InitAudioFiles()
     InitAudioDevice();
 
     //Music
-    IntroMusic = LoadMusicStream("resources/Sound/Title_Theme.mp3");	// Load Intro theme music
-    GameOverMusic = LoadMusicStream("resources/Audio/Music/GameOverTheme.mp3");
+    IntroSound = LoadSound("resources/Sound/Title_Theme.mp3");	// Load Intro theme music
+    GameOverSound = LoadSound("resources/Sound/Game_Over.mp3");
+    KenThemeSound = LoadSound("resources/Sound/Ken_Theme.mp3");
+    VictorySound = LoadSound("resources/Sound/Victory_Screen.mp3");
 
-
-    //Sounds
-    DeathSound = LoadSound("resources/Audio/Sounds/Death.mp3");;
-    EatingCherrySound = LoadSound("resources/Audio/Sounds/EatingCherry.mp3");;
-    EatingGhostSound = LoadSound("resources/Audio/Sounds/EatingGhost.mp3");;
-    EatingPowerPillSound = LoadSound("resources/Audio/Sounds/EatingPowerPill.mp3");;
-    GameStartSound = LoadSound("resources/Audio/Sounds/GameStart.mp3");;
-    SirenSound = LoadSound("resources/Audio/Sounds/Siren.mp3");;
-    VictorySound = LoadSound("resources/Audio/Sounds/Victory.mp3");;
-    WakaWakaSound = LoadSound("resources/Audio/Sounds/WakaWaka.mp3");;
-
-    SetMusicVolume(IntroMusic, 1.0f);
+    SetSoundVolume(IntroSound, 0.5f);
 }
 
-void AudioManager::PlayIntroMusic(bool activate)
-{
-    if (activate) {
-        PlayMusicStream(IntroMusic);
-        TraceLog(LOG_INFO, "Intro music started playing.");
-    }
-    else {
-        StopMusicStream(IntroMusic);
-        TraceLog(LOG_INFO, "Intro music finish playing.");
-    }
-}
-
-void AudioManager::UpdateIntroMusic()
-{
-    UpdateMusicStream(IntroMusic);
-}
-
-void AudioManager::PlayGameOverMusic(bool activate)
-{
-    if (activate)
-        PlayMusicStream(GameOverMusic);
-    else
-        StopMusicStream(GameOverMusic);
-}
-
-void AudioManager::UpdateGameOverMusic()
-{
-    UpdateMusicStream(GameOverMusic);
-}
 
 void AudioManager::PlaySoundEffect(SoundType sound)
 {
+
     switch (sound)
     {
-    case SoundType::Death:
-        PlaySound(DeathSound);
+    case SoundType::IntroTheme:
+        PlaySound(IntroSound);
+        StopSound(GameOverSound);
+        StopSound(KenThemeSound);
+        StopSound(VictorySound);
+        SetSoundVolume(IntroSound, 0.5f);
         break;
-    case SoundType::EatingCherry:
-        PlaySound(EatingCherrySound);
+    case SoundType::GameOver:
+        PlaySound(GameOverSound);
+        StopSound(IntroSound);
+        StopSound(KenThemeSound);
+        StopSound(VictorySound);
+        SetSoundVolume(GameOverSound, 0.5f);
         break;
-    case SoundType::EatingGhost:
-        PlaySound(EatingGhostSound);
-        break;
-    case SoundType::EatingPowerPill:
-        PlaySound(EatingPowerPillSound);
-        break;
-    case SoundType::GameStart:
-        PlaySound(GameStartSound);
-        break;
-    case SoundType::Siren:
-        PlaySound(SirenSound);
+    case SoundType::KenTheme:
+        PlaySound(KenThemeSound);
+        StopSound(IntroSound);
+        StopSound(GameOverSound);
+        StopSound(VictorySound);
+        SetSoundVolume(KenThemeSound, 0.5f);
         break;
     case SoundType::Victory:
-        PlaySound(VictorySound);
-        break;
-    case SoundType::WakaWaka:
-        PlaySound(WakaWakaSound);
+        PlaySound(VictorySound);        
+        StopSound(IntroSound);
+        StopSound(GameOverSound);
+        StopSound(KenThemeSound);
+        SetSoundVolume(VictorySound, 0.5f);
         break;
     default:
         break;
@@ -102,14 +69,11 @@ void AudioManager::PlaySoundEffect(SoundType sound)
 
 void AudioManager::UnloadAudioFiles()
 {
-    UnloadSound(DeathSound);
-    UnloadSound(EatingCherrySound);
-    UnloadSound(EatingGhostSound);
-    UnloadSound(EatingPowerPillSound);
-    UnloadSound(GameStartSound);
-    UnloadSound(SirenSound);
+    UnloadSound(KenThemeSound);
+    UnloadSound(IntroSound);
     UnloadSound(VictorySound);
-    UnloadSound(WakaWakaSound);
+    UnloadSound(GameOverSound);
+   
 
     //CloseAudio
     CloseAudioDevice();

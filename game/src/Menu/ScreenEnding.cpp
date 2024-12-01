@@ -40,7 +40,7 @@ void ScreenEndingState::InitScreen(void)
 	}
 	else
 	{
-		audioManager.PlayGameOverMusic(true);
+		audioManager.PlaySoundEffect(SoundType::GameOver);
 	}
 }
 
