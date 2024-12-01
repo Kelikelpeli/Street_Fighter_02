@@ -18,8 +18,8 @@ void Car::InitGameCharacter()
 	CarSprites_Counter = 8;
 	CarSprites[0] = FrameRecPos{ {0,0,725,360}, {0.f, 0.f} };
 	CarSprites[1] = FrameRecPos{ {0,360,725,360}, {-10.f, 30.f} };
-	CarSprites[2] = FrameRecPos{ {0,688,715,360}, {-5.f, 30.f} };
-	CarSprites[3] = FrameRecPos{ {725,688,725,360}, {-45.f, 30.f} };
+	CarSprites[2] = FrameRecPos{ {0,688,725,360}, {-5.f, 30.f} };
+	CarSprites[3] = FrameRecPos{ {725,688,700,360}, {-45.f, 30.f} };
 	CarSprites[4] = FrameRecPos{ {35,1035,680,325}, {-50.f, 15.f} };
 	CarSprites[5] = FrameRecPos{ {725,1035,680,325}, {-60.f, 7.f} };
 	CarSprites[6] = FrameRecPos{ {35,1350,672,265}, {-55.f, -60.f} };

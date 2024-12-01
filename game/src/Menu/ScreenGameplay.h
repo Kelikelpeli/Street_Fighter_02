@@ -68,8 +68,9 @@ private:
 	double countdown = 2400;
 	int frame;
 	int frame2;
-	bool mb_ReplayLevel = false;
-	bool win = false;
+	//bool mb_ReplayLevel = false;
+//bool win = false;
+	float acumulacionDaño;
 
 
 	bool debug_floor = false;

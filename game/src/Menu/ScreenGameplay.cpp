@@ -66,6 +66,7 @@ void ScreenGameplayState::InitScreen(void)
 	countdown = GetTime();
 	frame = 1;
 	frame2 = 4;
+	acumulacionDaño = 0;
 }
 
 void ScreenGameplayState::UpdateScreen(float deltaTime)
@@ -121,9 +122,15 @@ void ScreenGameplayState::CarDamage()
 
 	if (ken->GetAttack() && CheckCollisionRecs(ken->getHitColliderRect(), car->getBodyColliderRect())) {
 		if (IsKeyPressed(KEY_Q)) {
-
+			acumulacionDaño += 0.25f; //golpe ligero hace menos daño, más rápidoa
 		}
-		car->setDamage(1);//se puede hacer logica por tipo de golpe
+		else if (IsKeyPressed(KEY_T)) {
+			acumulacionDaño += 0.5f;  //golpe contundente, más daño, más lento
+		}
+		if (acumulacionDaño >= 1.f) {
+			acumulacionDaño = 0;
+			car->setDamage(1);
+		}
 	}
 
 }
@@ -142,7 +149,7 @@ void ScreenGameplayState::DrawCounter()
 	DrawTextureRec(ui, UISpritesMap[frame].frameRec, Vector2{ GetScreenWidth() / 2.f + (separacion / 2),uiPosY }, WHITE);
 
 	if (segundo >= 1.0f) {
-		if (frame2 >= 0 ) {
+		if (frame2 >= 0) {
 			if (frame > 0) {
 				frame--;
 
