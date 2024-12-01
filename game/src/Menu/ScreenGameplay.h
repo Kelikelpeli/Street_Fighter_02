@@ -8,18 +8,7 @@
 #include <map>
 #include <vector>
 
-enum class UISprite {
-	UISprite_0,
-	UISprite_1,
-	UISprite_2,
-	UISprite_3,
-	UISprite_4,
-	UISprite_5,
-	UISprite_6,
-	UISprite_7,
-	UISprite_8,
-	UISprite_9
-};
+
 struct FrameRecUI {
 	Rectangle frameRec;
 	Vector2 frameOrigin;

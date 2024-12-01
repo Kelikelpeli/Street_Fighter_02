@@ -35,7 +35,7 @@ void GameManager::InitGame()
     font = LoadFont("resources/UI/GAMEDAY.ttf");
 
     // Setup and init first screen
-    ScreenState = &ScreenTitleState::getInstance();
+    ScreenState = &ScreenLogoState::getInstance();
     ScreenState->InitScreen();     
 }
 //-------------------------------------------------------

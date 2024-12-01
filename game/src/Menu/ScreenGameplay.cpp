@@ -54,7 +54,7 @@ void ScreenGameplayState::InitScreen(void)
 	// Variables to control the counter
 	startTime = GetTime();
 	countdown = GetTime();
-	frame = 1; //second number
+	frame = 0; //second number
 	frame2 = 4; //first number
 
 	// Control damage per type of hit
@@ -72,7 +72,7 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 
 	CarDamage(); 
 
-	// Screen transition at 41 seconds to display counter numbers 40 and 00
+	
 	GameInst.SetSeconds(GetTime() - startTime);
 	if (car->getDamage() <= 1) {
 		GameInst.SetScore(true); //win
@@ -80,7 +80,7 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 	else if (car->getDamage() > 1) {
 		GameInst.SetScore(false); //game over
 	}
-	if (GameInst.GetSeconds() > 41.0f) {		
+	if (GameInst.GetSeconds() > 40.f) {		
 		finishScreen = 4; //ENDING
 	}
 }
