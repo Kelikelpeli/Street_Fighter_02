@@ -4,8 +4,7 @@
 #include "Screen.h"
 #include "raylib.h"
 
-class ScreenTitleState : public StateMachineMngr
-{
+class ScreenTitleState : public StateMachineMngr {
 public:
 
 	void enter(Screen* screen){}
@@ -31,10 +30,8 @@ private:
 	int framesCounter = 0;
 	int finishScreen = 0;
 
-	Texture2D LogoTitle;
 	bool animationStarted = false;
 	bool animationComplete = false; 
 	float rotationAngle = 0.0f;
 	float scale = 1.0f;
-
 };

@@ -1,5 +1,4 @@
 
-
 #include "IdleState.h"
 
 #include "WalkForwardState.h"
@@ -17,38 +16,42 @@ void IdleState::enter(GameCharacter* character) {
 }
 
 void IdleState::updateState(GameCharacter* character) {
-
-	if (IsKeyPressed(KEY_LEFT)){
+	// move to walk forward state if left key is pressed
+	if (IsKeyPressed(KEY_LEFT)) {
 
 		character->setState(WalkForwardState::getInstance());
 
-	} else if (IsKeyPressed(KEY_RIGHT)){
+	}
+	// move to walk backward state if right key is pressed
+	else if (IsKeyPressed(KEY_RIGHT)) {
 
 		character->setState(WalkBackwardState::getInstance());
 
-	}else if (IsKeyPressed(KEY_SPACE) && character->getStop() == false) {
+	}
+	// enter jump state if space is pressed
+	else if (IsKeyPressed(KEY_SPACE) && character->getStop() == false) {
 
 		character->setState(JumpUpState::getInstance());
 		character->isStop(true);
 	}
-	else if (IsKeyPressed(KEY_DOWN)){
+	// enter crouch state if down key is pressed
+	else if (IsKeyPressed(KEY_DOWN)) {
 
-	 character->setState(CrouchState::getInstance());
-	 character->isStop(true);
+		character->setState(CrouchState::getInstance());
+		character->isStop(true);
 	}
+	//enter light attack state if Q is pressed
 	else if (IsKeyPressed(KEY_Q)) {
 		character->setAttack(true);
 		character->setState(Special1State::getInstance());
 		character->isStop(true);
 	}
+	// enter medium attack state if T is pressed
 	else if (IsKeyPressed(KEY_T)) {
 		character->setAttack(true);
 		character->setState(Special2State::getInstance());
 		character->isStop(true);
 	}
-
-	// Add more states
-
 }
 
 
@@ -57,5 +60,4 @@ CharacterState& IdleState::getInstance() {
 	static IdleState singleton;
 
 	return singleton;
-
 }

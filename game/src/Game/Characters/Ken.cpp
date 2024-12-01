@@ -12,12 +12,11 @@
 #include "raylib.h"
 
 
-void Ken::InitGameCharacter()
-{
-	
-	widthLimits = { 820,(float)GetScreenWidth()-260 };
+void Ken::InitGameCharacter() {
+	widthLimits = { 820,(float)GetScreenWidth() - 260 }; //Left limit at the car and right limit at the screen
 
-	setPosition(GetScreenWidth() / 2.0f+70, GetScreenHeight() / 2.0f+100); //posicion inicial simiar a las capturas del ej
+	setPosition(GetScreenWidth() / 2.0f + 70, GetScreenHeight() / 2.0f + 100); //Initial position similar to the example screenshots
+
 	//IDLE
 	CharSprites_Counter[CharSpriteDirection::State_Idle] = 4;
 
@@ -85,44 +84,37 @@ void Ken::InitGameCharacter()
 	//init State
 	currentState = &IdleState::getInstance();
 	isStop(false);
-	SetControls(KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_Q, KEY_Z);
 	setSpeed(6.0f, 3.0f);
 	setAttack(false);
-	bodyColliderRect = { getPosition().x + 50, getPosition().y + 20, 170, 350 }; //cuerpo
-	hitColliderRect = { getPosition().x - 125.f, getPosition().y + 80, 80, 30 }; //puños
+
+	bodyColliderRect = { getPosition().x + 50, getPosition().y + 20, 170, 350 }; // body collider
+	hitColliderRect = { getPosition().x - 125.f, getPosition().y + 80, 80, 30 }; // punch collider
 }
 
 void Ken::UpdateGameCharacter(float deltaTime) {
 
 	//Update State Machine
 	updateState();
-	bodyColliderRect = { getPosition().x + 50, getPosition().y + 20, 170, 350 }; //actualizar el collider
-	hitColliderRect = { getPosition().x - 125.f, getPosition().y + 80, 80, 30 }; //actualizar el collider
+
+	//Update colliders
+	bodyColliderRect = { getPosition().x + 50, getPosition().y + 20, 170, 350 }; 
+	hitColliderRect = { getPosition().x - 125.f, getPosition().y + 80, 80, 30 }; 
 	framesCounter++;
 
-
 	if (framesCounter >= (60 / framesSpeed)) {
-
 		framesCounter = 0;
 		currentFrame++;
 
-		//TODO make it generic for every state, this is only valid for Idle
-
+		//Generic for all states
 		int totalNumFrames = CharSprites_Counter[currentSpriteState];
-			if (currentFrame >= totalNumFrames ) {
-				if (!stop) {
-					currentFrame = 0;
-				}
-				else {
-					 currentFrame = totalNumFrames - 1;
-				}
-
+		if (currentFrame >= totalNumFrames) {
+			if (!stop) {
+				currentFrame = 0;
+			} else {
+				currentFrame = totalNumFrames - 1;
 			}
-		
-
+		}
 	}
-
-	// add here the updateframe logic to be able to see all the sprites from one state
 }
 
 void Ken::DrawGameCharacter()
@@ -131,37 +123,31 @@ void Ken::DrawGameCharacter()
 	Texture2D kenSprites = textureManager.GetTexture(TextureType::BasicSpriteKen);
 	Texture2D punchText = textureManager.GetTexture(TextureType::PunchSpriteKen);
 
+	//If not attacking, use basic texture; otherwise, use attack texture
 	if (currentSpriteState != CharSpriteDirection::State_Special1 && currentSpriteState != CharSpriteDirection::State_Special2) {
 		DrawTextureRec(kenSprites, CharSprites[currentSpriteState][currentFrame].frameRec,
 			Vector2{ getPosition().x - CharSprites[currentSpriteState][currentFrame].frameOrigin.x,
 			getPosition().y - -CharSprites[currentSpriteState][currentFrame].frameOrigin.y }, WHITE);
 
-	}
-	else {
-		DrawTextureRec(punchText, CharSprites[currentSpriteState][currentFrame].frameRec, 
+	} else {
+		DrawTextureRec(punchText, CharSprites[currentSpriteState][currentFrame].frameRec,
 			Vector2{ getPosition().x - CharSprites[currentSpriteState][currentFrame].frameOrigin.x,
-			getPosition().y- -CharSprites[currentSpriteState][currentFrame].frameOrigin.y }, WHITE);
+			getPosition().y - -CharSprites[currentSpriteState][currentFrame].frameOrigin.y }, WHITE);
 	}
-
 }
 
-void Ken::UnloadGameCharacter()
-{}
+void Ken::UnloadGameCharacter(){}
 
 // State Machines
-void Ken::setState(CharacterState& newState)
-{
+void Ken::setState(CharacterState& newState) {
 	currentState->exit(this);  // do something before we change state
 	currentState = &newState;  // change state
 	currentState->enter(this); // do something after we change state
 }
 
-Rectangle Ken::getHitColliderRect()
-{
+Rectangle Ken::getHitColliderRect() {
 	return hitColliderRect;
 }
-
-
 
 void Ken::updateState()
 {

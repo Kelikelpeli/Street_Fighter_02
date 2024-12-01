@@ -1,4 +1,3 @@
-
 #include "IdleState.h"
 
 #include "WalkForwardState.h"
@@ -9,34 +8,24 @@
 #include "Special1State.h"
 #include "Special2State.h"
 
-
-void WalkForwardState::enter(GameCharacter* character){
+void WalkForwardState::enter(GameCharacter* character) {
 
 	character->SetCharSpriteState(CharSpriteDirection::State_WalkForward);
 }
 
-
-void WalkForwardState::updateState(GameCharacter* character)
-
-{
-	//	//character->setPosition(character->getPosition().x * character->getSpeed().x*1, character->getPosition().y);
-
-	if (!IsKeyDown(KEY_LEFT)) {
-
+void WalkForwardState::updateState(GameCharacter* character) {
+	if (!IsKeyDown(KEY_LEFT)) { // As long as it's still pressed, it doesn't change state
 		character->setState(IdleState::getInstance());
-
-	}else if (IsKeyDown(KEY_RIGHT)) {
-
+	}
+	else if (IsKeyDown(KEY_RIGHT)) {
 		character->setState(WalkBackwardState::getInstance());
 	}
 	else if (IsKeyPressed(KEY_SPACE) && character->getStop() == false) {
-
 		character->setState(JumpUpState::getInstance());
 		character->isStop(true);
-
-	}else if (IsKeyPressed(KEY_DOWN)){
-
-	    character->setState(CrouchState::getInstance());
+	}
+	else if (IsKeyPressed(KEY_DOWN)) {
+		character->setState(CrouchState::getInstance());
 		character->isStop(true);
 	}
 	else if (IsKeyPressed(KEY_Q)) {
@@ -52,17 +41,11 @@ void WalkForwardState::updateState(GameCharacter* character)
 	else {
 		character->setPosition(character->getPosition().x - character->getSpeed().x, character->getPosition().y);
 	}
-		// Add more states
-
 }
 
 
-CharacterState& WalkForwardState::getInstance()
-
-{
-
+CharacterState& WalkForwardState::getInstance() {
 	static WalkForwardState singleton;
 
 	return singleton;
-
 }

@@ -27,12 +27,7 @@ public:
 	
 private:
 
-	const float m_KenJump_Speed = 250.f;
-	//const float m_Ken_Horizontal_Speed = 100.f;
-	//const float m_Ken_Vertical_Speed = 100.f;
-
-	//float m_Speed = { 0.f };
-	//bool m_bcanJump = false;
+	// Special additions for this character
 	Texture2D punchText;
 	Rectangle hitColliderRect;
 };

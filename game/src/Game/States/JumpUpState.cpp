@@ -7,59 +7,39 @@
 #include "Special1State.h"
 #include "Special2State.h"
 
-
-void JumpUpState::enter(GameCharacter* character){
+void JumpUpState::enter(GameCharacter* character) {
 	character->SetCharSpriteState(CharSpriteDirection::State_JumpUp);
-	character->isStop(true); // Marca el personaje como saltando
-	startTime = GetTime();   // Registra el tiempo de inicio del salto
+
+	character->isStop(true); // Marks the character as jumping
+	startTime = GetTime();   // Records the start time of the jump
 }
 
 
 void JumpUpState::updateState(GameCharacter* character) {
-	const float jumpDuration = 2.0f;    // Duración total del salto (en segundos)
-	const float jumpHeight = 450.0f;   // Altura máxima del salto
-	const float gravity = 300.0f;      // Velocidad de caída controlada
-	float elapsedTime = GetTime() - startTime; // Tiempo transcurrido desde el inicio del salto
+	const float jumpDuration = 2.0f;    // Total jump duration (in seconds)
+	const float jumpHeight = 450.0f;   // Maximum jump height
+	const float gravity = 300.0f;      // Falling speed
+	float elapsedTime = GetTime() - startTime; // Time elapsed since the jump started
+
+	// Rising phase
 	if (elapsedTime < jumpDuration / 2) {
-		// Fase de subida
 		character->setPosition(character->getPosition().x, character->getPosition().y - jumpHeight * GetFrameTime());
 	}
+	// Falling phase
 	else if (elapsedTime < jumpDuration) {
-		// Fase de bajada
 		character->setPosition(character->getPosition().x, character->getPosition().y + gravity * GetFrameTime());
 	}
 	else {
-		// Finaliza el salto y regresa a Idle
-		character->setPosition(character->getPosition().x, character->groundLevel); // Ajusta la posición al suelo
-		character->isStop(false); // Marca que el personaje ya no está saltando
+		// Ends the jump
+		character->setPosition(character->getPosition().x, character->groundLevel); // Adjusts the position to the ground level
+		character->isStop(false);
 		character->setState(IdleState::getInstance());
 	}
-	/*if (IsKeyPressed(KEY_LEFT)){
-
-		character->setState(WalkForwardState::getInstance());
-
-	}else if (IsKeyPressed(KEY_RIGHT)){
-
-		character->setState(WalkBackwardState::getInstance());
-
-	}*/
-	//if (character->getPosition().y <= 100) { // Altura máxima
-	//	character->setSpeed(character->getSpeed().x, -character->getSpeed().y); // Cambia dirección a caer
-	//}
-	//else if (character->getPosition().y >= 400) { // Regresa al suelo
-	//	character->setPosition(character->getPosition().x, 400); // Ajusta posición al suelo
-	//	character->setState(IdleState::getInstance()); // Cambia a Idle
-	//}
-
-	// Add more states
-
 }
 
 
-CharacterState& JumpUpState::getInstance(){
-
+CharacterState& JumpUpState::getInstance() {
 	static JumpUpState singleton;
 
 	return singleton;
-
 }

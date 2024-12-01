@@ -1,8 +1,7 @@
 #pragma once
 #include "Screen.h"
 
-enum class ScreenState
-{
+enum class ScreenState {
 	LOGO = 0,
 	TITLE,
 	OPTIONS,
@@ -13,9 +12,7 @@ enum class ScreenState
 
 class Screen;
 
-class StateMachineMngr
-{
-
+class StateMachineMngr {
 public:
 
 	virtual ~StateMachineMngr() {}

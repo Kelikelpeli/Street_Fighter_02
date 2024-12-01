@@ -9,13 +9,8 @@
 #include "Game/Managers/AudioManager.h"
 
 #include <string>
-#include <iostream>
 
-
-ScreenGameplayState::ScreenGameplayState()
-{
-
-}
+ScreenGameplayState::ScreenGameplayState(){}
 
 ScreenGameplayState& ScreenGameplayState::getInstance()
 {
@@ -23,50 +18,47 @@ ScreenGameplayState& ScreenGameplayState::getInstance()
 	return singleton;
 }
 
-
-
 void ScreenGameplayState::InitScreen(void)
 {
-	AudioManager& audioManager = AudioManager::GetAudioManager();
+	TraceLog(LOG_INFO, "ScreenGameplayState::InitScreen");
 
-	audioManager.PlaySoundEffect(SoundType::KenTheme);
-	GameManager& GameInst = GameManager::GetGameManager();
-	UISprites_Counter = 10;
-	UISpritesMap[0] = FrameRecUI{ {58,125,60,60}, {0.f, 0.f} };
-
-	UISpritesMap[1] = FrameRecUI{ {123,125,60,60}, {0.f, 0.f} };
-
-	UISpritesMap[2] = FrameRecUI{ {188,125,60,60}, {0.f, 0.f} };
-
-	UISpritesMap[3] = FrameRecUI{ {252,125,60,60}, {0.f, 0.f} };
-
-	UISpritesMap[4] = FrameRecUI{ {316,125,60,60}, {0.f, 0.f} };
-
-	UISpritesMap[5] = FrameRecUI{ {380,125,60,60}, {0.f, 0.f} };
-
-	UISpritesMap[6] = FrameRecUI{ {443,125,60,60}, {0.f, 0.f} };
-
-	UISpritesMap[7] = FrameRecUI{ {508,125,60,60}, {0.f, 0.f} };
-
-	UISpritesMap[8] = FrameRecUI{ {569,125,60,60}, {0.f, 0.f} };
-
-	UISpritesMap[9] = FrameRecUI{ {633,125,60,60}, {0.f, 0.f} };
-
-
-	car = new Car();
-
-	ken = new Ken();
 	framesCounter = 0;
 	finishScreen = 0;
-	car->InitGameCharacter();
-	ken->InitGameCharacter();
+
+	AudioManager& audioManager = AudioManager::GetAudioManager(); 
+	GameManager& GameInst = GameManager::GetGameManager();
+
+	audioManager.PlaySoundEffect(SoundType::KenTheme);
 	GameInst.SetSeconds(0);
 	GameInst.SetScore(false);
+
+	// Prepare the map for the counter
+	UISprites_Counter = 10;
+	UISpritesMap[0] = FrameRecUI{ {58,125,60,60}, {0.f, 0.f} };
+	UISpritesMap[1] = FrameRecUI{ {123,125,60,60}, {0.f, 0.f} };
+	UISpritesMap[2] = FrameRecUI{ {188,125,60,60}, {0.f, 0.f} };
+	UISpritesMap[3] = FrameRecUI{ {252,125,60,60}, {0.f, 0.f} };
+	UISpritesMap[4] = FrameRecUI{ {316,125,60,60}, {0.f, 0.f} };
+	UISpritesMap[5] = FrameRecUI{ {380,125,60,60}, {0.f, 0.f} };
+	UISpritesMap[6] = FrameRecUI{ {443,125,60,60}, {0.f, 0.f} };
+	UISpritesMap[7] = FrameRecUI{ {508,125,60,60}, {0.f, 0.f} };
+	UISpritesMap[8] = FrameRecUI{ {569,125,60,60}, {0.f, 0.f} };
+	UISpritesMap[9] = FrameRecUI{ {633,125,60,60}, {0.f, 0.f} };
+
+	// Initialize "players"
+	car = new Car();
+	ken = new Ken();
+	car->InitGameCharacter();
+	ken->InitGameCharacter();
+
+	// Variables to control the counter
 	startTime = GetTime();
 	countdown = GetTime();
-	frame = 1;
-	frame2 = 4;
-	acumulacionDaño = 0;
+	frame = 1; //second number
+	frame2 = 4; //first number
+
+	// Control damage per type of hit
+	acumulacionDaño = 0; 
 }
 
 void ScreenGameplayState::UpdateScreen(float deltaTime)
@@ -77,82 +69,79 @@ void ScreenGameplayState::UpdateScreen(float deltaTime)
 
 	ken->UpdateGameCharacter(deltaTime);
 	car->UpdateGameCharacter(deltaTime);
-	CarDamage();
+
+	CarDamage(); 
+
+	// Screen transition at 41 seconds to display counter numbers 40 and 00
 	GameInst.SetSeconds(GetTime() - startTime);
-	if (GameInst.GetSeconds() > 41.0f) {
-		if (car->getDamage() <= 0) {
-			GameInst.SetScore(true); //ganar
-		}
-		else {
-			GameInst.SetScore(false); //perder
-		}
-		finishScreen = 4;
-
+	if (car->getDamage() <= 1) {
+		GameInst.SetScore(true); //win
 	}
-
-
+	else if (car->getDamage() > 1) {
+		GameInst.SetScore(false); //game over
+	}
+	if (GameInst.GetSeconds() > 41.0f) {		
+		finishScreen = 4; //ENDING
+	}
 }
 
 void ScreenGameplayState::DrawScreen(void)
 {
-
 	DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
 
 	GameManager& GameInst = GameManager::GetGameManager();
-
-	// UI Score, lives
+	TextureManager& textureManager = TextureManager::GetTextureManager();
 
 	Font font = GameInst.GetFont();
-
-	//DrawText("SCORE:", 300.f, 100.f, 25, WHITE);
-	//DrawText(to_string(GameInst.GetScore()).c_str(), 440.f, 100.f, 25, WHITE);
-//	Vector2 centerScreen = Vector2{ (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
-	TextureManager& textureManager = TextureManager::GetTextureManager();
 	landscape = textureManager.GetTexture(TextureType::Landscape);
+
 	DrawTexture(landscape, 0, 0, WHITE);
 
 	ken->DrawGameCharacter();
 	car->DrawGameCharacter();
+
 	DrawCounter();
-
-
 }
+
+// Logic for car damage
 void ScreenGameplayState::CarDamage()
 {
+	GameManager& GameInst = GameManager::GetGameManager();
 
 	if (ken->GetAttack() && CheckCollisionRecs(ken->getHitColliderRect(), car->getBodyColliderRect())) {
 		if (IsKeyPressed(KEY_Q)) {
-			acumulacionDaño += 0.25f; //golpe ligero hace menos daño, más rápidoa
+			acumulacionDaño += 0.25f; // Light hit does less damage, faster
 		}
 		else if (IsKeyPressed(KEY_T)) {
-			acumulacionDaño += 0.5f;  //golpe contundente, más daño, más lento
+			acumulacionDaño += 0.5f;  // Heavy hit, more damage, slower
 		}
 		if (acumulacionDaño >= 1.f) {
 			acumulacionDaño = 0;
-			car->setDamage(1);
+			car->setDamage(1); // Changes the car's frame
 		}
 	}
-
 }
 
-//dibujar contador
+// Draw the counter
 void ScreenGameplayState::DrawCounter()
 {
 	TextureManager& textureManager = TextureManager::GetTextureManager();
 	Texture2D ui = textureManager.GetTexture(TextureType::UIMiscBig);
-	float uiPosY = 20.f;
+
+	float uiPosY = 20.f; //Height
 	float separacion = 60.f;
 	double segundo = GetTime() - countdown;
-	//primer numero
+
+	//first number
 	DrawTextureRec(ui, UISpritesMap[frame2].frameRec, Vector2{ GetScreenWidth() / 2.f - (separacion / 2),uiPosY }, WHITE);
-	//segundo numero
+	//second number
 	DrawTextureRec(ui, UISpritesMap[frame].frameRec, Vector2{ GetScreenWidth() / 2.f + (separacion / 2),uiPosY }, WHITE);
 
+	// Logic for changing the sprite every secon
 	if (segundo >= 1.0f) {
 		if (frame2 >= 0) {
 			if (frame > 0) {
 				frame--;
-
 			}
 			else {
 				frame = 9;
@@ -166,10 +155,7 @@ void ScreenGameplayState::DrawCounter()
 		}
 	}
 }
-void ScreenGameplayState::UnloadScreen(void)
-{
-
-}
+void ScreenGameplayState::UnloadScreen(void){}
 
 int  ScreenGameplayState::FinishScreen(void)
 {
@@ -178,20 +164,14 @@ int  ScreenGameplayState::FinishScreen(void)
 
 void ScreenGameplayState::EvaluateInput()
 {
-
-	if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
+	// Not necessary in logic, left for debugging and fixing errors
+	
+	/*if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
 	{
 		finishScreen = 4;   // END SCREEN
-	}
+	}*/
 }
 
-void ScreenGameplayState::DebugOptions()
-{
+void ScreenGameplayState::DebugOptions(){}
 
-}
-
-void ScreenGameplayState::DrawDebug()
-{
-	GameManager& GameInst = GameManager::GetGameManager();
-
-}
+void ScreenGameplayState::DrawDebug(){}

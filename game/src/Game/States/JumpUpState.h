@@ -16,5 +16,6 @@ private:
 	JumpUpState() {};
 	JumpUpState(const JumpUpState& other);
 	JumpUpState& operator=(const JumpUpState& other);
-	double startTime; // Almacena el tiempo de inicio del salto
+
+	double startTime; 
 };

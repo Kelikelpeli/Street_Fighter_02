@@ -1,5 +1,3 @@
-
-
 #include "IdleState.h"
 
 #include "WalkForwardState.h"
@@ -20,27 +18,21 @@ void Special1State::updateState(GameCharacter* character) {
 	framesCounter++;
 	character->setAttack(false);
 
-	if (framesCounter > 9) {
+	if (framesCounter > 9) {  // Holds the position for 0.15 seconds
 		if (IsKeyPressed(KEY_LEFT)) {
-
 			character->isStop(false);
 			character->setState(WalkForwardState::getInstance());
-
 		}
 		else if (IsKeyPressed(KEY_RIGHT)) {
-
 			character->isStop(false);
 			character->setState(WalkBackwardState::getInstance());
-
 		}
 		else if (IsKeyPressed(KEY_SPACE) && character->getStop() == false) {
-
 			character->isStop(false);
 			character->setState(JumpUpState::getInstance());
 			character->isStop(true);
 		}
 		else if (IsKeyPressed(KEY_DOWN)) {
-
 			character->isStop(false);
 			character->setState(CrouchState::getInstance());
 			character->isStop(true);
@@ -54,16 +46,13 @@ void Special1State::updateState(GameCharacter* character) {
 		else {
 			character->isStop(false);
 			character->setState(IdleState::getInstance());
-
 		}
 	}
 }
 
 
 CharacterState& Special1State::getInstance() {
-
 	static Special1State singleton;
 
 	return singleton;
-
 }

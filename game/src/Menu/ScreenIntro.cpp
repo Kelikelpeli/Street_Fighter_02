@@ -11,25 +11,25 @@ ScreenIntroState& ScreenIntroState::getInstance()
 
 void ScreenIntroState::InitScreen(void)
 {
+    TraceLog(LOG_INFO, "ScreenIntroState::InitScreen");
     framesCounter = 0;
     finishScreen = 0;
     alpha = 0.0f;
     fadeDirection = 1;
-    TraceLog(LOG_INFO, "ScreenIntroState::InitScreen");
 }
 
 void ScreenIntroState::UpdateScreen(float deltaTime)
 {
     framesCounter++;
 
-    // Controla el fade in y fade out
+    // Controls the fade-in and fade-out effect
     if (fadeDirection == 1)
     {
         alpha += 0.02f;
         if (alpha >= 1.0f)
         {
             alpha = 1.0f;
-            fadeDirection = 0; // Fade completo, pausa
+            fadeDirection = 0; // Ends the fade-in
         }
     }
     else if (fadeDirection == -1)
@@ -38,37 +38,29 @@ void ScreenIntroState::UpdateScreen(float deltaTime)
         if (alpha <= 0.0f)
         {
             alpha = 0.0f;
-            finishScreen = 1; // Indica que debe cambiar a la siguiente pantalla (GAMEPLAY)
+            finishScreen = 1; //GAMEPLAY
         }
     }
 
     if (framesCounter > 180 && fadeDirection == 0)
     {
-        fadeDirection = -1; // Comienza el fade out después de un tiempo
+        fadeDirection = -1; // Starts the fade-out after a delay
     }
 }
 
 void ScreenIntroState::DrawScreen(void)
 {
-    TextureManager& textureManager = TextureManager::GetTextureManager();
-
-
-    // Dibuja un rectángulo oscuro en toda la pantalla
-    Texture2D bonusCarKen = textureManager.GetTexture(TextureType::BonusKen);
-
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
-    //DrawText("Intro Screen", GetScreenWidth() / 2 - MeasureText("Intro Screen", 20) / 2, GetScreenHeight() / 2, 20, RAYWHITE);
 
+    TextureManager& textureManager = TextureManager::GetTextureManager(); // Accesses textures
+    Texture2D bonusCarKen = textureManager.GetTexture(TextureType::BonusKen);
     Vector2 screenCenter = { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f - 100 };
 
-    textureManager.DrawTextureExCustom(bonusCarKen, screenCenter, 0, 1, WHITE);
-    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 1.0f - alpha));
+    textureManager.DrawTextureExCustom(bonusCarKen, screenCenter, 0, 1, WHITE); // Function managed and defined by the texture manager
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 1.0f - alpha)); // The actual fade effect is achieved with this rectangle
 }
 
-void ScreenIntroState::UnloadScreen(void)
-{
-    TraceLog(LOG_INFO, "ScreenIntroState::UnloadScreen");
-}
+void ScreenIntroState::UnloadScreen(void){}
 
 int ScreenIntroState::FinishScreen(void)
 {

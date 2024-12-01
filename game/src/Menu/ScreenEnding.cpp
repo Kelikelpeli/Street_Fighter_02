@@ -16,12 +16,12 @@ ScreenEndingState& ScreenEndingState::getInstance()
 
 void ScreenEndingState::InitScreen(void)
 {
+	TraceLog(LOG_INFO, "ScreenEndingState::InitScreen");
+
 	AudioManager& audioManager = AudioManager::GetAudioManager();
 
 	framesCounter = 0;
 	finishScreen = 0;
-	//fxWin = LoadSound("resources/Sounds/10.WinSaw.wav");
-	//fxGameOver = LoadSound("resources/Sounds/09.GameOver.wav");
 
 	//start position letters game over
 	for (int i = 0; i < 9; i++)
@@ -100,7 +100,7 @@ void ScreenEndingState::UpdateScreen(float deltaTime)
 	//To go to another screens...
 	if (IsKeyPressed(KEY_ENTER) )
 	{
-		finishScreen = 1; // GAMEPLAY
+		finishScreen = 1; // TITLE
 
 	}
 	if (IsKeyPressed(KEY_O))
@@ -142,12 +142,7 @@ void ScreenEndingState::DrawScreen(void)
 	DrawTextEx(font, line2, Vector2{ (GetScreenWidth() - MeasureTextEx(font, line2, 25, 2).x) / 2.f, 650.f }, 25, 2, WHITE);
 }
 
-void ScreenEndingState::UnloadScreen(void)
-{
-	//Let's unload all the enemies lines
-	GameManager& GameInst = GameManager::GetGameManager();
-
-}
+void ScreenEndingState::UnloadScreen(void){}
 
 int  ScreenEndingState::FinishScreen(void)
 {

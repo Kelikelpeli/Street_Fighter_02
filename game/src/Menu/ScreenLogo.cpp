@@ -123,10 +123,7 @@ void ScreenLogoState::DrawScreen(void)
 }
 
 //-------------------------------------------------------------
-void ScreenLogoState::UnloadScreen(void)
-{
-
-}
+void ScreenLogoState::UnloadScreen(void){}
 
 //-------------------------------------------------------------
 int  ScreenLogoState::FinishScreen(void)

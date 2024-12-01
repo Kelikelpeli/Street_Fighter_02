@@ -43,9 +43,6 @@ public:
 
 	static ScreenGameplayState& getInstance();
 
-
-
-
 private:
 	ScreenGameplayState();
 	ScreenGameplayState(const ScreenGameplayState& other);
@@ -59,27 +56,18 @@ private:
 	void DrawCounter();
 
 	int UISprites_Counter = 10;
-	//std::map<UISprite, FrameRecUI> UISpritesMap;
 	std::map<int, FrameRecUI> UISpritesMap;
-
 
 	int framesCounter = 0;
 	int finishScreen = 0;
-	double countdown = 2400;
+	double countdown = 0;
 	int frame;
 	int frame2;
-	//bool mb_ReplayLevel = false;
-//bool win = false;
 	float acumulacionDaño;
-
-
-	bool debug_floor = false;
-	bool debug_stairs = false;
-
 	double startTime;
+
 	Texture2D landscape;
 	Texture2D ui;
 	Ken* ken;
 	Car* car;
-
 };

@@ -18,7 +18,6 @@ public:
 	void InitAudioFiles();
 	void UnloadAudioFiles();
 
-
 	void PlaySoundEffect(SoundType sound);
 	static AudioManager& GetAudioManager();
 

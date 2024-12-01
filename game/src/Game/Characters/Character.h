@@ -37,27 +37,6 @@ public:
 	virtual void DrawGameCharacter();
 	virtual void UnloadGameCharacter();
 
-
-protected:
-	std::map<CharSpriteDirection, std::map<int, FrameRecPos>> CharSprites;
-
-	std::map<CharSpriteDirection, int> CharSprites_Counter;
-
-	std::map<int, FrameRecPos> CharSprites_Idle;
-	std::map<int, FrameRecPos> CharSprites_WalkForward;
-	std::map<int, FrameRecPos> CharSprites_WalkBackward;
-	std::map<int, FrameRecPos> CharSprites_Crouch;
-	std::map<int, FrameRecPos> CharSprites_JumpUp;
-	std::map<int, FrameRecPos> CharSprites_Special1;
-	std::map<int, FrameRecPos> CharSprites_Special2;
-
-	int CarSprites_Counter = 10;
-	std::map<int, FrameRecPos> CarSprites;
-	void SetControls(KeyboardKey left, KeyboardKey right, KeyboardKey up, KeyboardKey down, KeyboardKey special1, KeyboardKey special2);
-	KeyboardKey GetControl(char control);
-	Rectangle bodyColliderRect ={ getPosition().x + 50, getPosition().y + 20, 170, 350 };
-
-public:
 	int framesCounter = 0;
 	int framesSpeed = 10;
 	int currentFrame = 0;
@@ -70,6 +49,7 @@ public:
 	void setState(CharacterState& newState);
 	void SetCharSpriteState(CharSpriteDirection newCharState);
 
+	//Setters and getters
 	void setPosition(float x, float y);
 	Vector2 getPosition();
 	void setSpeed(float x, float y);
@@ -78,29 +58,43 @@ public:
 	bool getStop();
 	Rectangle getBodyColliderRect();
 
-	KeyboardKey left;
-	KeyboardKey right;
-	KeyboardKey down;
-	KeyboardKey up;
-	KeyboardKey special1;
-	KeyboardKey special2;
-
+	// For jump and attack logic in the state
 	const float groundLevel = GetScreenHeight() / 2.0f + 100;
 	bool GetAttack();
 	void setAttack(bool attack);
 
 protected:
 
+	// Contains all types of sprites
+	std::map<CharSpriteDirection, std::map<int, FrameRecPos>> CharSprites;
+
+	std::map<CharSpriteDirection, int> CharSprites_Counter;
+
+	std::map<int, FrameRecPos> CharSprites_Idle;
+	std::map<int, FrameRecPos> CharSprites_WalkForward;
+	std::map<int, FrameRecPos> CharSprites_WalkBackward;
+	std::map<int, FrameRecPos> CharSprites_Crouch;
+	std::map<int, FrameRecPos> CharSprites_JumpUp;
+	std::map<int, FrameRecPos> CharSprites_Special1;
+	std::map<int, FrameRecPos> CharSprites_Special2;
+
+	// For the car case...
+	int CarSprites_Counter = 10;
+	std::map<int, FrameRecPos> CarSprites;
+
 	CharSpriteDirection currentSpriteState;
 	CharacterState* currentState;
 
+	// Collisions
+	Rectangle bodyColliderRect = { getPosition().x + 50, getPosition().y + 20, 170, 350 };
+
 	Vector2 position;
+	Vector2 widthLimits = { 0,(float)GetScreenWidth() };
+
 	Vector2 speed;
-	Texture2D characterText = { 0 };
-	bool stop=false;
+	Texture2D characterText = { 0 }; //textura basica
+
+	bool stop = false;
 	bool attack;
-	Vector2 widthLimits = { 0,(float)GetScreenWidth()};
-
-
 };
 #endif 

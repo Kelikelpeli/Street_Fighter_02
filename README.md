@@ -1,139 +1,48 @@
-# Raylib Setup using Premake5
-This is a template system for building cross platform raylib projects using premake. It is focused on intermediate to advanced users.
-for a simple template, please see Raylib-QuickStart
+# Street Fighter: Bonus Car
 
-  * https://github.com/raylib-extras/raylib-quickstart
+## Description
 
-## Video Tutorial
-A video covering this process is here
-https://youtu.be/--gI9083QnU
+This project recreates a simplified version of the **Street Fighter Bonus Car Stage**, using the **Raylib** library and an object-oriented architecture in **C++**. The goal is to relive this iconic stage while improving graphics and sounds for an engaging gaming experience.
 
-# Download this repository
-Download the game premake repository from 
-https://github.com/raylib-extras/game-premake/
-You can either download the zip file, or clone the repository.
-If you clone the repository, you may want to remove the stored history. Simply delete the .git directory to do this.
+## Running the Game
 
-Rename the directory whatever you want. This will be the name of your game.
+To run the `.exe` file of the game outside of Visual Studio, make sure that the resources (images, sounds, textures) are in the same relative directory as the executable, as they are necessary for the correct functioning of the game. You can find the executables in the `bin` folder (both in Debug and Release mode).
 
-# Example app
-This repository is pre-populated with a simple C++ starting application that uses external headers and a static library, simply as an example of how to set them up.
+## Instructions to Play
 
-# Generate Projects
-For windows users, there are two batch files you can use depending on what compiler you are using. For linux users you can simply use a terminal.
-Only do ONE of these options depending on your compiler and platform.
-## Visual Studio (MSVC) Users
-Visual Studio users should run
+- **Arrow Keys**: Move the character.
+- **Space**: Jump.
+- **Q**: Perform a light punch.
+- **T**: Perform a strong punch.
+- Destroy the car before the timer reaches zero to win.
 
-    premake-VisualStudio.bat
-	
-This will generate a Visual Studio project.
+## Project Structure
 
-## Visual Studio Code (VSC) Users
-Visual Studio code uses the makefile systems for MinGW-w64, gcc, or clang on Windows, linux, and OSX respectivly. Simply follow the steps below for your OS and then continue to the VSC section below. Please make sure that you have the C/C++ extensions installed for VSC. Please make sure your compiler is in your path in order to use Visual Studio Code.
-	
-## MinGW-w64 Users
-Please make sure you have a recent version of MinGW-W64. The older versons from mingw.org will not work.
-We recommend the W64Devkit. It has everything needed to build raylib. It can be downloaded from here https://github.com/skeeto/w64devkit/releases
+- **`Game` Folder**: Contains the main classes of the game, such as `Ken`, `Car`, and `CharacterState`. These classes handle the logic and behavior of the game mechanics.
+- **`Menu` Folder**: Includes the scripts for the menu screens, such as the title screen, options, and the end game screen.
+- **`States` Folder**: Contains scripts for managing the different states of the game, such as `IdleState`, `WalkForwardState`, and `JumpUpState`.
+- **`Managers` Folder**: Includes classes for managing game elements like `GameManager`, `AudioManager`, and `TextureManager`.
 
-Once you have MinGW-W64
-Run the batch file.
+## Implemented Features
 
-    premake-mingw.bat
+- State-based screen navigation (TITLE, INTRO, GAMEPLAY, ENDING).
+- Character movement, attacks, and collision detection with the car.
+- Timer and score system.
+- Visual effects for the destruction of the car.
 
-This will generate a makefile for you.
+## Additional Improvements
 
-## Linux users
-cd to the root folder and run
+1. **Sound and Effects**: Added background music during the gameplay and menus.
+2. **Automatic Restart Screen**: At the end of the game, an option was added to automatically return to the title screen and enhanced the "WIN" or "LOSE" screens with animations and sound effects for a polished ending.
+3. **Dynamic Counter**: A visual countdown timer implemented using sprite maps for added visual appeal.
 
-    ./premake5 gmake2
+## References
 
-This will generate a makefile for you.
+- **Sprites**. Retrieved from: https://www.spriters-resource.com/arcade/streetfighter2
+-**Soundtrack**. Retrieved from: https://downloads.khinsider.com/game-soundtracks/album/street-fighter-ii-the-definitive-soundtrack
+- **Gameday Font**. Retrieved from: https://www.dafont.com/es/gameday.font
+- **Sound, Image, and Texture Resources**: Material provided by the professor through the ZIP file InitialSource.zip
 
-## macOS users
-cd to the root folder and run
+## Credits
 
-    ./premake5.osx gmake2
-	
-This will generate a makefile for you.
-
-# Build your game
-Only do ONE of these options depending on your compiler and platform.
-
-## Visual Studio (MSVC) Users
-Double click the .sln file that was generated in the folder. From here you can use the project as normal.
-
-#Visual Studio Code (VSC) Users
-Game-premake comes with a visual studio code project file, simply open the folder in vscode and it should be setup to run the makefiles build for gcc or MinGW-w64. Just use the build, debug, or run functions in VSC
-
-## MinGW-w64 Users
-Open your compiler terminal (w64devkit if you are using it), change to the game folder and type.
-
-    make
-	
-This will build your game
-	
-## Linux/macOS users
-Open your terminal, change to the root folder and type.
-
-    make
-	
-This will build your starting game template.
-	
-	
-# Building for other OpenGL targets
-If you need to build for a different OpenGL version than the default (OpenGL 3.3) you can specify an openGL version in your premake command line. Just modify the bat file or add the following to your command line.
-
-## For OpenGL 1.1
---graphics=opengl11
-
-## For OpenGL 2.1
---graphics=opengl21
-
-## For OpenGL 4.3
---graphics=opengl43
-
-## For OpenGLES 2.0
---graphics=opengles2
-
-## For OpenGLES 3.0
---graphics=opengles3
-
-# Building extra libs
-If you need to add a separate library to your game you can do that very easily.
-Simply copy the extras/example_library folder and rename it to what you want your lib to be called.
-Replace lib.c with the sources for your library (just copy them in the folder).
-If you library has an include folder, copy that too.
-Then go to the premake5.lua file in the game folder, and link your library by calling link_to with the folder name for the library.
-
-link_to("LIB_FOLDER_NAME")
-
-Rerun premake and it will build your library for you.
-Note that by default link_to will add include dirs for your library folder and library/include. If you have other include needs you will have to add those to your premake file manually.
-
-# (Optional) Get Raylib
-If you wish to use a specific version of raylib, follow the instructions below. If you want the current development version, skip this section and premake will download raylib for you.
-
-## Download Raylib
-Get the raylib sources from 
-https://github.com/raysan5/raylib
-Download the zip file, or clone the repository. It doesn't matter what one you use.
-Put the raylib sources in a folder called raylib inside your game folder (The same folder this file is in). The folder must be named raylib, it can not be raylib-master. The raylib folder should contain all the sources from raylib (including the 'src' folder).
-
-# License
-Copyright (c) 2020-2024 Jeffery Myers
-
-This software is provided "as-is", without any express or implied warranty. In no event 
-will the authors be held liable for any damages arising from the use of this software.
-
-Permission is granted to anyone to use this software for any purpose, including commercial 
-applications, and to alter it and redistribute it freely, subject to the following restrictions:
-
-  1. The origin of this software must not be misrepresented; you must not claim that you 
-  wrote the original software. If you use this software in a product, an acknowledgment 
-  in the product documentation would be appreciated but is not required.
-
-  2. Altered source versions must be plainly marked as such, and must not be misrepresented
-  as being the original software.
-
-  3. This notice may not be removed or altered from any source distribution.
+Developed by: **Raquel López Barceló**

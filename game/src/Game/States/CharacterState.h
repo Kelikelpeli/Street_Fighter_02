@@ -4,13 +4,9 @@
 
 class GameCharacter;
 
-//////////////////////////////////////
 // State Machine
-class CharacterState
-{
+class CharacterState {
 public:
-
-
 	virtual ~CharacterState() {}
 
 	virtual void enter(GameCharacter* light) = 0;

@@ -14,7 +14,11 @@
 
 void Car::InitGameCharacter()
 {
-	setPosition(GetScreenWidth() / 2.0f -840, GetScreenHeight() / 2.0f + 140); //posicion inicial
+	TraceLog(LOG_INFO, "CarInitGameCharacter::InitCar");
+
+	setPosition(GetScreenWidth() / 2.0f - 840, GetScreenHeight() / 2.0f + 140); // Initial position
+
+	//Sprites
 	CarSprites_Counter = 8;
 	CarSprites[0] = FrameRecPos{ {0,0,725,360}, {0.f, 0.f} };
 	CarSprites[1] = FrameRecPos{ {0,360,725,360}, {-10.f, 30.f} };
@@ -29,42 +33,37 @@ void Car::InitGameCharacter()
 	bodyColliderRect = { getPosition().x + 75, getPosition().y + 30, 600, 300 };
 }
 
-void Car::UpdateGameCharacter(float deltaTime)
-{
+void Car::UpdateGameCharacter(float deltaTime) {
 	framesCounter++;
-	bodyColliderRect = { getPosition().x + 75, getPosition().y + 30, 600, 300 }; //actualizar el collider
-
+	bodyColliderRect = { getPosition().x + 75, getPosition().y + 30, 600, 300 }; // Update the collider
 }
 
-void Car::DrawGameCharacter()
-{
+void Car::DrawGameCharacter() {
 	TextureManager& textureManager = TextureManager::GetTextureManager();
 	characterText = textureManager.GetTexture(TextureType::SpriteCar);
-	//pintar ruedas
+
+	// Draw the wheels
 	DrawTextureRec(characterText, CarSprites[0].frameRec,
 		Vector2{ getPosition().x - CarSprites[0].frameOrigin.x,
 		getPosition().y - CarSprites[0].frameOrigin.y }, WHITE);
 
-		DrawTextureRec(characterText, CarSprites[CarSprites_Counter-(damage-1)].frameRec,
-			Vector2{ getPosition().x - CarSprites[CarSprites_Counter - (damage - 1)].frameOrigin.x,
-			getPosition().y - CarSprites[CarSprites_Counter - (damage - 1)].frameOrigin.y }, WHITE);
-		
-
+	//Draw the rest of the car
+	DrawTextureRec(characterText, CarSprites[CarSprites_Counter - (damage - 1)].frameRec,
+		Vector2{ getPosition().x - CarSprites[CarSprites_Counter - (damage - 1)].frameOrigin.x,
+		getPosition().y - CarSprites[CarSprites_Counter - (damage - 1)].frameOrigin.y }, WHITE);
 }
 
-void Car::UnloadGameCharacter()
-{
-}
+void Car::UnloadGameCharacter(){}
 
-void Car::setDamage(int damage)
-{
-	if (this->damage > 0) {
+// No more damage than the car has sprites
+void Car::setDamage(int damage) {
+	if (this->damage > 1) {
 		this->damage -= damage;
 	}
 }
 
-int Car::getDamage()
-{
+// Additional logic with screenGameplay
+int Car::getDamage() {
 	return damage;
 }
 

@@ -19,7 +19,6 @@
 //---------------------------------------------------------------
 GameManager* GameManager::GameMngr = nullptr;
 
-
 GameManager& GameManager::GetGameManager()
 {
     if (!GameMngr)
@@ -28,10 +27,7 @@ GameManager& GameManager::GetGameManager()
     return *GameMngr; 
 }
 
-GameManager::GameManager()
-{
-}
-
+GameManager::GameManager(){}
 
 void GameManager::InitGame()
 {
@@ -39,7 +35,7 @@ void GameManager::InitGame()
     font = LoadFont("resources/UI/GAMEDAY.ttf");
 
     // Setup and init first screen
-    ScreenState = &ScreenGameplayState::getInstance();
+    ScreenState = &ScreenTitleState::getInstance();
     ScreenState->InitScreen();     
 }
 //-------------------------------------------------------
@@ -73,7 +69,7 @@ void GameManager::UpdateFrame(float deltaTime)
                     else if (InputKey == 2)
                     {
                         TransitionToScreen((int)ScreenState::INTRO);
-                        ScreenState = &ScreenIntroState::getInstance();  // Cambio a ScreenIntro
+                        ScreenState = &ScreenIntroState::getInstance();  // Change to ScreenIntro
                     }
                 }
                 break;
@@ -81,7 +77,7 @@ void GameManager::UpdateFrame(float deltaTime)
                 if (ScreenState->FinishScreen())
                 {
                     TransitionToScreen((int)ScreenState::GAMEPLAY);
-                    ScreenState = &ScreenGameplayState::getInstance();  // Cambio a Gameplay después de Intro
+                    ScreenState = &ScreenGameplayState::getInstance();  // Change to Gameplay after Intro
                 }
                 break;
             case (int) ScreenState::OPTIONS:
@@ -119,10 +115,6 @@ void GameManager::UpdateFrame(float deltaTime)
                     }
                     else if (InputKey == 1)
                     {
-                        //player.InitPlayer();
-                        //player.SetPlayerNumLifes(3);
-                        //EnemyMngr.InitEnemyManager();
-
                         TransitionToScreen((int)ScreenState::TITLE);
                         ScreenState = &ScreenTitleState::getInstance();
                     }
@@ -133,7 +125,6 @@ void GameManager::UpdateFrame(float deltaTime)
      }
     else UpdateTransition();    // Update transition (fade-in, fade-out)
     //----------------------------------------------------------------------------------
-
 }
 
 //-------------------------------------------------------
@@ -245,8 +236,6 @@ void GameManager::ClearGameVar()
 {
     score = 0;
     seconds = 0;
-    
-
 }
 
 
@@ -268,9 +257,4 @@ void GameManager::MapsForwardProgression()
     }
 }
 
-
-void GameManager::MapsBackwardProgression()
-{
-
-}
-
+void GameManager::MapsBackwardProgression(){}

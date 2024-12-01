@@ -6,13 +6,11 @@
 
 using namespace std;
 
-enum Level
-{
+enum Level{
 	Title = 0,
 	Level1 = 1,
 	Level2 = 2,
 	End = 3,
-
 };
 
 
@@ -46,19 +44,15 @@ public:
 	void MapsForwardProgression();
 	void MapsBackwardProgression();
 
-
-
 	static GameManager& GetGameManager();
 
 private:
 	//----------------------------------------------------
-	//TODO to move to ScreensMngr?
 	void ChangeToScreen(int screen);     // Change to screen, no transition effect
 
 	void TransitionToScreen(int screen); // Request transition to next screen
 	void UpdateTransition(void);         // Update transition effect
 	void DrawTransition(void);           // Draw transition effect (full-screen rectangle)
-
 
 	float transAlpha = 0.0f;
 	bool onTransition = false;
@@ -82,5 +76,4 @@ private:
 	Sound fxCoin = { 0 };
 
 	StateMachineMngr* ScreenState;
-
 };

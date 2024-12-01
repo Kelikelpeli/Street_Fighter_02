@@ -3,8 +3,7 @@
 #include "raylib.h"
 #include "Game/Characters/Ken.h"
 
-enum class TextureType
-{
+enum class TextureType {
 	Logo = 0,
 	BonusKen,
 	BasicSpriteKen,
@@ -12,22 +11,17 @@ enum class TextureType
 
 	Landscape,
 	SpriteCar,
-	UIMiscBig,
-
-	
+	UIMiscBig,	
 };
 
-
-
-class TextureManager
-{
+class TextureManager {
 public:
 	TextureManager();
 
 	void InitTexturesFiles();
 	void UnloadTexturesFiles();
 
-	//Functons For textures
+	//Functions For textures
 	Texture2D& GetTexture(TextureType texture);
 
 	void DrawTextureExCustom(Texture2D texture, Vector2 position, float rotation, float scale, Color tint);
@@ -37,24 +31,14 @@ public:
 	static TextureManager& GetTextureManager();
 
 private:
-
 	static TextureManager* TextureMngr;
-
 
 	Texture2D textLogo;
 	Texture2D bonusKen;
 	Texture2D textBasicSpriteKen;
 	Texture2D textPunchSpriteKen;
-	Texture2D textSpriteKenClimb;
-	Texture2D textSpriteKenClimbIdle;
-	Texture2D textSpriteKenDead;
-	Texture2D textSpriteKenDeadIdle;
-
 
 	Texture2D textLandscape;
 	Texture2D textSpriteCar;
-	Texture2D textUIMiscBig;
-
-
-	
+	Texture2D textUIMiscBig;	
 };
